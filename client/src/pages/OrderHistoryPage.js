@@ -32,8 +32,8 @@ export default function OrderHistoryPage(props) {
 					</thead>
 					<tbody>
 						{orders.map((order) => (
-							<tr key={order._id}>
-								<td>{order._id}</td>
+							<tr key={order.id}>
+								<td>{order.id}</td>
 								<td>{order.createdAt.substring(0, 10)}</td>
 								<td>{order.totalPrice.toFixed(2)}</td>
 								<td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
@@ -47,7 +47,7 @@ export default function OrderHistoryPage(props) {
 										type="button"
 										className="small"
 										onClick={() => {
-											props.history.push(`/order/${order._id}`);
+											props.history.push(`/order/${order.id}`);
 										}}
 									>
 										Details

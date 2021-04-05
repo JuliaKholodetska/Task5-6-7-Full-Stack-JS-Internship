@@ -32,7 +32,7 @@ export default function OrderPage(props) {
 			};
 			document.body.appendChild(script);
 		};
-		if (!order || successPay || (order && order._id !== orderId)) {
+		if (!order || successPay || (order && order.id !== orderId)) {
 			dispatch({ type: ORDER_PAY.RESET });
 			dispatch(detailsOrder(orderId));
 		} else {
@@ -56,7 +56,7 @@ export default function OrderPage(props) {
 		<MessageBox variant="danger">{error}</MessageBox>
 	) : (
 		<div>
-			<h1>Order {order._id}</h1>
+			<h1>Order {order.id}</h1>
 			<div className="row top">
 				<div className="col-2">
 					<ul>

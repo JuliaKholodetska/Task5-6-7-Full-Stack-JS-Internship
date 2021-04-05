@@ -1,21 +1,21 @@
-import mongoose from "mongoose";
+import SequelizeDb from "../db.js";
+import dataTypes from "sequelize";
+import OrderItems from "./orderItemsModel.js";
 
-const productSchema = new mongoose.Schema(
-	{
-		name: { type: String, required: true, unique: true },
-		image: { type: String, required: true },
-		brand: { type: String, required: true },
-		category: { type: String, required: true },
-		price: { type: Number, required: true },
-		countInStock: { type: Number, required: true },
-		rating: { type: Number, required: true },
-		numReviews: { type: Number, required: true },
-		description: { type: String, required: true },
-	},
-	{
-		timestamps: true,
-	}
-);
-const Product = mongoose.model("Product", productSchema);
+const { DataTypes } = dataTypes;
+const Product = SequelizeDb.define("product", {
+	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+	name: { type: DataTypes.STRING, unique: true },
+	price: { type: DataTypes.INTEGER },
+	description: { type: DataTypes.STRING },
+	countInStock: { type: DataTypes.INTEGER },
+	brandId: { type: DataTypes.INTEGER },
+	ratingId: { type: DataTypes.INTEGER, defaultValue: 0 },
+	img: { type: DataTypes.STRING },
+	categoryId: { type: DataTypes.INTEGER },
+});
+
+Product.hasMany(OrderItems);
+OrderItems.belongsTo(Product);
 
 export default Product;

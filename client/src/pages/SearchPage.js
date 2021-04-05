@@ -179,7 +179,7 @@ export default function SearchPage(props) {
 						{products.length === 0 && <MessageBox>No Product Found</MessageBox>}
 						<div className="row center">
 							{products.map((product) => (
-								<Product key={product._id} product={product}></Product>
+								<Product key={product.id} product={product}></Product>
 							))}
 						</div>
 					</>
