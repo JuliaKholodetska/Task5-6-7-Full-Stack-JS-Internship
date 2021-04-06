@@ -1,13 +1,17 @@
 import express from "express";
 import userController from "../controllers/userController.js";
-import { isAuth } from "../utils.js";
+import { isAuth /*validate*/ } from "../utils.js";
+
 const userRouter = express.Router();
 
 userRouter.get("/", userController.getUser);
 
 userRouter.post("/signin", userController.signinUser);
 
-userRouter.post("/register", userController.registerUser);
+userRouter.post(
+	"/register",
+	/*validate(['password']),*/ userController.registerUser
+);
 
 userRouter.get("/:id", userController.getUserDetailsById);
 

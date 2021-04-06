@@ -23,31 +23,23 @@ export default function OrderHistoryPage(props) {
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>DATE</th>
-							<th>TOTAL</th>
-							<th>PAID</th>
-							<th>DELIVERED</th>
+							<th>Shipping Price</th>
+							<th>DELIVERED ADDRESS</th>
 							<th>ACTIONS</th>
 						</tr>
 					</thead>
 					<tbody>
 						{orders.map((order) => (
-							<tr key={order._id}>
-								<td>{order._id}</td>
-								<td>{order.createdAt.substring(0, 10)}</td>
-								<td>{order.totalPrice.toFixed(2)}</td>
-								<td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
-								<td>
-									{order.isDelivered
-										? order.deliveredAt.substring(0, 10)
-										: "No"}
-								</td>
+							<tr key={order.id}>
+								<tr> {order.id}</tr>
+								<td>{order.shippingPrice}</td>
+								<td>{order.shippingAddress}</td>
 								<td>
 									<button
 										type="button"
 										className="small"
 										onClick={() => {
-											props.history.push(`/order/${order._id}`);
+											props.history.push(`/order/${order.id}`);
 										}}
 									>
 										Details

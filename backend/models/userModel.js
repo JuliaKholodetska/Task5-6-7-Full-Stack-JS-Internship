@@ -1,16 +1,25 @@
-import mongoose from "mongoose";
+import sequelizeDB from "../sequelize.js";
+import dataTypes from "sequelize";
+import Order from "./orderModel.js";
+import Rating from "./ratingModel.js";
+const { DataTypes } = dataTypes;
 
-const userSchema = new mongoose.Schema(
+const User = sequelizeDB.define(
+	"user",
 	{
-		name: { type: String, required: true },
-		email: { type: String, required: true, unique: true },
-		password: { type: String, required: true },
-		isAdmin: { type: Boolean, default: false, required: true },
+		id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+		name: { type: DataTypes.STRING, unique: true },
+		email: { type: DataTypes.STRING, unique: true },
+		password: { type: DataTypes.STRING, unique: false },
+		isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false },
 	},
-	{
-		timestamps: true,
-	}
+	{ createdAt: false, updatedAt: false, deletedAt: false }
 );
-const User = mongoose.model("User", userSchema);
+
+User.hasMany(Order);
+Order.belongsTo(User);
+
+User.hasMany(Rating);
+Rating.belongsTo(User);
 
 export default User;

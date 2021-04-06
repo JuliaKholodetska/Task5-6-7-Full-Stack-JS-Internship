@@ -5,16 +5,16 @@ import { generateToken } from "../utils.js";
 
 const userController = {
 	getUser: expressAsyncHandler(async (req, res) => {
-		const users = await User.find({});
+		const users = await User.findAll();
 		res.send(users);
 	}),
 	signinUser: expressAsyncHandler(async (req, res) => {
 		const { email, password } = req.body;
-		const user = await User.findOne({ email: email });
+		const user = await User.findOne({ where: { email } });
 		if (user) {
 			if (bcrypt.compareSync(password, user.password)) {
 				res.send({
-					_id: user._id,
+					id: user.id,
 					name: user.name,
 					email: user.email,
 					isAdmin: user.isAdmin,
@@ -27,16 +27,15 @@ const userController = {
 	}),
 	registerUser: expressAsyncHandler(async (req, res) => {
 		const { name, email, password } = req.body;
-		const user = new User({
-			name: name,
-			email: email,
-			password: bcrypt.hashSync(password, 8),
-		});
-		const userPosible = await User.findOne({ email: email });
-		if (!userPosible) {
-			const createdUser = await user.save();
+		const userAlreadyExists = await User.findOne({ where: { email } });
+		if (!userAlreadyExists) {
+			const createdUser = await User.create({
+				name: name,
+				email: email,
+				password: bcrypt.hashSync(password, 8),
+			});
 			res.send({
-				_id: createdUser._id,
+				id: createdUser.id,
 				name: createdUser.name,
 				email: createdUser.email,
 				isAdmin: createdUser.isAdmin,
@@ -47,7 +46,7 @@ const userController = {
 		}
 	}),
 	getUserDetailsById: expressAsyncHandler(async (req, res) => {
-		const user = await User.findById(req.params.id);
+		const user = await User.findByPk(req.params.id);
 		if (user) {
 			res.send(user);
 		} else {
@@ -55,17 +54,20 @@ const userController = {
 		}
 	}),
 	putProfile: expressAsyncHandler(async (req, res) => {
-		const user = await User.findById(req.user._id);
+		const user = await User.findByPk(req.user.id);
 		const { name, email, password } = req.body;
 		if (user) {
-			user.name = name || user.name;
-			user.email = email || user.email;
+			let newUserData = {
+				name: name || user.name,
+				email: email || user.email,
+			};
 			if (password) {
-				user.password = bcrypt.hashSync(password, 8);
+				newUserData.password = bcrypt.hashSync(password, 8);
 			}
-			const updatedUser = await user.save();
+			await User.update(newUserData, { where: { id: req.user.id } });
+			const updatedUser = await User.findByPk(req.user.id);
 			res.send({
-				_id: updatedUser._id,
+				id: updatedUser.id,
 				name: updatedUser.name,
 				email: updatedUser.email,
 				isAdmin: updatedUser.isAdmin,
@@ -74,4 +76,5 @@ const userController = {
 		}
 	}),
 };
+
 export default userController;

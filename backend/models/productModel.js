@@ -1,21 +1,31 @@
-import mongoose from "mongoose";
+import sequelizeDB from "../sequelize.js";
+import dataTypes from "sequelize";
+import OrderItem from "./orderItemModel.js";
+import Rating from "./ratingModel.js";
+const { DataTypes } = dataTypes;
 
-const productSchema = new mongoose.Schema(
+const Product = sequelizeDB.define(
+	"product",
 	{
-		name: { type: String, required: true, unique: true },
-		image: { type: String, required: true },
-		brand: { type: String, required: true },
-		category: { type: String, required: true },
-		price: { type: Number, required: true },
-		countInStock: { type: Number, required: true },
-		rating: { type: Number, required: true },
-		numReviews: { type: Number, required: true },
-		description: { type: String, required: true },
+		id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+		name: { type: DataTypes.STRING, unique: true },
+		price: { type: DataTypes.INTEGER },
+		description: { type: DataTypes.STRING },
+		countInStock: { type: DataTypes.INTEGER },
+		brandId: { type: DataTypes.INTEGER },
+		img: { type: DataTypes.STRING },
+		categoryId: { type: DataTypes.INTEGER },
 	},
-	{
-		timestamps: true,
-	}
+	{ createdAt: false, updatedAt: false, deletedAt: false }
 );
-const Product = mongoose.model("Product", productSchema);
+
+Product.hasMany(OrderItem, { as: "orderItem" });
+OrderItem.belongsTo(Product, {
+	foreignKey: "productId",
+	as: "product",
+});
+
+Product.hasMany(Rating, { as: "ratings" });
+Rating.belongsTo(Product, { foreignKey: "productId", as: "product" });
 
 export default Product;
