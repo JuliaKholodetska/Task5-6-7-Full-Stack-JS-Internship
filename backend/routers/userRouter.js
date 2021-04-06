@@ -1,16 +1,20 @@
-// import express from "express";
-// import userController from "../controllers/userController.js";
-// import { isAuth } from "../utils.js";
-// const userRouter = express.Router();
+import express from "express";
+import userController from "../controllers/userController.js";
+import { isAuth /*validate*/ } from "../utils.js";
 
-// userRouter.get("/", userController.getUser);
+const userRouter = express.Router();
 
-// userRouter.post("/signin", userController.signinUser);
+userRouter.get("/", userController.getUser);
 
-// userRouter.post("/register", userController.registerUser);
+userRouter.post("/signin", userController.signinUser);
 
-// userRouter.get("/:id", userController.getUserDetailsById);
+userRouter.post(
+	"/register",
+	/*validate(['password']),*/ userController.registerUser
+);
 
-// userRouter.put("/profile", isAuth, userController.putProfile);
+userRouter.get("/:id", userController.getUserDetailsById);
 
-// export default userRouter;
+userRouter.put("/profile", isAuth, userController.putProfile);
+
+export default userRouter;

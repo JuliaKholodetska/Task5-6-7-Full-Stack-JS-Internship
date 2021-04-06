@@ -28,11 +28,7 @@ export default function CartPage(props) {
 							<li key={item.product}>
 								<div className="row-cart-product">
 									<div>
-										<img
-											src={item.image}
-											alt={item.name}
-											className="small"
-										></img>
+										<img src={item.img} alt={item.name} className="small"></img>
 									</div>
 									<div className="name-product-cart">
 										<Link to={`/product/${item.product}`}>{item.name}</Link>

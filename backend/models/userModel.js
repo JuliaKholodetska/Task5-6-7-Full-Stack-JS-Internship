@@ -1,16 +1,20 @@
-import SequelizeDb from "../db.js";
+import sequelizeDB from "../sequelize.js";
 import dataTypes from "sequelize";
 import Order from "./orderModel.js";
 import Rating from "./ratingModel.js";
-
 const { DataTypes } = dataTypes;
-const User = SequelizeDb.define("user", {
-	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-	name: { type: DataTypes.STRING, unique: true },
-	email: { type: DataTypes.STRING, unique: true },
-	password: { type: DataTypes.STRING, unique: false },
-	isAdmin: { type: DataTypes.BOOLEAN },
-});
+
+const User = sequelizeDB.define(
+	"user",
+	{
+		id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+		name: { type: DataTypes.STRING, unique: true },
+		email: { type: DataTypes.STRING, unique: true },
+		password: { type: DataTypes.STRING, unique: false },
+		isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false },
+	},
+	{ createdAt: false, updatedAt: false, deletedAt: false }
+);
 
 User.hasMany(Order);
 Order.belongsTo(User);

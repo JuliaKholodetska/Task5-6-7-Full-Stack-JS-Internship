@@ -23,7 +23,7 @@ export default function PlaceOrderScreen(props) {
 	cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 	const dispatch = useDispatch();
 	const placeOrderHandler = () => {
-		dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+		dispatch(createOrder({ ...cart, orderItem: cart.cartItems }));
 	};
 	useEffect(() => {
 		if (success) {
@@ -70,7 +70,7 @@ export default function PlaceOrderScreen(props) {
 											<div className="row">
 												<div>
 													<img
-														src={item.image}
+														src={item.img}
 														alt={item.name}
 														className="small"
 													></img>

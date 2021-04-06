@@ -1,14 +1,15 @@
-// import express from "express";
-// import orderController from "../controllers/orderController.js";
-// import { isAuth } from "../utils.js";
-// const orderRouter = express.Router();
+import express from "express";
+import orderController from "../controllers/orderController.js";
+import { isAuth } from "../utils.js";
 
-// orderRouter.get("/mine", isAuth, orderController.getMineOrder);
+const orderRouter = express.Router();
 
-// orderRouter.post("/", isAuth, orderController.createOrder);
+orderRouter.get("/mine", isAuth, orderController.getMineOrder);
 
-// orderRouter.get("/:id", isAuth, orderController.getById);
+orderRouter.post("/", isAuth, orderController.createOrder);
 
-// orderRouter.put("/:id/pay", isAuth, orderController.putByIdPay);
+orderRouter.get("/:id", isAuth, orderController.getById);
 
-// export default orderRouter;
+orderRouter.put("/:id/pay", isAuth, orderController.putByIdPay);
+
+export default orderRouter;

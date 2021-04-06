@@ -1,21 +1,31 @@
-import SequelizeDb from "../db.js";
+import sequelizeDB from "../sequelize.js";
 import dataTypes from "sequelize";
-import OrderItems from "./orderItemsModel.js";
-
+import OrderItem from "./orderItemModel.js";
+import Rating from "./ratingModel.js";
 const { DataTypes } = dataTypes;
-const Product = SequelizeDb.define("product", {
-	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-	name: { type: DataTypes.STRING, unique: true },
-	price: { type: DataTypes.INTEGER },
-	description: { type: DataTypes.STRING },
-	countInStock: { type: DataTypes.INTEGER },
-	brandId: { type: DataTypes.INTEGER },
-	ratingId: { type: DataTypes.INTEGER, defaultValue: 0 },
-	img: { type: DataTypes.STRING },
-	categoryId: { type: DataTypes.INTEGER },
+
+const Product = sequelizeDB.define(
+	"product",
+	{
+		id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+		name: { type: DataTypes.STRING, unique: true },
+		price: { type: DataTypes.INTEGER },
+		description: { type: DataTypes.STRING },
+		countInStock: { type: DataTypes.INTEGER },
+		brandId: { type: DataTypes.INTEGER },
+		img: { type: DataTypes.STRING },
+		categoryId: { type: DataTypes.INTEGER },
+	},
+	{ createdAt: false, updatedAt: false, deletedAt: false }
+);
+
+Product.hasMany(OrderItem, { as: "orderItem" });
+OrderItem.belongsTo(Product, {
+	foreignKey: "productId",
+	as: "product",
 });
 
-Product.hasMany(OrderItems);
-OrderItems.belongsTo(Product);
+Product.hasMany(Rating, { as: "ratings" });
+Rating.belongsTo(Product, { foreignKey: "productId", as: "product" });
 
 export default Product;

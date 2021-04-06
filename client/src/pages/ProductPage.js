@@ -36,11 +36,7 @@ export default function ProductPage(props) {
 					</Link>
 					<div className="row">
 						<div className="col-2">
-							<img
-								className="large"
-								src={product.image}
-								alt={product.name}
-							></img>
+							<img className="large" src={product.img} alt={product.name}></img>
 						</div>
 
 						<div className="col-1">

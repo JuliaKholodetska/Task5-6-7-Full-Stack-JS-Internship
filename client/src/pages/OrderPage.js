@@ -32,11 +32,16 @@ export default function OrderPage(props) {
 			};
 			document.body.appendChild(script);
 		};
-		if (!order || successPay || (order && order.id !== orderId)) {
+
+		if (
+			!order ||
+			successPay ||
+			(order && Number(order.id) !== Number(orderId))
+		) {
 			dispatch({ type: ORDER_PAY.RESET });
 			dispatch(detailsOrder(orderId));
 		} else {
-			if (!order.isPaid) {
+			if (!order.paymentStatusId) {
 				if (!window.paypal) {
 					addPayPalScript();
 				} else {
@@ -64,15 +69,13 @@ export default function OrderPage(props) {
 							<div className="card-body-order">
 								<h2>Shipping</h2>
 								<p>
-									<strong>Name:</strong> {order.shippingAddress.fullName} <br />
-									<strong>Address: </strong> {order.shippingAddress.address},
-									{order.shippingAddress.city},{" "}
-									{order.shippingAddress.postalCode},
-									{order.shippingAddress.country}
+									<strong>Name:</strong> {order.fullName} <br />
+									<strong>Address: </strong> {order.shippingAddress},
+									{order.city},{order.postalCode},{order.country}
 								</p>
 								{order.isDelivered ? (
 									<MessageBox variant="success">
-										Delivered at {order.deliveredAt}
+										Delivered status {order.orderStatusId}
 									</MessageBox>
 								) : (
 									<MessageBox variant="danger">Not Delivered</MessageBox>
@@ -87,7 +90,7 @@ export default function OrderPage(props) {
 								</p>
 								{order.isPaid ? (
 									<MessageBox variant="success">
-										Paid at {order.paidAt}
+										Paiment status {order.paymentStatusId}
 									</MessageBox>
 								) : (
 									<MessageBox variant="danger">Not Paid</MessageBox>
@@ -96,24 +99,11 @@ export default function OrderPage(props) {
 						</li>
 						<li>
 							<div className="card-body-order">
-								<h2>Order Items</h2>
+								<h2>Order items price</h2>
 								<ul>
-									{order.orderItems.map((item) => (
-										<li key={item.product}>
+									{order.orderItem.map((item) => (
+										<li key={item.id}>
 											<div className="row">
-												<div>
-													<img
-														src={item.image}
-														alt={item.name}
-														className="small"
-													></img>
-												</div>
-												<div className="min-30">
-													<Link to={`/product/${item.product}`}>
-														{item.name}
-													</Link>
-												</div>
-
 												<div>
 													{item.quantity} x ${item.price} = $
 													{item.quantity * item.price}

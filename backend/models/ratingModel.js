@@ -1,15 +1,16 @@
-import SequelizeDb from "../db.js";
+import sequelizeDB from "../sequelize.js";
 import dataTypes from "sequelize";
-import Product from "./productModel.js";
-
 const { DataTypes } = dataTypes;
-const Rating = SequelizeDb.define("rating", {
-	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-	userId: { type: DataTypes.INTEGER },
-	rating: { type: DataTypes.INTEGER },
-});
 
-Rating.hasMany(Product);
-Product.belongsTo(Rating);
+const Rating = sequelizeDB.define(
+	"rating",
+	{
+		id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+		userId: { type: DataTypes.INTEGER },
+		productId: { type: DataTypes.INTEGER },
+		rating: { type: DataTypes.INTEGER },
+	},
+	{ createdAt: false, updatedAt: false, deletedAt: false }
+);
 
 export default Rating;
