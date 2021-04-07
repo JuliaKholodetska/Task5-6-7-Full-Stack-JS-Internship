@@ -10,7 +10,6 @@ const Product = sequelizeDB.define("product", {
 	description: { type: DataTypes.STRING },
 	countInStock: { type: DataTypes.INTEGER },
 	brandId: { type: DataTypes.INTEGER },
-	ratingId: { type: DataTypes.INTEGER, defaultValue: 0 },
 	image: { type: DataTypes.STRING },
 	categoryId: { type: DataTypes.INTEGER },
 });
