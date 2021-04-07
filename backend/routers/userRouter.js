@@ -1,6 +1,10 @@
 import express from "express";
 import userController from "../controllers/userController.js";
-import { isAuth /*validate*/ } from "../utils.js";
+import {
+	validateEmail,
+	validatePassword,
+} from "../middleware/checkUserInput.js";
+import { isAuth } from "../middleware/utils.js";
 
 const userRouter = express.Router();
 
@@ -10,7 +14,9 @@ userRouter.post("/signin", userController.signinUser);
 
 userRouter.post(
 	"/register",
-	/*validate(['password']),*/ userController.registerUser
+	validatePassword(["password"]),
+	validateEmail(["email"]),
+	userController.registerUser
 );
 
 userRouter.get("/:id", userController.getUserDetailsById);

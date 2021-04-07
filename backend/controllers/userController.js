@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import User from "../models/userModel.js";
-import { generateToken } from "../utils.js";
+import { generateToken } from "../middleware/utils.js";
 
 const userController = {
 	getUser: expressAsyncHandler(async (req, res) => {
