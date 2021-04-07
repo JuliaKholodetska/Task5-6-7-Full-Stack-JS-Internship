@@ -13,8 +13,8 @@ import express from "express";
 // import Category from "./models/categoryModel.js";
 // import Brand from "./models/brandModel.js";
 import dotenv from "dotenv";
-import sequelizeDB from "./sequelize.js";
 import cors from "cors";
+import { start } from "./serverDB.js";
 dotenv.config();
 
 const app = express();
@@ -39,11 +39,8 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 
-const start = async () => {
-	await sequelizeDB.authenticate();
-	await sequelizeDB.sync();
-	app.listen(port, () => {
-		console.log(`Serve at http://localhost:${port}`);
-	});
-};
+app.listen(port, () => {
+	console.log(`Serve at http://localhost:${port}`);
+});
+
 start();
