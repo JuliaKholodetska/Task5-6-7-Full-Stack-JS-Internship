@@ -14,7 +14,7 @@ import express from "express";
 // import Brand from "./models/brandModel.js";
 import dotenv from "dotenv";
 import cors from "cors";
-import { start } from "./serverDB.js";
+import { start } from "./db/index.js";
 dotenv.config();
 
 const app = express();

@@ -1,4 +1,4 @@
-import sequelizeDB from "./sequelize.js";
+import sequelizeDB from "../sequelize.js";
 
 export const start = async () => {
 	await sequelizeDB.authenticate();

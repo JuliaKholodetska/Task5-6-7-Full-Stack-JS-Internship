@@ -102,11 +102,11 @@ export default function OrderPage(props) {
 										<li key={item.product}>
 											<div className="row">
 												<div>
-													<img
+													<image
 														src={item.image}
 														alt={item.name}
 														className="small"
-													></img>
+													></image>
 												</div>
 												<div className="min-30">
 													<Link to={`/product/${item.product}`}>

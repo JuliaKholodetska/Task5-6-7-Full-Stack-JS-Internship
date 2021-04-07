@@ -11,7 +11,7 @@ const Product = sequelizeDB.define("product", {
 	countInStock: { type: DataTypes.INTEGER },
 	brandId: { type: DataTypes.INTEGER },
 	ratingId: { type: DataTypes.INTEGER, defaultValue: 0 },
-	img: { type: DataTypes.STRING },
+	image: { type: DataTypes.STRING },
 	categoryId: { type: DataTypes.INTEGER },
 });
 
