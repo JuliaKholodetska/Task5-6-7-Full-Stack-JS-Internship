@@ -8,7 +8,7 @@ const Rating = sequelizeDB.define(
 		id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 		userId: { type: DataTypes.INTEGER },
 		productId: { type: DataTypes.INTEGER },
-		rating: { type: DataTypes.INTEGER },
+		rating: { type: DataTypes.FLOAT },
 	},
 	{ createdAt: false, updatedAt: false, deletedAt: false }
 );

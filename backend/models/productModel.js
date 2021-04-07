@@ -13,7 +13,7 @@ const Product = sequelizeDB.define(
 		description: { type: DataTypes.STRING },
 		countInStock: { type: DataTypes.INTEGER },
 		brandId: { type: DataTypes.INTEGER },
-		img: { type: DataTypes.STRING },
+		image: { type: DataTypes.STRING },
 		categoryId: { type: DataTypes.INTEGER },
 	},
 	{ createdAt: false, updatedAt: false, deletedAt: false }
