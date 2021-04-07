@@ -1,8 +1,8 @@
-import SequelizeDb from "../db.js";
+import sequelizeDB from "../db.js";
 import dataTypes from "sequelize";
 
 const { DataTypes } = dataTypes;
-const OrderItems = SequelizeDb.define("orderItems", {
+const OrderItem = sequelizeDB.define("orderItem", {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	orderId: { type: DataTypes.INTEGER },
 	productId: { type: DataTypes.INTEGER },
@@ -10,4 +10,4 @@ const OrderItems = SequelizeDb.define("orderItems", {
 	price: { type: DataTypes.INTEGER },
 });
 
-export default OrderItems;
+export default OrderItem;

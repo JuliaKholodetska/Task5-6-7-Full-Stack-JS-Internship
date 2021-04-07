@@ -1,9 +1,9 @@
-import SequelizeDb from "../db.js";
+import sequelizeDB from "../db.js";
 import dataTypes from "sequelize";
 import Order from "./orderModel.js";
 
 const { DataTypes } = dataTypes;
-const OrderStatus = SequelizeDb.define("orderStatus", {
+const OrderStatus = sequelizeDB.define("orderStatus", {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	orderStatus: { type: DataTypes.STRING },
 });

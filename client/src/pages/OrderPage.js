@@ -98,7 +98,7 @@ export default function OrderPage(props) {
 							<div className="card-body-order">
 								<h2>Order Items</h2>
 								<ul>
-									{order.orderItems.map((item) => (
+									{order.orderItem.map((item) => (
 										<li key={item.product}>
 											<div className="row">
 												<div>

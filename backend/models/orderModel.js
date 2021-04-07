@@ -1,9 +1,9 @@
-import SequelizeDb from "../db.js";
+import sequelizeDB from "../db.js";
 import dataTypes from "sequelize";
-import OrderItems from "./orderItemsModel.js";
+import OrderItem from "./orderItemModel.js";
 
 const { DataTypes } = dataTypes;
-const Order = SequelizeDb.define("order", {
+const Order = sequelizeDB.define("order", {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	userId: { type: DataTypes.INTEGER },
 	paymentStatusId: { type: DataTypes.INTEGER },
@@ -18,7 +18,7 @@ const Order = SequelizeDb.define("order", {
 	county: { type: DataTypes.STRING },
 });
 
-Order.hasMany(OrderItems);
-OrderItems.belongsTo(Order);
+Order.hasMany(OrderItem);
+OrderItem.belongsTo(Order);
 
 export default Order;

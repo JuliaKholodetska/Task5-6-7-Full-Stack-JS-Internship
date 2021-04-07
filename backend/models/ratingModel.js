@@ -1,12 +1,12 @@
-import SequelizeDb from "../db.js";
+import sequelizeDB from "../db.js";
 import dataTypes from "sequelize";
 import Product from "./productModel.js";
 
 const { DataTypes } = dataTypes;
-const Rating = SequelizeDb.define("rating", {
+const Rating = sequelizeDB.define("rating", {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	userId: { type: DataTypes.INTEGER },
-	rating: { type: DataTypes.INTEGER },
+	rating: { type: DataTypes.FLOAT },
 });
 
 Rating.hasMany(Product);

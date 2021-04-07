@@ -4,7 +4,7 @@
 // const orderController = {
 // 	createOrder: expressAsyncHandler(async (req, res) => {
 // 		const {
-// 			orderItems,
+// 			orderItem,
 // 			shippingAddress,
 // 			paymentMethod,
 // 			itemsPrice,
@@ -12,11 +12,11 @@
 // 			taxPrice,
 // 			totalPrice,
 // 		} = req.body;
-// 		if (orderItems.length === 0) {
+// 		if (orderItem.length === 0) {
 // 			res.status(400).send({ message: "Cart is empty" });
 // 		} else {
 // 			const order = new Order({
-// 				orderItems: orderItems,
+// 				orderItem: orderItem,
 // 				shippingAddress: shippingAddress,
 // 				paymentMethod: paymentMethod,
 // 				itemsPrice: itemsPrice,
