@@ -13,7 +13,7 @@ import Category from "./models/categoryModel.js";
 import Brand from "./models/brandModel.js";
 import dotenv from "dotenv";
 import cors from "cors";
-import { start } from "./db/index.js";
+import { startDB } from "./db/index.js";
 dotenv.config();
 
 const app = express();
@@ -42,4 +42,4 @@ app.listen(port, () => {
 	console.log(`Serve at http://localhost:${port}`);
 });
 
-start();
+startDB();
