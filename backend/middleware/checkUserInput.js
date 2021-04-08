@@ -5,7 +5,7 @@ export const validatePassword = (keysToValidate) => (req, res, next) => {
 				if (req.body.password.length <= 6) {
 					return res.status(400).send({
 						message:
-							"Password should be at least 6 symbols long. Please enter another.",
+							"Password should be at least 6 symbols long. Please enter another!",
 					});
 				}
 				next();
