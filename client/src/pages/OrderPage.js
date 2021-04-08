@@ -102,8 +102,21 @@ export default function OrderPage(props) {
 								<h2>Order items price</h2>
 								<ul>
 									{order.orderItem.map((item) => (
-										<li key={item.id}>
+										<li key={item.product}>
 											<div className="row">
+												<div>
+													<image
+														src={item.image}
+														alt={item.name}
+														className="small"
+													></image>
+												</div>
+												<div className="min-30">
+													<Link to={`/product/${item.product}`}>
+														{item.name}
+													</Link>
+												</div>
+
 												<div>
 													{item.quantity} x ${item.price} = $
 													{item.quantity * item.price}
