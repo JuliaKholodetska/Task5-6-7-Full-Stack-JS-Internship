@@ -64,3 +64,7 @@ VALUES ('Inglot All covered concealer',22,'Was developed especially for the deli
 ('Inglot Makeup brush 15bjf',45,'Best for: bronzing powder, blush, pressed powder, loose powder. A classic brush for blush and sculpting powder application. Synthetic version available',29,1,8,'/images/p-8.jpg',3),
 ('Inglot Body Sparkles 111',80,'Brilliant glitter flakes that reflect light and add color and another dimension. Come in variety of shapes and colors to be used on nails, lips, and all over the body.',41,1,9,'/images/p-9.jpg',3),
 ('Inglot Multi-Action Toner',95,'Add more glow and radiance to your skin with Starlight Stick Highlighter and enjoy it for hours!',26,1,10,'/images/p-10.jpg',1);
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
