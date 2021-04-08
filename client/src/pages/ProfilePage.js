@@ -25,19 +25,19 @@ export default function ProfilePage() {
 	useEffect(() => {
 		if (!user) {
 			dispatch({ type: USER_UPDATE_PROFILE.RESET });
-			dispatch(detailsUser(userInfo._id));
+			dispatch(detailsUser(userInfo.id));
 		} else {
 			setName(user.name);
 			setEmail(user.email);
 		}
-	}, [dispatch, userInfo._id, user]);
+	}, [dispatch, userInfo.id, user]);
 	const submitHandler = (e) => {
 		e.preventDefault();
 		// dispatch update profile
 		if (password !== confirmPassword) {
 			alert("Password and Confirm Password Are Not Matched");
 		} else {
-			dispatch(updateUserProfile({ userId: user._id, name, email, password }));
+			dispatch(updateUserProfile({ userId: user.id, name, email, password }));
 		}
 	};
 	return (

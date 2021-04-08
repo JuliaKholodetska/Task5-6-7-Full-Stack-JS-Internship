@@ -23,11 +23,11 @@ export default function PlaceOrderScreen(props) {
 	cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 	const dispatch = useDispatch();
 	const placeOrderHandler = () => {
-		dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+		dispatch(createOrder({ ...cart, orderItem: cart.cartItems }));
 	};
 	useEffect(() => {
 		if (success) {
-			props.history.push(`/order/${order._id}`);
+			props.history.push(`/order/${order.id}`);
 			dispatch({ type: ORDER_CREATE.RESET });
 		}
 	}, [dispatch, order, props.history, success]);
@@ -69,11 +69,11 @@ export default function PlaceOrderScreen(props) {
 										<li key={item.product}>
 											<div className="row">
 												<div>
-													<img
+													<image
 														src={item.image}
 														alt={item.name}
 														className="small"
-													></img>
+													></image>
 												</div>
 												<div className="min-30">
 													<Link to={`/product/${item.product}`}>

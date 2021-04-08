@@ -32,7 +32,7 @@ export default function OrderPage(props) {
 			};
 			document.body.appendChild(script);
 		};
-		if (!order || successPay || (order && order._id !== orderId)) {
+		if (!order || successPay || (order && order.id !== orderId)) {
 			dispatch({ type: ORDER_PAY.RESET });
 			dispatch(detailsOrder(orderId));
 		} else {
@@ -56,7 +56,7 @@ export default function OrderPage(props) {
 		<MessageBox variant="danger">{error}</MessageBox>
 	) : (
 		<div>
-			<h1>Order {order._id}</h1>
+			<h1>Order {order.id}</h1>
 			<div className="row top">
 				<div className="col-2">
 					<ul>
@@ -98,15 +98,15 @@ export default function OrderPage(props) {
 							<div className="card-body-order">
 								<h2>Order Items</h2>
 								<ul>
-									{order.orderItems.map((item) => (
+									{order.orderItem.map((item) => (
 										<li key={item.product}>
 											<div className="row">
 												<div>
-													<img
+													<image
 														src={item.image}
 														alt={item.name}
 														className="small"
-													></img>
+													></image>
 												</div>
 												<div className="min-30">
 													<Link to={`/product/${item.product}`}>
