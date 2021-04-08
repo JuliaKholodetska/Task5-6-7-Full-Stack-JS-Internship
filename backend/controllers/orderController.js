@@ -1,9 +1,9 @@
-import expressAsyncHandler from "express-async-handler";
 import OrderItem from "../models/orderItemModel.js";
 import Order from "../models/orderModel.js";
+import { getSum } from "../utils.js";
 
 const orderController = {
-	createOrder: expressAsyncHandler(async (req, res) => {
+	createOrder: async (req, res) => {
 		const {
 			orderItem,
 			shippingAddress,
@@ -33,18 +33,11 @@ const orderController = {
 			);
 			res.status(201).send({
 				message: "New Order Created",
-				order: {
-					...order.dataValues,
-					itemsPrice,
-					taxPrice: Number(order.taxPrice),
-					shippingPrice: Number(order.shippingPrice),
-					totalPrice:
-						itemsPrice + Number(order.taxPrice) + Number(order.shippingPrice),
-				},
+				order: Create(order, itemsPrice),
 			});
 		}
-	}),
-	getById: expressAsyncHandler(async (req, res) => {
+	},
+	getById: async (req, res) => {
 		const order = await Order.findByPk(req.params.id, {
 			include: [
 				{
@@ -58,48 +51,49 @@ const orderController = {
 			const itemsPrice = getSum(
 				order.orderItem.map(({ price, quantity }) => price * quantity)
 			);
+			res.send(Create(order, itemsPrice));
+		} else {
+			res.status(404).send({ message: "Order Not Found" });
+		}
+	},
+	putPay: async (req, res) => {
+		const order = await Order.findByPk(id);
+		const { id, status, updateTime, emailAddress } = req.body;
 
-			res.send({
-				...order.dataValues,
-				itemsPrice,
-				taxPrice: Number(order.taxPrice),
-				shippingPrice: Number(order.shippingPrice),
-				totalPrice:
-					itemsPrice + Number(order.taxPrice) + Number(order.shippingPrice),
-			});
-		} else {
+		if (!order) {
 			res.status(404).send({ message: "Order Not Found" });
 		}
-	}),
-	putByIdPay: expressAsyncHandler(async (req, res) => {
-		const order = await Order.findByPk(req.params.id);
-		const { id, status, update_time, email_address } = req.body;
-		if (order) {
-			const newOrderData = {
-				isPaid: true,
-				paidAt: Date.now(),
-				paymentResult: {
-					id: id,
-					status: status,
-					update_time: update_time,
-					email_address: email_address,
-				},
-			};
-			await Order.update(newOrderData, { where: { id: req.params.id } });
-			const updatedOrder = await Order.findByPk(req.params.id, {
-				include: ["orderItem"],
-			});
-			res.send({ message: "Order Paid", order: updatedOrder });
-		} else {
-			res.status(404).send({ message: "Order Not Found" });
-		}
-	}),
-	getMineOrder: expressAsyncHandler(async (req, res) => {
+		const newOrderData = {
+			isPaid: true,
+			paidAt: Date.now(),
+			paymentResult: {
+				id: id,
+				status: status,
+				updateTime: updateTime,
+				emailAddress: emailAddress,
+			},
+		};
+		await Order.update(newOrderData, { where: { id: id } });
+		const updatedOrder = await Order.findByPk(id, {
+			include: ["orderItem"],
+		});
+		res.send({ message: "Order Paid", order: updatedOrder });
+	},
+	getUserOrder: async (req, res) => {
 		const orders = await Order.findAll({ user: req.user.id });
 		res.send(orders);
-	}),
+	},
 };
 
-const getSum = (arr) => arr.reduce((a, b) => a + b, 0);
+const Create = (order, itemsPrice) => {
+	return {
+		...order.dataValues,
+		itemsPrice,
+		taxPrice: Number(order.taxPrice),
+		shippingPrice: Number(order.shippingPrice),
+		totalPrice:
+			itemsPrice + Number(order.taxPrice) + Number(order.shippingPrice),
+	};
+};
 
 export default orderController;

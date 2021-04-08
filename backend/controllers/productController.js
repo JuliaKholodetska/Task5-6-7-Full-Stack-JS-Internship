@@ -1,18 +1,20 @@
 import Product from "../models/productModel.js";
-import expressAsyncHandler from "express-async-handler";
 import { PRODUCT_POPULATION } from "../constants.js";
 import Category from "../models/categoryModel.js";
 import pkg from "sequelize";
+import { getSum } from "../utils.js";
 const { Op } = pkg;
 
 const productController = {
-	getProduct: expressAsyncHandler(async (req, res) => {
+	getProducts: async (req, res) => {
 		const { name, category, max, order, rating } = req.query;
+		const maxNumber = Number(max);
+		const ratingNumber = Number(rating);
 		let maxPrice;
-		if (max) {
-			maxPrice = +max !== 0 ? +max : 0;
+		if (maxNumber) {
+			maxPrice = maxNumber !== 0 ? maxNumber : 0;
 		}
-		const ratings = rating && Number(rating) !== 0 ? Number(rating) : 0;
+		const ratings = ratingNumber && ratingNumber !== 0 ? ratingNumber : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
 		const categoryFilter = category
 			? { categoryId: await getCategoryIdByName(category) }
@@ -20,9 +22,9 @@ const productController = {
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};
 		const ratingFilter = ratings ? { rating: { [Op.gte]: ratings } } : {};
 		const sortOrder =
-			order === PRODUCT_POPULATION.lowest
+			order === PRODUCT_POPULATION.LOWEST
 				? ["price", "ASC"]
-				: order === PRODUCT_POPULATION.highest
+				: order === PRODUCT_POPULATION.HIHGEST
 				? ["price", "DESC"]
 				: ["id", "DESC"];
 		const products = await Product.findAll({
@@ -46,40 +48,36 @@ const productController = {
 					};
 				})
 				.sort((a, b) =>
-					order === PRODUCT_POPULATION.toprated ? b.rating - a.rating : 0
+					order === PRODUCT_POPULATION.TOPRATED ? b.rating - a.rating : 0
 				)
 		);
-	}),
-	getProductById: expressAsyncHandler(async (req, res) => {
+	},
+	getProductById: async (req, res) => {
 		const product = await Product.findByPk(req.params.id, {
-			include: ["ratings", "category", "brand"],
+			include: ["ratings"],
 		});
 		if (product) {
 			res.send({
 				...product.dataValues,
-				category: product.category.name,
-				brand: product.brand.name,
 				rating: getRating(product),
 			});
 		} else {
 			res.status(404).send({ message: "Product Not Found" });
 		}
-	}),
-	getCategories: expressAsyncHandler(async (req, res) => {
+	},
+	getCategories: async (req, res) => {
 		const categories = await Category.findAll();
 		res.send(categories.map((category) => category.name));
-	}),
+	},
 };
 
 const getCategoryIdByName = async (categoryName) => {
-	return (await Category.findOne({ where: { name: categoryName } })).id || 0;
+	return (await Category.findOne({ where: { name: categoryName } })).id;
 };
 
 const getRating = (product) => {
 	const ratings = product.ratings.map((rating) => rating.rating);
-	return ratings.reduce((a, b) => {
-		return a + b;
-	}, 0);
+	return getSum(ratings);
 };
 
 export default productController;

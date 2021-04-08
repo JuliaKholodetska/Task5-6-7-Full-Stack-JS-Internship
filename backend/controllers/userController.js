@@ -1,14 +1,13 @@
-import expressAsyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import User from "../models/userModel.js";
 import { generateToken } from "../utils.js";
 
 const userController = {
-	getUser: expressAsyncHandler(async (req, res) => {
+	getUsers: async (req, res) => {
 		const users = await User.findAll();
 		res.send(users);
-	}),
-	signinUser: expressAsyncHandler(async (req, res) => {
+	},
+	signinUser: async (req, res) => {
 		const { email, password } = req.body;
 		const user = await User.findOne({ where: { email } });
 		if (user) {
@@ -24,8 +23,8 @@ const userController = {
 			}
 		}
 		res.status(401).send({ message: "Invalid email or password" });
-	}),
-	registerUser: expressAsyncHandler(async (req, res) => {
+	},
+	registerUser: async (req, res) => {
 		const { name, email, password } = req.body;
 		const userAlreadyExists = await User.findOne({ where: { email } });
 		if (!userAlreadyExists) {
@@ -44,37 +43,44 @@ const userController = {
 		} else {
 			res.status(401).send({ message: "User Already exist" });
 		}
-	}),
-	getUserDetailsById: expressAsyncHandler(async (req, res) => {
+	},
+	getUser: async (req, res) => {
 		const user = await User.findByPk(req.params.id);
-		if (user) {
-			res.send(user);
-		} else {
+		if (!user) {
 			res.status(404).send({ message: "User Not Found" });
 		}
-	}),
-	putProfile: expressAsyncHandler(async (req, res) => {
-		const user = await User.findByPk(req.user.id);
+		res.send(user);
+	},
+	profile: async (req, res) => {
 		const { name, email, password } = req.body;
+		const { id } = req.user;
+		const user = await User.findByPk(+id);
 		if (user) {
-			let newUserData = {
+			let updatedUserData = {
 				name: name || user.name,
 				email: email || user.email,
 			};
 			if (password) {
-				newUserData.password = bcrypt.hashSync(password, 8);
+				updatedUserData.password = bcrypt.hashSync(password, 8);
 			}
-			await User.update(newUserData, { where: { id: req.user.id } });
-			const updatedUser = await User.findByPk(req.user.id);
-			res.send({
-				id: updatedUser.id,
-				name: updatedUser.name,
-				email: updatedUser.email,
-				isAdmin: updatedUser.isAdmin,
-				token: generateToken(updatedUser),
+			const result = await User.update(updatedUserData, {
+				where: { id: id },
+				returning: true,
 			});
+			if (!result) {
+				res.status(404).send({ message: "Something went wrong, try again." });
+			} else {
+				const updatedUser = result[1][0].dataValues;
+				res.send({
+					id: updatedUser.dataValues,
+					name: updatedUser.name,
+					email: updatedUser.email,
+					isAdmin: updatedUser.isAdmin,
+					token: generateToken(updatedUser),
+				});
+			}
 		}
-	}),
+	},
 };
 
 export default userController;
