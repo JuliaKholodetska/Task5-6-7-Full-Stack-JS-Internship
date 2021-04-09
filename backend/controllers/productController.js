@@ -68,7 +68,6 @@ const productController = {
 			},
 			order: [sortOrder],
 		});
-		console.log(products);
 		res.send(
 			products.map((product) => {
 				return {
@@ -101,18 +100,6 @@ const productController = {
 	getCategories: async (req, res) => {
 		const categories = await Category.findAll();
 		res.send(categories.map((category) => category.name));
-	},
-	getRating: async (req, res) => {
-		const products = await Product.findAll({
-			include: ["ratings"],
-
-			attributes: [
-				[Sequelize.fn("sum", Sequelize.col("ratings.rating")), "total"],
-			],
-			group: ["ratings.id"],
-			raw: true,
-			order: Sequelize.literal("total DESC"),
-		}).then((res) => console.log(res));
 	},
 };
 

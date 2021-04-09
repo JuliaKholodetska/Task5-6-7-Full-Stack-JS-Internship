@@ -6,7 +6,6 @@ const productRouter = express.Router();
 
 productRouter.get("/", asyncHandler(productController.getProducts));
 
-productRouter.get("/test", asyncHandler(productController.getRating));
 productRouter.get(
 	"/categories",
 	asyncHandler(categoryController.getCategories)

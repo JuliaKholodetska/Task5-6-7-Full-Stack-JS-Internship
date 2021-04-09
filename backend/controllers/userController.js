@@ -53,8 +53,8 @@ const userController = {
 	},
 	profile: async (req, res) => {
 		const { name, email, password } = req.body;
-		const { id } = req.user;
-		const user = await User.findByPk(+id);
+		//const { id } = req.user;
+		const user = await User.findByPk(req.user.id);
 		if (user) {
 			let updatedUserData = {
 				name: name || user.name,
@@ -64,7 +64,7 @@ const userController = {
 				updatedUserData.password = bcrypt.hashSync(password, 8);
 			}
 			const result = await User.update(updatedUserData, {
-				where: { id: id },
+				where: { id: req.user.id },
 				returning: true,
 			});
 			if (!result) {
