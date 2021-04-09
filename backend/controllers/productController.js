@@ -3,6 +3,8 @@ import { PRODUCT_POPULATION } from "../constants.js";
 import Category from "../models/categoryModel.js";
 import pkg from "sequelize";
 import { getSum } from "../utils.js";
+import { Sequelize } from "sequelize";
+import Rating from "../models/ratingModel.js";
 const { Op } = pkg;
 
 const productController = {
@@ -22,13 +24,42 @@ const productController = {
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};
 		const ratingFilter = ratings ? { rating: { [Op.gte]: ratings } } : {};
 		const sortOrder =
-			order === PRODUCT_POPULATION.LOWEST
+			order === PRODUCT_POPULATION.TOPRATED
+				? [Sequelize.literal("total DESC")]
+				: order === PRODUCT_POPULATION.LOWEST
 				? ["price", "ASC"]
 				: order === PRODUCT_POPULATION.HIHGEST
 				? ["price", "DESC"]
 				: ["id", "DESC"];
+
 		const products = await Product.findAll({
 			include: ["ratings", "category", "brand"],
+			attributes: [
+				"product.id",
+				"product.name",
+				"product.price",
+				"product.description",
+				"product.countInStock",
+				"product.brandId",
+				"product.image",
+				"product.categoryId",
+				[Sequelize.fn("sum", Sequelize.col("ratings.rating")), "total"],
+			],
+			group: [
+				"product.id",
+				"product.name",
+				"product.price",
+				"product.description",
+				"product.countInStock",
+				"product.brandId",
+				"product.image",
+				"product.categoryId",
+				"ratings.id",
+				"category.id",
+				"brand.id",
+			],
+			raw: true,
+
 			where: {
 				...nameFilter,
 				...categoryFilter,
@@ -37,19 +68,21 @@ const productController = {
 			},
 			order: [sortOrder],
 		});
+		console.log(products);
 		res.send(
-			products
-				.map((product) => {
-					return {
-						...product.dataValues,
-						category: product.category.name,
-						brand: product.brand.name,
-						rating: getRating(product),
-					};
-				})
-				.sort((a, b) =>
-					order === PRODUCT_POPULATION.TOPRATED ? b.rating - a.rating : 0
-				)
+			products.map((product) => {
+				return {
+					id: product.id,
+					name: product.name,
+					price: product.price,
+					countInStock: product.countInStock,
+					image: product.image,
+					description: product.description,
+					category: product?.category?.name,
+					brand: product?.brand?.name,
+					rating: product.total,
+				};
+			})
 		);
 	},
 	getProductById: async (req, res) => {
@@ -69,11 +102,33 @@ const productController = {
 		const categories = await Category.findAll();
 		res.send(categories.map((category) => category.name));
 	},
+	getRating: async (req, res) => {
+		const products = await Product.findAll({
+			include: ["ratings"],
+
+			attributes: [
+				[Sequelize.fn("sum", Sequelize.col("ratings.rating")), "total"],
+			],
+			group: ["ratings.id"],
+			raw: true,
+			order: Sequelize.literal("total DESC"),
+		}).then((res) => console.log(res));
+	},
 };
 
 const getCategoryIdByName = async (categoryName) => {
 	return (await Category.findOne({ where: { name: categoryName } })).id;
 };
+
+const ratingall = Rating.findAll({
+	attributes: [
+		"productId",
+		[Sequelize.fn("sum", Sequelize.col("rating")), "total"],
+	],
+	group: ["product.ratingsId"],
+	raw: true,
+	order: Sequelize.literal("total DESC"),
+});
 
 const getRating = (product) => {
 	const ratings = product.ratings.map((rating) => rating.rating);
