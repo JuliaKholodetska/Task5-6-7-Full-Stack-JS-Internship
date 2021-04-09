@@ -10,13 +10,11 @@ const { Op } = pkg;
 const productController = {
 	getProducts: async (req, res) => {
 		const { name, category, max, order, rating } = req.query;
-		const maxNumber = Number(max);
-		const ratingNumber = Number(rating);
 		let maxPrice;
-		if (maxNumber) {
-			maxPrice = maxNumber !== 0 ? maxNumber : 0;
+		if (+max) {
+			maxPrice = +max !== 0 ? +max : 0;
 		}
-		const ratings = ratingNumber && ratingNumber !== 0 ? ratingNumber : 0;
+		const ratings = +rating && +rating !== 0 ? +rating : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
 		const categoryFilter = category
 			? { categoryId: await getCategoryIdByName(category) }
@@ -38,8 +36,7 @@ const productController = {
 				"product.id",
 				"product.name",
 				"product.price",
-				"product.description",
-				"product.countInStock",
+
 				"product.brandId",
 				"product.image",
 				"product.categoryId",
@@ -49,8 +46,6 @@ const productController = {
 				"product.id",
 				"product.name",
 				"product.price",
-				"product.description",
-				"product.countInStock",
 				"product.brandId",
 				"product.image",
 				"product.categoryId",
@@ -59,7 +54,6 @@ const productController = {
 				"brand.id",
 			],
 			raw: true,
-
 			where: {
 				...nameFilter,
 				...categoryFilter,
@@ -88,13 +82,13 @@ const productController = {
 		const product = await Product.findByPk(req.params.id, {
 			include: ["ratings"],
 		});
-		if (product) {
+		if (!product) {
+			res.status(404).send({ message: "Product Not Found" });
+		} else {
 			res.send({
 				...product.dataValues,
 				rating: getRating(product),
 			});
-		} else {
-			res.status(404).send({ message: "Product Not Found" });
 		}
 	},
 	getCategories: async (req, res) => {
@@ -107,19 +101,10 @@ const getCategoryIdByName = async (categoryName) => {
 	return (await Category.findOne({ where: { name: categoryName } })).id;
 };
 
-const ratingall = Rating.findAll({
-	attributes: [
-		"productId",
-		[Sequelize.fn("sum", Sequelize.col("rating")), "total"],
-	],
-	group: ["product.ratingsId"],
-	raw: true,
-	order: Sequelize.literal("total DESC"),
-});
-
 const getRating = (product) => {
 	const ratings = product.ratings.map((rating) => rating.rating);
-	return getSum(ratings);
+	const avgRatings = getSum(ratings) / ratings.length;
+	return avgRatings;
 };
 
 export default productController;

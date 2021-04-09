@@ -3,9 +3,9 @@
 	"type": "module",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "server.js",
 	"scripts": {
-		"start": "nodemon --watch backend --exec node --experimental-modules backend/routes/index.js"
+		"start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
 	},
 	"repository": {
 		"type": "git",

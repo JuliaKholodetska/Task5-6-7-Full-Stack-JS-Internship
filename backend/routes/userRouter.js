@@ -16,7 +16,7 @@ userRouter.get("/:id", asyncHandler(userController.getUser));
 userRouter.put(
 	"/profile",
 	ensureAuthenticated,
-	asyncHandler(userController.profile)
+	asyncHandler(userController.updateProfile)
 );
 
 export default userRouter;

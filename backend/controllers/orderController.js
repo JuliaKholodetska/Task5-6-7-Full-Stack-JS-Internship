@@ -33,7 +33,7 @@ const orderController = {
 			);
 			res.status(201).send({
 				message: "New Order Created",
-				order: Create(order, itemsPrice),
+				order: formatOrderResponse(order, itemsPrice),
 			});
 		}
 	},
@@ -51,7 +51,7 @@ const orderController = {
 			const itemsPrice = getSum(
 				order.orderItem.map(({ price, quantity }) => price * quantity)
 			);
-			res.send(Create(order, itemsPrice));
+			res.send(formatOrderResponse(order, itemsPrice));
 		} else {
 			res.status(404).send({ message: "Order Not Found" });
 		}
@@ -85,7 +85,7 @@ const orderController = {
 	},
 };
 
-const Create = (order, itemsPrice) => {
+const formatOrderResponse = (order, itemsPrice) => {
 	return {
 		...order.dataValues,
 		itemsPrice,

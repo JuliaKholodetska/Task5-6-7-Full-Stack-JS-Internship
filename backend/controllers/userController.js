@@ -51,10 +51,10 @@ const userController = {
 		}
 		res.send(user);
 	},
-	profile: async (req, res) => {
+	updateProfile: async (req, res) => {
 		const { name, email, password } = req.body;
-		//const { id } = req.user;
-		const user = await User.findByPk(req.user.id);
+		const reqUserId = req.user.id;
+		const user = await User.findByPk(reqUserId);
 		if (user) {
 			let updatedUserData = {
 				name: name || user.name,
@@ -64,7 +64,7 @@ const userController = {
 				updatedUserData.password = bcrypt.hashSync(password, 8);
 			}
 			const result = await User.update(updatedUserData, {
-				where: { id: req.user.id },
+				where: { id: reqUserId },
 				returning: true,
 			});
 			if (!result) {
