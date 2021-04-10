@@ -124,19 +124,19 @@ export default function OrderPage(props) {
 							<li>
 								<div className="row">
 									<div>Items</div>
-									<div>${order.itemsPrice.toFixed(2)}</div>
+									<div>${order.itemsPrice}</div>
 								</div>
 							</li>
 							<li>
 								<div className="row">
 									<div>Shipping</div>
-									<div>${order.shippingPrice.toFixed(2)}</div>
+									<div>${order.shippingPrice}</div>
 								</div>
 							</li>
 							<li>
 								<div className="row">
 									<div>Tax</div>
-									<div>${order.taxPrice.toFixed(2)}</div>
+									<div>${order.taxPrice}</div>
 								</div>
 							</li>
 							<li>
@@ -145,7 +145,7 @@ export default function OrderPage(props) {
 										<strong> Order Total</strong>
 									</div>
 									<div>
-										<strong>${order.totalPrice.toFixed(2)}</strong>
+										<strong>${order.totalPrice}</strong>
 									</div>
 								</div>
 							</li>

@@ -11,6 +11,7 @@ const orderController = {
 			shippingPrice,
 			taxPrice,
 		} = req.body;
+
 		if (orderItem.length === 0) {
 			res.status(400).send({ message: "Cart is empty" });
 		} else {
@@ -19,8 +20,8 @@ const orderController = {
 					orderItem: orderItem,
 					shippingAddress: shippingAddress.address,
 					paymentMethod: paymentMethod,
-					shippingPrice: Number(shippingPrice),
-					taxPrice: Number(taxPrice),
+					shippingPrice: shippingPrice,
+					taxPrice: taxPrice,
 					userId: req.user.id,
 					fullName: shippingAddress.fullName,
 					city: shippingAddress.city,
@@ -28,12 +29,9 @@ const orderController = {
 				},
 				{ include: ["orderItem"] }
 			);
-			const itemsPrice = getSum(
-				order.orderItem.map(({ price, quantity }) => price * quantity)
-			);
 			res.status(201).send({
 				message: "New Order Created",
-				order: formatOrderResponse(order, itemsPrice),
+				order: formatOrderResponse(order),
 			});
 		}
 	},
@@ -48,10 +46,7 @@ const orderController = {
 			],
 		});
 		if (order) {
-			const itemsPrice = getSum(
-				order.orderItem.map(({ price, quantity }) => price * quantity)
-			);
-			res.send(formatOrderResponse(order, itemsPrice));
+			res.send(formatOrderResponse(order));
 		} else {
 			res.status(404).send({ message: "Order Not Found" });
 		}
@@ -85,14 +80,16 @@ const orderController = {
 	},
 };
 
-const formatOrderResponse = (order, itemsPrice) => {
+const formatOrderResponse = (order) => {
+	const itemsPrice = getSum(
+		order.orderItem.map(({ price, quantity }) => price * quantity)
+	);
 	return {
 		...order.dataValues,
 		itemsPrice,
-		taxPrice: Number(order.taxPrice),
-		shippingPrice: Number(order.shippingPrice),
-		totalPrice:
-			itemsPrice + Number(order.taxPrice) + Number(order.shippingPrice),
+		taxPrice: order.taxPrice,
+		shippingPrice: order.shippingPrice,
+		totalPrice: itemsPrice + order.taxPrice + order.shippingPrice,
 	};
 };
 

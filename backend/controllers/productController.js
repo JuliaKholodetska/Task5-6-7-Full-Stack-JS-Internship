@@ -11,10 +11,10 @@ const productController = {
 	getProducts: async (req, res) => {
 		const { name, category, max, order, rating } = req.query;
 		let maxPrice;
-		if (+max) {
-			maxPrice = +max !== 0 ? +max : 0;
+		if (Number(max)) {
+			maxPrice = Number(max) !== 0 ? Number(max) : 0;
 		}
-		const ratings = +rating && +rating !== 0 ? +rating : 0;
+		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
 		const categoryFilter = category
 			? { categoryId: await getCategoryIdByName(category) }
