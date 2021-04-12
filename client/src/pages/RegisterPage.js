@@ -90,7 +90,12 @@ export default function RegisterPage(props) {
 					<label />
 					<div>
 						Already have an account?{" "}
-						<Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+						<Link
+							to={`/signin?redirect=${redirect}`}
+							className="underline-link"
+						>
+							Sign-In
+						</Link>
 					</div>
 				</div>
 			</form>

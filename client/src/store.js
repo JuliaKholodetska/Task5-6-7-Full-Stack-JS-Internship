@@ -18,7 +18,7 @@ import {
 	userSigninReducer,
 	userUpdateProfileReducer,
 } from "./reducers/userReducers";
-
+import { authReducer } from "./reducers/authReducers.js";
 const initialState = {
 	userSignin: {
 		userInfo: localStorage.getItem("userInfo")
@@ -49,6 +49,7 @@ const reducer = combineReducers({
 	orderMineList: orderMineListReducer,
 	userDetails: userDetailsReducer,
 	userUpdateProfile: userUpdateProfileReducer,
+	auth: authReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
