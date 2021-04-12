@@ -1,65 +1,96 @@
-// import expressAsyncHandler from "express-async-handler";
-// import Order from "../models/orderModel.js";
+import OrderItem from "../models/orderItemModel.js";
+import Order from "../models/orderModel.js";
+import { getSum } from "../utils.js";
 
-// const orderController = {
-// 	createOrder: expressAsyncHandler(async (req, res) => {
-// 		const {
-// 			orderItem,
-// 			shippingAddress,
-// 			paymentMethod,
-// 			itemsPrice,
-// 			shippingPrice,
-// 			taxPrice,
-// 			totalPrice,
-// 		} = req.body;
-// 		if (orderItem.length === 0) {
-// 			res.status(400).send({ message: "Cart is empty" });
-// 		} else {
-// 			const order = new Order({
-// 				orderItem: orderItem,
-// 				shippingAddress: shippingAddress,
-// 				paymentMethod: paymentMethod,
-// 				itemsPrice: itemsPrice,
-// 				shippingPrice: shippingPrice,
-// 				taxPrice: taxPrice,
-// 				totalPrice: totalPrice,
-// 				user: req.user._id,
-// 			});
-// 			const createdOrder = await order.save();
-// 			res
-// 				.status(201)
-// 				.send({ message: "New Order Created", order: createdOrder });
-// 		}
-// 	}),
-// 	getById: expressAsyncHandler(async (req, res) => {
-// 		const order = await Order.findById(req.params.id);
-// 		if (order) {
-// 			res.send(order);
-// 		} else {
-// 			res.status(404).send({ message: "Order Not Found" });
-// 		}
-// 	}),
-// 	putByIdPay: expressAsyncHandler(async (req, res) => {
-// 		const order = await Order.findById(req.params.id);
-// 		const { id, status, update_time, email_address } = req.body;
-// 		if (order) {
-// 			order.isPaid = true;
-// 			order.paidAt = Date.now();
-// 			order.paymentResult = {
-// 				id: id,
-// 				status: status,
-// 				update_time: update_time,
-// 				email_address: email_address,
-// 			};
-// 			const updatedOrder = await order.save();
-// 			res.send({ message: "Order Paid", order: updatedOrder });
-// 		} else {
-// 			res.status(404).send({ message: "Order Not Found" });
-// 		}
-// 	}),
-// 	getMineOrder: expressAsyncHandler(async (req, res) => {
-// 		const orders = await Order.find({ user: req.user._id });
-// 		res.send(orders);
-// 	}),
-// };
-// export default orderController;
+const orderController = {
+	createOrder: async (req, res) => {
+		const {
+			orderItem,
+			shippingAddress,
+			paymentMethod,
+			shippingPrice,
+			taxPrice,
+		} = req.body;
+
+		if (orderItem.length === 0) {
+			res.status(400).send({ message: "Cart is empty" });
+		} else {
+			const order = await Order.create(
+				{
+					orderItem: orderItem,
+					shippingAddress: shippingAddress.address,
+					paymentMethod: paymentMethod,
+					shippingPrice: shippingPrice,
+					taxPrice: taxPrice,
+					userId: req.user.id,
+					fullName: shippingAddress.fullName,
+					city: shippingAddress.city,
+					postalCode: shippingAddress.postalCode,
+				},
+				{ include: ["orderItem"] }
+			);
+			res.status(201).send({
+				message: "New Order Created",
+				order: formatOrderResponse(order),
+			});
+		}
+	},
+	getById: async (req, res) => {
+		const order = await Order.findByPk(req.params.id, {
+			include: [
+				{
+					model: OrderItem,
+					as: "orderItem",
+					include: ["product"],
+				},
+			],
+		});
+		if (order) {
+			res.send(formatOrderResponse(order));
+		} else {
+			res.status(404).send({ message: "Order Not Found" });
+		}
+	},
+	putPay: async (req, res) => {
+		const order = await Order.findByPk(id);
+		const { id, status, updateTime, emailAddress } = req.body;
+
+		if (!order) {
+			res.status(404).send({ message: "Order Not Found" });
+		}
+		const newOrderData = {
+			isPaid: true,
+			paidAt: Date.now(),
+			paymentResult: {
+				id: id,
+				status: status,
+				updateTime: updateTime,
+				emailAddress: emailAddress,
+			},
+		};
+		await Order.update(newOrderData, { where: { id: id } });
+		const updatedOrder = await Order.findByPk(id, {
+			include: ["orderItem"],
+		});
+		res.send({ message: "Order Paid", order: updatedOrder });
+	},
+	getUserOrder: async (req, res) => {
+		const orders = await Order.findAll({ user: req.user.id });
+		res.send(orders);
+	},
+};
+
+const formatOrderResponse = (order) => {
+	const itemsPrice = getSum(
+		order.orderItem.map(({ price, quantity }) => price * quantity)
+	);
+	return {
+		...order.dataValues,
+		itemsPrice,
+		taxPrice: order.taxPrice,
+		shippingPrice: order.shippingPrice,
+		totalPrice: itemsPrice + order.taxPrice + order.shippingPrice,
+	};
+};
+
+export default orderController;

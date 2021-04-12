@@ -36,11 +36,11 @@ export default function ProductPage(props) {
 					</Link>
 					<div className="row">
 						<div className="col-2">
-							<image
+							<img
 								className="large"
 								src={product.image}
 								alt={product.name}
-							></image>
+							></img>
 						</div>
 
 						<div className="col-1">

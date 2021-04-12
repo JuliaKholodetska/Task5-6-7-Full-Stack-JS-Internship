@@ -42,14 +42,14 @@ export default function SearchPage(props) {
 		dispatch(
 			listProducts({
 				name: name !== "all" ? name : "",
-				category: category !== "all" ? category : "",
+				category: category,
 				min,
 				max,
 				rating,
 				order,
 			})
 		);
-	}, [category, dispatch, name, min, max, rating, order]);
+	}, [dispatch, name, min, max, rating, order, category]);
 
 	const getFilterUrl = (filter) => {
 		const filterCategory = filter.category || category;
@@ -126,12 +126,12 @@ export default function SearchPage(props) {
 								</Link>
 							</li>
 							{categories.map((c) => (
-								<li key={c}>
+								<li key={c.name}>
 									<Link
-										className={c === category ? "active" : ""}
-										to={getFilterUrl({ category: c })}
+										className={c.name === category ? "active" : ""}
+										to={getFilterUrl({ category: c.id })}
 									>
-										{c}
+										{c.name}
 									</Link>
 								</li>
 							))}

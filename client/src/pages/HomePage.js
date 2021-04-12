@@ -5,16 +5,19 @@ import { useParams } from "react-router";
 import MessageBox from "../components/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
-import { defaultNameValue } from "../utils";
+import { defaultNameValue, defaultCategoryValue } from "../utils";
 
 export default function HomePage() {
-	const { name = defaultNameValue } = useParams();
+	const {
+		name = defaultNameValue,
+		category = defaultCategoryValue,
+	} = useParams();
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products } = productList;
 	useEffect(() => {
-		dispatch(listProducts({ name: name !== "all" ? name : "" }));
-	}, [dispatch, name]);
+		dispatch(listProducts({ name: name !== "all" ? name : "", category }));
+	}, [dispatch, name, category]);
 
 	return (
 		<div>

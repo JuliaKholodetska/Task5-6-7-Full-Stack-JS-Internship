@@ -2,7 +2,6 @@ import Axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { detailsOrder, payOrder } from "../actions/orderAcrions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
@@ -32,11 +31,16 @@ export default function OrderPage(props) {
 			};
 			document.body.appendChild(script);
 		};
-		if (!order || successPay || (order && order.id !== orderId)) {
+
+		if (
+			!order ||
+			successPay ||
+			(order && Number(order.id) !== Number(orderId))
+		) {
 			dispatch({ type: ORDER_PAY.RESET });
 			dispatch(detailsOrder(orderId));
 		} else {
-			if (!order.isPaid) {
+			if (!order.paymentStatusId) {
 				if (!window.paypal) {
 					addPayPalScript();
 				} else {
@@ -64,15 +68,13 @@ export default function OrderPage(props) {
 							<div className="card-body-order">
 								<h2>Shipping</h2>
 								<p>
-									<strong>Name:</strong> {order.shippingAddress.fullName} <br />
-									<strong>Address: </strong> {order.shippingAddress.address},
-									{order.shippingAddress.city},{" "}
-									{order.shippingAddress.postalCode},
-									{order.shippingAddress.country}
+									<strong>Name:</strong> {order.fullName} <br />
+									<strong>Address: </strong> {order.shippingAddress},
+									{order.city},{order.postalCode},{order.country}
 								</p>
 								{order.isDelivered ? (
 									<MessageBox variant="success">
-										Delivered at {order.deliveredAt}
+										Delivered status {order.orderStatusId}
 									</MessageBox>
 								) : (
 									<MessageBox variant="danger">Not Delivered</MessageBox>
@@ -87,7 +89,7 @@ export default function OrderPage(props) {
 								</p>
 								{order.isPaid ? (
 									<MessageBox variant="success">
-										Paid at {order.paidAt}
+										Paiment status {order.paymentStatusId}
 									</MessageBox>
 								) : (
 									<MessageBox variant="danger">Not Paid</MessageBox>
@@ -96,24 +98,11 @@ export default function OrderPage(props) {
 						</li>
 						<li>
 							<div className="card-body-order">
-								<h2>Order Items</h2>
+								<h2>Order items price</h2>
 								<ul>
 									{order.orderItem.map((item) => (
-										<li key={item.product}>
+										<li key={item.id}>
 											<div className="row">
-												<div>
-													<image
-														src={item.image}
-														alt={item.name}
-														className="small"
-													></image>
-												</div>
-												<div className="min-30">
-													<Link to={`/product/${item.product}`}>
-														{item.name}
-													</Link>
-												</div>
-
 												<div>
 													{item.quantity} x ${item.price} = $
 													{item.quantity * item.price}
@@ -135,19 +124,19 @@ export default function OrderPage(props) {
 							<li>
 								<div className="row">
 									<div>Items</div>
-									<div>${order.itemsPrice.toFixed(2)}</div>
+									<div>${order.itemsPrice}</div>
 								</div>
 							</li>
 							<li>
 								<div className="row">
 									<div>Shipping</div>
-									<div>${order.shippingPrice.toFixed(2)}</div>
+									<div>${order.shippingPrice}</div>
 								</div>
 							</li>
 							<li>
 								<div className="row">
 									<div>Tax</div>
-									<div>${order.taxPrice.toFixed(2)}</div>
+									<div>${order.taxPrice}</div>
 								</div>
 							</li>
 							<li>
@@ -156,7 +145,7 @@ export default function OrderPage(props) {
 										<strong> Order Total</strong>
 									</div>
 									<div>
-										<strong>${order.totalPrice.toFixed(2)}</strong>
+										<strong>${order.totalPrice}</strong>
 									</div>
 								</div>
 							</li>
