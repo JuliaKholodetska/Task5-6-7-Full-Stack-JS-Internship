@@ -6,7 +6,7 @@ import asyncHandler from "express-async-handler";
 const orderRouter = express.Router();
 
 orderRouter.get(
-	"/user/order",
+	"/userOrderList",
 	ensureAuthenticated,
 	asyncHandler(orderController.getUserOrder)
 );

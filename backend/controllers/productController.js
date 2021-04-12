@@ -16,9 +16,10 @@ const productController = {
 		}
 		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
-		const categoryFilter = category
-			? { categoryId: await getCategoryIdByName(category) }
-			: {};
+		let categoryFilter;
+		if (category !== "all") {
+			categoryFilter = { categoryId: category };
+		}
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};
 		const ratingFilter = ratings ? { rating: { [Op.gte]: ratings } } : {};
 		const sortOrder =
@@ -36,7 +37,6 @@ const productController = {
 				"product.id",
 				"product.name",
 				"product.price",
-
 				"product.brandId",
 				"product.image",
 				"product.categoryId",
@@ -95,10 +95,6 @@ const productController = {
 		const categories = await Category.findAll();
 		res.send(categories.map((category) => category.name));
 	},
-};
-
-const getCategoryIdByName = async (categoryName) => {
-	return (await Category.findOne({ where: { name: categoryName } })).id;
 };
 
 const getRating = (product) => {

@@ -72,7 +72,7 @@ const userController = {
 			} else {
 				const updatedUser = result[1][0].dataValues;
 				res.send({
-					id: updatedUser.dataValues,
+					id: updatedUser.id,
 					name: updatedUser.name,
 					email: updatedUser.email,
 					isAdmin: updatedUser.isAdmin,

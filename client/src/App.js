@@ -109,12 +109,12 @@ function App() {
 							<MessageBox variant="danger">{errorCategories}</MessageBox>
 						) : (
 							categories.map((c) => (
-								<li key={c}>
+								<li key={c.name}>
 									<Link
-										to={`/search/category/${c}`}
+										to={`/search/category/${c.id}`}
 										onClick={() => setSidebarIsOpen(false)}
 									>
-										{c}
+										{c.name}
 									</Link>
 								</li>
 							))
