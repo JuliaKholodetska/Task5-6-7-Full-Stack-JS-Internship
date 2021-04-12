@@ -15,7 +15,6 @@ import {
 import {
 	userDetailsReducer,
 	userRegisterReducer,
-	userSignInGoogleReducer,
 	userSigninReducer,
 	userUpdateProfileReducer,
 } from "./reducers/userReducers";
@@ -49,7 +48,6 @@ const reducer = combineReducers({
 	orderMineList: orderMineListReducer,
 	userDetails: userDetailsReducer,
 	userUpdateProfile: userUpdateProfileReducer,
-	userSignInGoogle: userSignInGoogleReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

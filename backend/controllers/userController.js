@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
+import { OAuth2Client } from "google-auth-library";
 import User from "../models/userModel.js";
 import { generateToken } from "../utils.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const userController = {
 	getUsers: async (req, res) => {
@@ -81,76 +84,53 @@ const userController = {
 			}
 		}
 	},
-	googleUser: async (idToken, staySignedIn) => {
+	googleUser: async (req, res) => {
 		const client = new OAuth2Client();
 		const ticket = await client.verifyIdToken({
-			idToken,
-			audience: REACT_APP_GOOGLE_CLIENT_ID,
+			idToken: req.body.tokenId,
+			audience: process.env.REACT_APP_GOOGLE_CLIENT_ID,
 		});
 		const dataUser = ticket.getPayload();
-		const userid = dataUser.sub;
-		if (!(await User.findOne({ where: { email: dataUser.email } }).exec())) {
-			await this.registerGoogleUser({
-				firstName: dataUser.given_name,
-				lastName: dataUser.family_name,
+
+		let user = null;
+		if (!(await User.findOne({ where: { email: dataUser.email } }))) {
+			user = await registerGoogleUser({
+				name: dataUser.name,
 				email: dataUser.email,
-				credentials: [
-					{
-						source: GOOGLE,
-						tokenPass: userid,
-					},
-				],
 			});
 		}
-		return this.loginGoogleUser({
+		user = await loginGoogleUser({
 			email: dataUser.email,
-			staySignedIn,
 		});
+
+		res.send(user);
 	},
 };
 
-const loginGoogleUser = async ({ email, staySignedIn }) => {
-	const user = await User.findOne({ email }).exec();
+const loginGoogleUser = async ({ email }) => {
+	const user = await User.findOne({ where: { email } });
 	if (!user) {
-		throw new Error("Error");
-		//	throw new UserInputError(WRONG_CREDENTIALS, { statusCode: BAD_REQUEST });
+		throw new Error("Wrong credentials");
 	}
-
-	const { accesToken, refreshToken } = generateTokens(
-		user._id,
-		{
-			expiresIn: TOKEN_EXPIRES_IN,
-			secret: SECRET,
-		},
-		staySignedIn
-	);
 
 	return {
-		...user._doc,
-		_id: user._id,
-		token: accesToken,
-		refreshToken,
+		...user.dataValues,
+		id: user.id,
+		token: generateToken(user),
 	};
 };
-const registerGoogleUser = async ({
-	firstName,
-	lastName,
-	email,
-	credentials,
-}) => {
-	if (await User.findOne({ email }).exec()) {
-		throw new Error("Error");
-		//	throw new UserInputError(USER_ALREADY_EXIST, { statusCode: BAD_REQUEST });
-	}
-
-	const user = new User({
-		firstName,
-		lastName,
+const registerGoogleUser = async ({ name, email }) => {
+	const user = await User.create({
+		password: "",
+		isAdmin: false,
+		name,
 		email,
-		credentials,
 	});
-	const savedUser = await user.save();
 
-	return savedUser;
+	return {
+		...user.dataValues,
+		id: user.id,
+		token: generateToken(user),
+	};
 };
 export default userController;

@@ -6,14 +6,12 @@ import { getSum } from "../utils.js";
 import { Sequelize } from "sequelize";
 import Rating from "../models/ratingModel.js";
 const { Op } = pkg;
-
 const productController = {
 	getProducts: async (req, res) => {
 		const { name, category, max, order, rating } = req.query;
 		let maxPrice;
 		if (Number(max)) {
 			maxPrice = Number(max) !== 0 ? Number(max) : 0;
-			я;
 		}
 		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
