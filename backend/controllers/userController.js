@@ -1,7 +1,9 @@
 import bcrypt from "bcryptjs";
 import User from "../models/userModel.js";
 import { generateToken } from "../utils.js";
-
+import { OAuth2Client } from "google-auth-library";
+import dotenv from "dotenv";
+dotenv.config();
 const userController = {
 	getUsers: async (req, res) => {
 		const users = await User.findAll();
@@ -81,6 +83,75 @@ const userController = {
 			}
 		}
 	},
+	googleUser: async (idToken, staySignedIn) => {
+		const client = new OAuth2Client();
+		const ticket = await client.verifyIdToken({
+			idToken,
+			audience: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+		});
+		const dataUser = ticket.getPayload();
+		const userid = dataUser.sub;
+		if (!(await User.findOne({ where: { email: dataUser.email } }).exec())) {
+			await this.registerGoogleUser({
+				firstName: dataUser.given_name,
+				lastName: dataUser.family_name,
+				email: dataUser.email,
+				credentials: [
+					{
+						source: GOOGLE,
+						tokenPass: userid,
+					},
+				],
+			});
+		}
+		return this.loginGoogleUser({
+			email: dataUser.email,
+			staySignedIn,
+		});
+	},
+};
+
+const loginGoogleUser = async ({ email, staySignedIn }) => {
+	const user = await User.findOne({ email }).exec();
+	if (!user) {
+		throw new UserInputError(WRONG_CREDENTIALS, { statusCode: BAD_REQUEST });
+	}
+
+	const { accesToken, refreshToken } = generateTokens(
+		user._id,
+		{
+			expiresIn: TOKEN_EXPIRES_IN,
+			secret: SECRET,
+		},
+		staySignedIn
+	);
+
+	return {
+		...user._doc,
+		_id: user._id,
+		token: accesToken,
+		refreshToken,
+	};
+};
+const registerGoogleUser = async ({
+	firstName,
+	lastName,
+	email,
+	credentials,
+}) => {
+	if (await User.findOne({ email }).exec()) {
+		throw new UserInputError(USER_ALREADY_EXIST, { statusCode: BAD_REQUEST });
+	}
+
+	const user = new User({
+		firstName,
+		lastName,
+		email,
+		credentials,
+	});
+	const savedUser = await user.save();
+
+	return savedUser;
 };
 
 export default userController;

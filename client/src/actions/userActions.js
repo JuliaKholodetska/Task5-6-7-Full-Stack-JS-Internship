@@ -5,6 +5,7 @@ import {
 	USER_REGISTER,
 	USER_DETAILS,
 	USER_UPDATE_PROFILE,
+	USER_SIGNIN_GOOGLE,
 } from "../constants/userConstants";
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -28,6 +29,7 @@ export const register = (name, email, password) => async (dispatch) => {
 		});
 	}
 };
+
 export const signin = (email, password) => async (dispatch) => {
 	dispatch({ type: USER_SIGNIN.REQUEST, payload: { email, password } });
 	try {
@@ -37,6 +39,23 @@ export const signin = (email, password) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: USER_SIGNIN.FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+export const signInGoggle = (tokenId) => async (dispatch) => {
+	dispatch({ type: USER_SIGNIN_GOOGLE.REQUEST, payload: { tokenId } });
+	try {
+		const res = await Axios.post("/api/users/signinGoggle", { tokenId });
+		console.log(res);
+		/* 		dispatch({ type: USER_SIGNIN.SUCCESS, payload: data });
+		localStorage.setItem("userInfo", JSON.stringify(data)); */
+	} catch (error) {
+		dispatch({
+			type: USER_SIGNIN_GOOGLE.FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

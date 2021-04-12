@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signin } from "../actions/userActions";
+import { signin, signInGoggle } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Googlelogin from "react-google-login";
@@ -29,15 +29,7 @@ export default function SigninPadge(props) {
 		}
 	}, [props.history, redirect, userInfo]);
 	const googleSuccess = async (res) => {
-		console.log(res);
-		// const result = res?.profileObj;
-		// const token = res?.tokenId;
-		// try {
-		// 	dispatch({ type: "AUTH", data: { result, token } });
-		// 	//	props.history.push("/");
-		// } catch (error) {
-		// 	console.log(error);
-		// }
+		dispatch(signInGoggle(res.tokenId));
 	};
 	const googleError = () =>
 		alert("Google Sign In was unsuccessful. Try again later");

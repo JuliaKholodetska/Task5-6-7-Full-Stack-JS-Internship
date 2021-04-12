@@ -2,7 +2,9 @@ import {
 	USER_DETAILS,
 	USER_REGISTER,
 	USER_SIGNIN,
+	USER_SIGNIN_GOOGLE,
 	USER_SIGNOUT,
+	USER_SIGNOUT_GOOGLE,
 	USER_UPDATE_PROFILE,
 } from "../constants/userConstants";
 
@@ -28,6 +30,21 @@ export const userSigninReducer = (state = {}, action) => {
 		case USER_SIGNIN.FAIL:
 			return { loading: false, error: action.payload };
 		case USER_SIGNOUT:
+			return {};
+		default:
+			return state;
+	}
+};
+
+export const userSignInGoogleReducer = (state = {}, action) => {
+	switch (action.type) {
+		case USER_SIGNIN_GOOGLE.REQUEST:
+			return { loading: true };
+		case USER_SIGNIN_GOOGLE.SUCCESS:
+			return { loading: false, userInfo: action.payload };
+		case USER_SIGNIN_GOOGLE.FAIL:
+			return { loading: false, error: action.payload };
+		case USER_SIGNOUT_GOOGLE:
 			return {};
 		default:
 			return state;

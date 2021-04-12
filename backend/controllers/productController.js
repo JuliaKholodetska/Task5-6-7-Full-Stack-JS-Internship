@@ -13,6 +13,7 @@ const productController = {
 		let maxPrice;
 		if (Number(max)) {
 			maxPrice = Number(max) !== 0 ? Number(max) : 0;
+			я;
 		}
 		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
