@@ -1,9 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "../models/userModel.js";
 import { generateToken } from "../utils.js";
-import { OAuth2Client } from "google-auth-library";
-import dotenv from "dotenv";
-dotenv.config();
 
 const userController = {
 	getUsers: async (req, res) => {
@@ -88,7 +85,7 @@ const userController = {
 		const client = new OAuth2Client();
 		const ticket = await client.verifyIdToken({
 			idToken,
-			audience: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+			audience: REACT_APP_GOOGLE_CLIENT_ID,
 		});
 		const dataUser = ticket.getPayload();
 		const userid = dataUser.sub;
@@ -115,7 +112,8 @@ const userController = {
 const loginGoogleUser = async ({ email, staySignedIn }) => {
 	const user = await User.findOne({ email }).exec();
 	if (!user) {
-		throw new UserInputError(WRONG_CREDENTIALS, { statusCode: BAD_REQUEST });
+		throw new Error("Error");
+		//	throw new UserInputError(WRONG_CREDENTIALS, { statusCode: BAD_REQUEST });
 	}
 
 	const { accesToken, refreshToken } = generateTokens(
@@ -141,7 +139,8 @@ const registerGoogleUser = async ({
 	credentials,
 }) => {
 	if (await User.findOne({ email }).exec()) {
-		throw new UserInputError(USER_ALREADY_EXIST, { statusCode: BAD_REQUEST });
+		throw new Error("Error");
+		//	throw new UserInputError(USER_ALREADY_EXIST, { statusCode: BAD_REQUEST });
 	}
 
 	const user = new User({
@@ -154,5 +153,4 @@ const registerGoogleUser = async ({
 
 	return savedUser;
 };
-
 export default userController;
