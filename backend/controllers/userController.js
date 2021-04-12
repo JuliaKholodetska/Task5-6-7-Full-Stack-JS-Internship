@@ -4,6 +4,7 @@ import { generateToken } from "../utils.js";
 import { OAuth2Client } from "google-auth-library";
 import dotenv from "dotenv";
 dotenv.config();
+
 const userController = {
 	getUsers: async (req, res) => {
 		const users = await User.findAll();

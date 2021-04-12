@@ -19,7 +19,6 @@ import {
 	userSigninReducer,
 	userUpdateProfileReducer,
 } from "./reducers/userReducers";
-import { authReducer } from "./reducers/authReducers.js";
 const initialState = {
 	userSignin: {
 		userInfo: localStorage.getItem("userInfo")
