@@ -29,6 +29,19 @@ function App() {
 	const signoutHandler = () => {
 		dispatch(signout());
 	};
+	// const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+	// console.log(user);
+	// const logout = () => {
+	// 	dispatch({ type: "LOGOUT" });
+	// 	history.pushState("/");
+	// 	setUser(null);
+	// };
+
+	// useEffect(() => {
+	// 	const token = user?.token;
+	// 	setUser(JSON.parse(localStorage.getItem("profile")));
+	// }, []);
+
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,

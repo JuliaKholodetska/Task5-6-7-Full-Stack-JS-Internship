@@ -9,6 +9,8 @@ userRouter.get("/", asyncHandler(userController.getUsers));
 
 userRouter.post("/signin", asyncHandler(userController.signinUser));
 
+userRouter.post("/signinGoggle", asyncHandler(userController.googleUser));
+
 userRouter.post("/register", userController.registerUser);
 
 userRouter.get("/:id", asyncHandler(userController.getUser));
