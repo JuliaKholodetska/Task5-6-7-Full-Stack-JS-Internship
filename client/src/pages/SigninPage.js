@@ -7,6 +7,8 @@ import MessageBox from "../components/MessageBox";
 import Googlelogin from "react-google-login";
 import { Button } from "@material-ui/core";
 import Icon from "../components/Icon.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function SigninPadge(props) {
 	const [email, setEmail] = useState("");
@@ -28,11 +30,13 @@ export default function SigninPadge(props) {
 			props.history.push(redirect);
 		}
 	}, [props.history, redirect, userInfo]);
+
 	const googleSuccess = async (res) => {
 		dispatch(signInGoggle(res.tokenId));
 	};
 	const googleError = () =>
 		alert("Google Sign In was unsuccessful. Try again later");
+
 	return (
 		<div>
 			<form className="form" onSubmit={submitHandler}>
@@ -69,7 +73,7 @@ export default function SigninPadge(props) {
 					<label />
 
 					<Googlelogin
-						clientId="565759498706-9bu6o9jqq50uspku8e9hjj3utptlng7t.apps.googleusercontent.com"
+						clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
 						render={(renderProps) => (
 							<Button
 								className="googleSignIn"
@@ -84,7 +88,6 @@ export default function SigninPadge(props) {
 						)}
 						onSuccess={googleSuccess}
 						onFailure={googleError}
-						// cookiePolicy="single_host_origin"
 					/>
 				</div>
 				<div>
