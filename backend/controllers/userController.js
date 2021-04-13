@@ -133,4 +133,5 @@ const registerGoogleUser = async ({ name, email }) => {
 		token: generateToken(user),
 	};
 };
+
 export default userController;
