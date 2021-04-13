@@ -3,3 +3,5 @@ export const PRODUCT_POPULATION = {
 	HIHGEST: "highest",
 	TOPRATED: "toprated",
 };
+export const pageSize = 5;
+export const count = 10;

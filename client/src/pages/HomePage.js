@@ -5,19 +5,26 @@ import { useParams } from "react-router";
 import MessageBox from "../components/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
-import { defaultNameValue, defaultCategoryValue } from "../utils";
-
+import {
+	defaultNameValue,
+	defaultCategoryValue,
+	defaultPageNumberValue,
+} from "../utils";
+import { Link } from "react-router-dom";
 export default function HomePage() {
 	const {
 		name = defaultNameValue,
 		category = defaultCategoryValue,
+		pageNumber = defaultPageNumberValue,
 	} = useParams();
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products } = productList;
+	const { loading, error, products, page, pages } = productList;
 	useEffect(() => {
-		dispatch(listProducts({ name: name !== "all" ? name : "", category }));
-	}, [dispatch, name, category]);
+		dispatch(
+			listProducts({ name: name !== "all" ? name : "", category, pageNumber })
+		);
+	}, [dispatch, name, category, pageNumber]);
 
 	return (
 		<div>
@@ -32,6 +39,17 @@ export default function HomePage() {
 					))}
 				</div>
 			)}
+			<div className="pagination">
+				{[...Array(pages).keys()].map((x) => (
+					<Link
+						className={x + 1 === page ? "active" : ""}
+						key={x + 1}
+						to={`/productlist/pageNumber/${x + 1}`}
+					>
+						{x + 1}
+					</Link>
+				))}
+			</div>
 		</div>
 	);
 }

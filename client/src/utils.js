@@ -6,6 +6,7 @@ export const defaultCategoryValue = "all";
 export const defaultMinValue = 0;
 export const defaultMaxValue = 0;
 export const defaultRatingValue = 0;
+export const defaultPageNumberValue = 1;
 export const prices = [
 	{
 		name: "Any",

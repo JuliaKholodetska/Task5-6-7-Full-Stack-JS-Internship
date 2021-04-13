@@ -29,19 +29,6 @@ function App() {
 	const signoutHandler = () => {
 		dispatch(signout());
 	};
-	// const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-	// console.log(user);
-	// const logout = () => {
-	// 	dispatch({ type: "LOGOUT" });
-	// 	history.pushState("/");
-	// 	setUser(null);
-	// };
-
-	// useEffect(() => {
-	// 	const token = user?.token;
-	// 	setUser(JSON.parse(localStorage.getItem("profile")));
-	// }, []);
-
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,
@@ -147,6 +134,11 @@ function App() {
 					<Route path="/orderhistory" component={OrderHistoryPage}></Route>
 					<PrivateRoute path="/profile" component={ProfilePage}></PrivateRoute>
 					<Route
+						path="/productlist/pageNumber/:pageNumber"
+						component={HomePage}
+						exact
+					></Route>
+					<Route
 						path="/search/name/:name?"
 						component={SearchPage}
 						exact
@@ -162,7 +154,7 @@ function App() {
 						exact
 					></Route>
 					<Route
-						path="/search/category/:category/name/:name/min/:min/max/:max/rating/:ratingg/order/:order"
+						path="/search/category/:category/name/:name/min/:min/max/:max/rating/:ratingg/order/:order/pageNumber/:pageNumber"
 						component={SearchPage}
 						exact
 					></Route>

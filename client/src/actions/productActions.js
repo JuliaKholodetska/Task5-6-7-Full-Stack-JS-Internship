@@ -6,6 +6,7 @@ const {
 } = require("../constants/productConstants");
 
 export const listProducts = ({
+	pageNumber = "",
 	name = "",
 	category = "",
 	order = "",
@@ -18,7 +19,7 @@ export const listProducts = ({
 	});
 	try {
 		const { data } = await Axios.get(
-			`/api/products/?name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
+			`/api/products/?pageNumber=${pageNumber}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
 		);
 		dispatch({ type: PRODUCT_LIST.SUCCESS, payload: data });
 	} catch (error) {

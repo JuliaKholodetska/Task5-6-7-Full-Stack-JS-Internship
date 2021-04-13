@@ -18,6 +18,7 @@ import {
 	prices,
 	ratings,
 	toprated,
+	defaultPageNumberValue,
 } from "../utils";
 
 export default function SearchPage(props) {
@@ -28,10 +29,11 @@ export default function SearchPage(props) {
 		max = defaultMaxValue,
 		rating = defaultRatingValue,
 		order,
+		pageNumber = defaultPageNumberValue,
 	} = useParams();
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products } = productList;
+	const { loading, error, products, page, pages } = productList;
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,
@@ -41,6 +43,7 @@ export default function SearchPage(props) {
 	useEffect(() => {
 		dispatch(
 			listProducts({
+				pageNumber,
 				name: name !== "all" ? name : "",
 				category: category,
 				min,
@@ -49,9 +52,10 @@ export default function SearchPage(props) {
 				order,
 			})
 		);
-	}, [dispatch, name, min, max, rating, order, category]);
+	}, [dispatch, name, min, max, rating, order, category, pageNumber]);
 
 	const getFilterUrl = (filter) => {
+		const filterPage = filter.page || pageNumber;
 		const filterCategory = filter.category || category;
 		const filterName = filter.name || name;
 		const filterRating = filter.rating || rating;
@@ -80,7 +84,7 @@ export default function SearchPage(props) {
 				filterMax = max;
 				break;
 		}
-		return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}`;
+		return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
 	};
 	return (
 		<div className="row top">
@@ -180,6 +184,17 @@ export default function SearchPage(props) {
 						<div className="row center">
 							{products.map((product) => (
 								<Product key={product.id} product={product}></Product>
+							))}
+						</div>
+						<div className="pagination">
+							{[...Array(pages).keys()].map((x) => (
+								<Link
+									className={x + 1 === page ? "active" : ""}
+									key={x + 1}
+									to={getFilterUrl({ page: x + 1 })}
+								>
+									{x + 1}
+								</Link>
 							))}
 						</div>
 					</>
