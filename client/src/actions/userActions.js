@@ -49,16 +49,14 @@ export const signInGoggle = (tokenId) => async (dispatch) => {
 	dispatch({ type: USER_SIGNIN.REQUEST, payload: { tokenId } });
 	try {
 		const { data } = await Axios.post("/api/users/signinGoggle", { tokenId });
-		console.log(data);
 		dispatch({ type: USER_SIGNIN.SUCCESS, payload: data });
 		localStorage.setItem("userInfo", JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: USER_SIGNIN.FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
+			payload: error.response.data.message
+				? error.response.data.message
+				: error.message,
 		});
 	}
 };
