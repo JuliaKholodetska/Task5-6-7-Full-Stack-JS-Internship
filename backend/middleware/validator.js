@@ -21,7 +21,9 @@ export const ensureAuthenticated = (req, res, next) => {
 export const validatRequestSchema = (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(400).send({ message: "Invalid email or password" });
+		return res
+			.status(400)
+			.send({ message: "Password should be at least 7 characters long." });
 	}
 	next();
 };
