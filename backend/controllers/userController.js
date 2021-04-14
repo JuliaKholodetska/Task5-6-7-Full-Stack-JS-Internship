@@ -84,7 +84,7 @@ const userController = {
 			}
 		}
 	},
-	googleUser: async (req, res) => {
+	checkGoogleUser: async (req, res) => {
 		const client = new OAuth2Client();
 		const ticket = await client.verifyIdToken({
 			idToken: req.body.tokenId,
@@ -93,7 +93,8 @@ const userController = {
 		const dataUser = ticket.getPayload();
 
 		let user = null;
-		if (!(await User.findOne({ where: { email: dataUser.email } }))) {
+		const findUser = await User.findOne({ where: { email: dataUser.email } });
+		if (!findUser) {
 			user = await registerGoogleUser({
 				name: dataUser.name,
 				email: dataUser.email,
