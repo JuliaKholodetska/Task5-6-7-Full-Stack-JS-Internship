@@ -17,9 +17,9 @@ const productController = {
 		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
 		let categoryFilter;
-		if (category !== "all") {
-			categoryFilter = { categoryId: category };
-		}
+		// if (category !== "all") {
+		// 	categoryFilter = { categoryId: category };
+		// }
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};
 		const ratingFilter = ratings ? { rating: { [Op.gte]: ratings } } : {};
 		const sortOrder =
@@ -90,10 +90,6 @@ const productController = {
 				rating: getRating(product),
 			});
 		}
-	},
-	getCategories: async (req, res) => {
-		const categories = await Category.findAll();
-		res.send(categories.map((category) => category.name));
 	},
 };
 

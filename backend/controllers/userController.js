@@ -31,7 +31,7 @@ const userController = {
 			const createdUser = await User.create({
 				name: name,
 				email: email,
-				password: bcrypt.hashSync(password, 8),
+				password: bcrypt.hashSync(password),
 			});
 			res.send({
 				id: createdUser.id,
