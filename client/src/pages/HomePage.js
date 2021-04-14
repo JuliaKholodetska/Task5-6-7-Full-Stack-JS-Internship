@@ -27,7 +27,7 @@ export default function HomePage() {
 	}, [dispatch, name, category, pageNumber]);
 
 	return (
-		<div>
+		<div className="col-1">
 			{loading ? (
 				<LoadingBox></LoadingBox>
 			) : error ? (
@@ -39,16 +39,24 @@ export default function HomePage() {
 					))}
 				</div>
 			)}
-			<div className="pagination">
-				{[...Array(pages).keys()].map((x) => (
-					<Link
-						className={x + 1 === page ? "active" : ""}
-						key={x + 1}
-						to={`/productlist/pageNumber/${x + 1}`}
-					>
-						{x + 1}
-					</Link>
-				))}
+			<div className="row-center-pagination">
+				<div className="pagination">
+					<Link to={`/productlist/pageNumber/${page - 1}`}>Previous</Link>
+				</div>
+				<div className="pagination">
+					{[...Array(pages).keys()].map((x) => (
+						<Link
+							className={x + 1 === page ? "active" : ""}
+							key={x + 1}
+							to={`/productlist/pageNumber/${x + 1}`}
+						>
+							{x + 1}
+						</Link>
+					))}
+				</div>
+				<div className="pagination">
+					<Link to={`/productlist/pageNumber/${page + 1}`}>Next</Link>
+				</div>
 			</div>
 		</div>
 	);

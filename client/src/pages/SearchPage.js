@@ -174,6 +174,26 @@ export default function SearchPage(props) {
 				</div>
 			</div>
 			<div className="col-3">
+				{" "}
+				<div className="row-center-pagination">
+					<div className="pagination">
+						<Link to={getFilterUrl({ page: page - 1 })}>Previous</Link>
+					</div>
+					<div className="pagination">
+						{[...Array(pages).keys()].map((x) => (
+							<Link
+								className={x + 1 === page ? "active" : ""}
+								key={x + 1}
+								to={getFilterUrl({ page: x + 1 })}
+							>
+								{x + 1}
+							</Link>
+						))}
+					</div>
+					<div className="pagination">
+						<Link to={getFilterUrl({ page: page + 1 })}>Next</Link>
+					</div>
+				</div>{" "}
 				{loading ? (
 					<LoadingBox></LoadingBox>
 				) : error ? (
@@ -181,25 +201,14 @@ export default function SearchPage(props) {
 				) : (
 					<>
 						{products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-						<div className="row center">
+						<div className="row center-search">
 							{products.map((product) => (
 								<Product key={product.id} product={product}></Product>
 							))}
 						</div>
-						<div className="pagination">
-							{[...Array(pages).keys()].map((x) => (
-								<Link
-									className={x + 1 === page ? "active" : ""}
-									key={x + 1}
-									to={getFilterUrl({ page: x + 1 })}
-								>
-									{x + 1}
-								</Link>
-							))}
-						</div>
 					</>
 				)}
-			</div>
+			</div>{" "}
 		</div>
 	);
 }
