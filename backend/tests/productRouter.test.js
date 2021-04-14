@@ -1,10 +1,9 @@
-// import request from "supertest";
-// import app from "../server.js";
+import request from "supertest";
+import app from "../server.js";
 
-// describe("Product API", () => {
-// 	it("should show all products", async () => {
-// 		const res = await request(app).get("/api/products");
-// 		expect(res.statusCode).toEqual(200);
-// 		// expect(res.body).toHaveProperty('products')
-// 	});
-// });
+describe("Server connection", () => {
+	it("should show message about server connection", async () => {
+		const res = await request(app).get("/");
+		expect("Server is ready");
+	});
+});
