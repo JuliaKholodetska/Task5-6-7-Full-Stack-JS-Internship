@@ -45,6 +45,7 @@ const orderController = {
 				},
 			],
 		});
+		res.send(formatOrderResponse(order));
 		if (order) {
 			res.send(formatOrderResponse(order));
 		} else {
