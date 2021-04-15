@@ -21,12 +21,13 @@ export const ensureAuthenticated = (req, res, next) => {
 export const validatRequestSchema = (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res
-			.status(400)
-			.send({
-				message:
-					"Password must be at least 7 chars long and must contain a number. Check email correct.",
-			});
+		const extractedErrors = [];
+		errors
+			.array({ onlyFirstError: true })
+			.map((err) => extractedErrors.push(err.msg));
+		return res.status(400).send({
+			errors: extractedErrors.join(),
+		});
 	}
 	next();
 };
