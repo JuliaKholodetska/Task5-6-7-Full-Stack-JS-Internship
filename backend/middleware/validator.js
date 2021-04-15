@@ -23,7 +23,10 @@ export const validatRequestSchema = (req, res, next) => {
 	if (!errors.isEmpty()) {
 		return res
 			.status(400)
-			.send({ message: "Password should be at least 7 characters long." });
+			.send({
+				message:
+					"Password must be at least 7 chars long and must contain a number. Check email correct.",
+			});
 	}
 	next();
 };
