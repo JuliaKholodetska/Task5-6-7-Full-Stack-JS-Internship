@@ -1,7 +1,7 @@
 import Product from "../models/productModel.js";
 import {
 	countOfProduct,
-	numberOfProductOnPage,
+	limitProducts,
 	PRODUCT_POPULATION,
 } from "../constants.js";
 import Category from "../models/categoryModel.js";
@@ -63,8 +63,8 @@ const productController = {
 				...priceFilter,
 				...ratingFilter,
 			},
-			offset: numberOfProductOnPage * (page - 1),
-			limit: numberOfProductOnPage,
+			offset: limitProducts * (page - 1),
+			limit: limitProducts,
 			subQuery: false,
 			order: [sortOrder],
 		});
@@ -84,7 +84,7 @@ const productController = {
 		res.send({
 			products,
 			page,
-			pages: Math.ceil(countOfProduct / numberOfProductOnPage),
+			totalpages: Math.ceil(countOfProduct / limitProducts),
 		});
 	},
 	getProductById: async (req, res) => {
@@ -105,7 +105,6 @@ const productController = {
 		res.send(categories.map((category) => category.name));
 	},
 };
-
 const getRating = (product) => {
 	const ratings = product.ratings.map((rating) => rating.rating);
 	const avgRatings = getSum(ratings) / ratings.length;

@@ -7,6 +7,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Product from "../components/Product";
 import Rating from "../components/Rating";
+import { useLocation } from "react-router-dom";
 import {
 	defaultCategoryValue,
 	defaultNameValue,
@@ -33,38 +34,54 @@ export default function SearchPage(props) {
 	} = useParams();
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, pages } = productList;
+	const { loading, error, products, page, totalpages } = productList;
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,
 		error: errorCategories,
 		categories,
 	} = productCategoryList;
+	const search = useLocation().search;
+	const searchCategory = new URLSearchParams(search).get("category");
+	const searchMin = new URLSearchParams(search).get("min");
+	const searchMax = new URLSearchParams(search).get("max");
+	const searchOrder = new URLSearchParams(search).get("order");
+	const searchRating = new URLSearchParams(search).get("rating");
+	const searchPageNumber = new URLSearchParams(search).get("pageNumber");
 	useEffect(() => {
 		dispatch(
 			listProducts({
-				pageNumber,
+				pageNumber: searchPageNumber,
 				name: name !== "all" ? name : "",
-				category: category,
-				min,
-				max,
-				rating,
-				order,
+				category: searchCategory,
+				min: searchMin,
+				max: searchMax,
+				rating: searchRating,
+				order: searchOrder,
 			})
 		);
-	}, [dispatch, name, min, max, rating, order, category, pageNumber]);
+	}, [
+		dispatch,
+		name,
+		searchMin,
+		searchMax,
+		searchRating,
+		searchOrder,
+		searchCategory,
+		searchPageNumber,
+	]);
 
 	const getFilterUrl = (filter) => {
-		const filterPage = filter.page || pageNumber;
-		const filterCategory = filter.category || category;
+		const filterPage = filter.searchPageNumber || pageNumber;
+		const filterCategory = filter.searchCategory || category;
 		const filterName = filter.name || name;
-		const filterRating = filter.rating || rating;
-		const sortOrder = filter.order || order;
+		const filterRating = filter.searchRating || rating;
+		const sortOrder = filter.searchOrder || order;
 		let filterMin;
 		let filterMax;
-		switch (filter.min) {
-			case filter.min:
-				filterMin = filter.min;
+		switch (filter.searchMin) {
+			case filter.searchMin:
+				filterMin = filter.searchMin;
 				break;
 			case 0:
 				filterMin = 0;
@@ -73,9 +90,9 @@ export default function SearchPage(props) {
 				filterMin = min;
 				break;
 		}
-		switch (filter.max) {
-			case filter.max:
-				filterMax = filter.max;
+		switch (filter.searchMax) {
+			case filter.searchMax:
+				filterMax = filter.searchMax;
 				break;
 			case 0:
 				filterMax = 0;
@@ -84,7 +101,7 @@ export default function SearchPage(props) {
 				filterMax = max;
 				break;
 		}
-		return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
+		return `/search/?category=${filterCategory}&name=${filterName}&min=${filterMin}&max=${filterMax}&rating=${filterRating}&order=${sortOrder}&pageNumber=${filterPage}`;
 	};
 	return (
 		<div className="row top">
@@ -102,7 +119,9 @@ export default function SearchPage(props) {
 						<select
 							value={order}
 							onChange={(e) => {
-								props.history.push(getFilterUrl({ order: e.target.value }));
+								props.history.push(
+									getFilterUrl({ searchOrder: e.target.value })
+								);
 							}}
 						>
 							<option>Newest Arrivals</option>
@@ -123,8 +142,8 @@ export default function SearchPage(props) {
 						<ul>
 							<li>
 								<Link
-									className={"all" === category ? "active" : ""}
-									to={getFilterUrl({ category: "all" })}
+									className={"all" === searchCategory ? "active" : ""}
+									to={getFilterUrl({ searchCategory: "all" })}
 								>
 									Any
 								</Link>
@@ -132,8 +151,8 @@ export default function SearchPage(props) {
 							{categories.map((c) => (
 								<li key={c.name}>
 									<Link
-										className={c.name === category ? "active" : ""}
-										to={getFilterUrl({ category: c.id })}
+										className={c.name === searchCategory ? "active" : ""}
+										to={getFilterUrl({ searchCategory: c.id })}
 									>
 										{c.name}
 									</Link>
@@ -148,8 +167,8 @@ export default function SearchPage(props) {
 						{prices.map((p) => (
 							<li key={p.name}>
 								<Link
-									to={getFilterUrl({ max: p.max })}
-									className={`${p.max}` === `${max}` ? "active" : ""}
+									to={getFilterUrl({ searchMax: p.max })}
+									className={`${p.max}` === `${searchMax}` ? "active" : ""}
 								>
 									{p.name}
 								</Link>
@@ -163,8 +182,10 @@ export default function SearchPage(props) {
 						{ratings.map((r) => (
 							<li key={r.name}>
 								<Link
-									to={getFilterUrl({ rating: r.rating })}
-									className={`${r.rating}` === `${rating}` ? "active" : ""}
+									to={getFilterUrl({ searchRating: r.rating })}
+									className={
+										`${r.rating}` === `${searchRating}` ? "active" : ""
+									}
 								>
 									<Rating caption={" & up"} rating={r.rating}></Rating>
 								</Link>
@@ -177,10 +198,12 @@ export default function SearchPage(props) {
 				{" "}
 				<div className="row-center-pagination">
 					<div className="pagination">
-						<Link to={getFilterUrl({ page: page - 1 })}>Previous</Link>
+						<Link to={getFilterUrl({ searchPageNumber: page - 1 })}>
+							Previous
+						</Link>
 					</div>
 					<div className="pagination">
-						{[...Array(pages).keys()].map((x) => (
+						{[...Array(totalpages).keys()].map((x) => (
 							<Link
 								className={x + 1 === page ? "active" : ""}
 								key={x + 1}
@@ -191,7 +214,7 @@ export default function SearchPage(props) {
 						))}
 					</div>
 					<div className="pagination">
-						<Link to={getFilterUrl({ page: page + 1 })}>Next</Link>
+						<Link to={getFilterUrl({ searchPageNumber: page + 1 })}>Next</Link>
 					</div>
 				</div>{" "}
 				{loading ? (

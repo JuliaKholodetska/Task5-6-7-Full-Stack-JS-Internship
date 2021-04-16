@@ -3,5 +3,5 @@ export const PRODUCT_POPULATION = {
 	HIHGEST: "highest",
 	TOPRATED: "toprated",
 };
-export const numberOfProductOnPage = 8;
+export const limitProducts = 8;
 export const countOfProduct = 16;

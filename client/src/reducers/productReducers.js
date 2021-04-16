@@ -15,7 +15,7 @@ export const productListReducer = (
 			return {
 				loading: false,
 				products: action.payload.products,
-				pages: action.payload.pages,
+				totalpages: action.payload.totalpages,
 				page: action.payload.page,
 			};
 		case PRODUCT_LIST.FAIL:
