@@ -4,4 +4,3 @@ export const PRODUCT_POPULATION = {
 	TOPRATED: "toprated",
 };
 export const limitProducts = 8;
-export const countOfProduct = 16;

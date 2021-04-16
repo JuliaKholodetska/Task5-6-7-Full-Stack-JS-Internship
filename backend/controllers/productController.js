@@ -1,17 +1,14 @@
 import Product from "../models/productModel.js";
-import {
-	countOfProduct,
-	limitProducts,
-	PRODUCT_POPULATION,
-} from "../constants.js";
-import Category from "../models/categoryModel.js";
+import { limitProducts, PRODUCT_POPULATION } from "../constants.js";
 import pkg from "sequelize";
 import { getSum } from "../utils.js";
 import { Sequelize } from "sequelize";
 const { Op } = pkg;
+
 const productController = {
 	getProducts: async (req, res) => {
 		const { name, category, max, order, rating, pageNumber } = req.query;
+		const countOfProducts = await Product.count();
 		let maxPrice;
 		const page = Number(pageNumber) || 1;
 		if (Number(max)) {
@@ -84,7 +81,7 @@ const productController = {
 		res.send({
 			products,
 			page,
-			totalpages: Math.ceil(countOfProduct / limitProducts),
+			totalpages: Math.ceil(countOfProducts / limitProducts),
 		});
 	},
 	getProductById: async (req, res) => {
@@ -100,11 +97,8 @@ const productController = {
 			});
 		}
 	},
-	getCategories: async (req, res) => {
-		const categories = await Category.findAll();
-		res.send(categories.map((category) => category.name));
-	},
 };
+
 const getRating = (product) => {
 	const ratings = product.ratings.map((rating) => rating.rating);
 	const avgRatings = getSum(ratings) / ratings.length;

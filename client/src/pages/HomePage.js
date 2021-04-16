@@ -60,7 +60,7 @@ export default function HomePage() {
 						<Link
 							className={x + 1 === page ? "active" : ""}
 							key={x + 1}
-							to={getFilterUrl({ page: x + 1 })}
+							to={getFilterUrl({ searchPageNumber: x + 1 })}
 						>
 							{x + 1}
 						</Link>
