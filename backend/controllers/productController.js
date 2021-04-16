@@ -81,7 +81,7 @@ const productController = {
 		res.send({
 			products,
 			page,
-			totalpages: Math.ceil(countOfProducts / limitProducts),
+			totalPages: Math.ceil(countOfProducts / limitProducts),
 		});
 	},
 	getProductById: async (req, res) => {

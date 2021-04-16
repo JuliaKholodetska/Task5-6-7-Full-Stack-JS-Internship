@@ -45,7 +45,7 @@ const getUrlParams = (data) => {
 export default function SearchPage(props) {
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, totalpages } = productList;
+	const { loading, error, products, page, totalPages } = productList;
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,
@@ -217,7 +217,7 @@ export default function SearchPage(props) {
 						</Link>
 					</div>
 					<div className="pagination">
-						{[...Array(totalpages).keys()].map((x) => (
+						{[...Array(totalPages).keys()].map((x) => (
 							<Link
 								className={x + 1 === page ? "active" : ""}
 								key={x + 1}
@@ -228,7 +228,13 @@ export default function SearchPage(props) {
 						))}
 					</div>
 					<div className="pagination">
-						<Link to={getFilterUrl({ searchPageNumber: page + 1 })}>Next</Link>
+						<Link
+							to={getFilterUrl({
+								searchPageNumber: page + 1 > totalPages ? page : totalPages,
+							})}
+						>
+							Next
+						</Link>
 					</div>
 				</div>{" "}
 				{loading ? (
