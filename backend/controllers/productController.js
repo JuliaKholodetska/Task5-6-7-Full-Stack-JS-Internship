@@ -1,5 +1,9 @@
 import Product from "../models/productModel.js";
-import { count, pageSize, PRODUCT_POPULATION } from "../constants.js";
+import {
+	countOfProduct,
+	numberOfProductOnPage,
+	PRODUCT_POPULATION,
+} from "../constants.js";
 import Category from "../models/categoryModel.js";
 import pkg from "sequelize";
 import { getSum } from "../utils.js";
@@ -59,8 +63,8 @@ const productController = {
 				...priceFilter,
 				...ratingFilter,
 			},
-			offset: pageSize * (page - 1),
-			limit: pageSize,
+			offset: numberOfProductOnPage * (page - 1),
+			limit: numberOfProductOnPage,
 			subQuery: false,
 			order: [sortOrder],
 		});
@@ -80,7 +84,7 @@ const productController = {
 		res.send({
 			products,
 			page,
-			pages: Math.ceil(count / pageSize),
+			pages: Math.ceil(countOfProduct / numberOfProductOnPage),
 		});
 	},
 	getProductById: async (req, res) => {

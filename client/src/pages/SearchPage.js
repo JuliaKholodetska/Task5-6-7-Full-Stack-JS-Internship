@@ -19,7 +19,7 @@ import {
 	ratings,
 	toprated,
 	defaultPageNumberValue,
-} from "../utils";
+} from "../constants/defaultValueConstants.js";
 
 export default function SearchPage(props) {
 	const {
