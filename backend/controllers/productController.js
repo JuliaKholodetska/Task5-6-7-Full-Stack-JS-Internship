@@ -5,7 +5,6 @@ import pkg from "sequelize";
 import { getSum } from "../utils.js";
 import { Sequelize } from "sequelize";
 const { Op } = pkg;
-
 const productController = {
 	getProducts: async (req, res) => {
 		const { name, category, max, order, rating } = req.query;

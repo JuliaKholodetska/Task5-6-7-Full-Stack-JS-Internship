@@ -29,6 +29,7 @@ function App() {
 	const signoutHandler = () => {
 		dispatch(signout());
 	};
+
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,

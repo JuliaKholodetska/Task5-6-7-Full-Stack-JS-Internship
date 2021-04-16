@@ -383,3 +383,7 @@ button.close-sidebar {
 .table button {
 	margin: 0 0.2rem;
 }
+
+.underline-link {
+	text-decoration: underline;
+}

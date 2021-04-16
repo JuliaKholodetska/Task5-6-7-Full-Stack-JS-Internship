@@ -28,6 +28,7 @@ export const register = (name, email, password) => async (dispatch) => {
 		});
 	}
 };
+
 export const signin = (email, password) => async (dispatch) => {
 	dispatch({ type: USER_SIGNIN.REQUEST, payload: { email, password } });
 	try {
@@ -41,6 +42,21 @@ export const signin = (email, password) => async (dispatch) => {
 				error.response && error.response.data.message
 					? error.response.data.message
 					: error.message,
+		});
+	}
+};
+export const signInGoggle = (tokenId) => async (dispatch) => {
+	dispatch({ type: USER_SIGNIN.REQUEST, payload: { tokenId } });
+	try {
+		const { data } = await Axios.post("/api/users/signinGoggle", { tokenId });
+		dispatch({ type: USER_SIGNIN.SUCCESS, payload: data });
+		localStorage.setItem("userInfo", JSON.stringify(data));
+	} catch (error) {
+		dispatch({
+			type: USER_SIGNIN.FAIL,
+			payload: error.response.data.message
+				? error.response.data.message
+				: error.message,
 		});
 	}
 };

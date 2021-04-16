@@ -12,12 +12,15 @@ userRouter.get("/", asyncHandler(userController.getUsers));
 
 userRouter.post("/signin", asyncHandler(userController.signinUser));
 
+userRouter.post("/signinGoggle", asyncHandler(userController.checkGoogleUser));
+
 userRouter.post(
 	"/register",
 	registerSchema,
 	validatRequestSchema,
 	userController.registerUser
 );
+
 userRouter.get("/:id", asyncHandler(userController.getUser));
 
 userRouter.put(

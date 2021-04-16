@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
+import { OAuth2Client } from "google-auth-library";
 import User from "../models/userModel.js";
 import { generateToken } from "../utils.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const userController = {
 	getUsers: async (req, res) => {
@@ -81,6 +84,55 @@ const userController = {
 			}
 		}
 	},
+	checkGoogleUser: async (req, res) => {
+		const client = new OAuth2Client();
+		const ticket = await client.verifyIdToken({
+			idToken: req.body.tokenId,
+			audience: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+		});
+		const dataUser = ticket.getPayload();
+
+		let user = null;
+		const findUser = await User.findOne({ where: { email: dataUser.email } });
+		if (!findUser) {
+			user = await registerGoogleUser({
+				name: dataUser.name,
+				email: dataUser.email,
+			});
+		}
+		user = await loginGoogleUser({
+			email: dataUser.email,
+		});
+
+		res.send(user);
+	},
+};
+
+const loginGoogleUser = async ({ email }) => {
+	const user = await User.findOne({ where: { email } });
+	if (!user) {
+		throw new Error("Wrong credentials");
+	}
+
+	return {
+		...user.dataValues,
+		id: user.id,
+		token: generateToken(user),
+	};
+};
+const registerGoogleUser = async ({ name, email }) => {
+	const user = await User.create({
+		password: "",
+		isAdmin: false,
+		name,
+		email,
+	});
+
+	return {
+		...user.dataValues,
+		id: user.id,
+		token: generateToken(user),
+	};
 };
 
 export default userController;
