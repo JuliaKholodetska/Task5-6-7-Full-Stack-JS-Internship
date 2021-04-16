@@ -48,11 +48,12 @@ export default function SearchPage(props) {
 	const searchOrder = new URLSearchParams(search).get("order");
 	const searchRating = new URLSearchParams(search).get("rating");
 	const searchPageNumber = new URLSearchParams(search).get("pageNumber");
+	const searchName = new URLSearchParams(search).get("name");
 	useEffect(() => {
 		dispatch(
 			listProducts({
 				pageNumber: searchPageNumber,
-				name: name !== "all" ? name : "",
+				name: searchName !== "all" ? searchName : "",
 				category: searchCategory,
 				min: searchMin,
 				max: searchMax,
@@ -62,7 +63,7 @@ export default function SearchPage(props) {
 		);
 	}, [
 		dispatch,
-		name,
+		searchName,
 		searchMin,
 		searchMax,
 		searchRating,
@@ -74,7 +75,7 @@ export default function SearchPage(props) {
 	const getFilterUrl = (filter) => {
 		const filterPage = filter.searchPageNumber || pageNumber;
 		const filterCategory = filter.searchCategory || category;
-		const filterName = filter.name || name;
+		const filterName = filter.searchName || name;
 		const filterRating = filter.searchRating || rating;
 		const sortOrder = filter.searchOrder || order;
 		let filterMin;
