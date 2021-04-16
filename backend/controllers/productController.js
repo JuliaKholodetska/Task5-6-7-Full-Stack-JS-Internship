@@ -4,7 +4,6 @@ import Category from "../models/categoryModel.js";
 import pkg from "sequelize";
 import { getSum } from "../utils.js";
 import { Sequelize } from "sequelize";
-import Rating from "../models/ratingModel.js";
 const { Op } = pkg;
 
 const productController = {
