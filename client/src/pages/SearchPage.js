@@ -167,7 +167,7 @@ export default function SearchPage(props) {
 							{categories.map((c) => (
 								<li key={c.name}>
 									<Link
-										className={c.name === category ? "active" : ""}
+										className={`${c.id}` === `${category}` ? "active" : ""}
 										to={getFilterUrl({ searchCategory: c.id })}
 									>
 										{c.name}
