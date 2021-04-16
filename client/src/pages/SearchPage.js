@@ -22,16 +22,27 @@ import {
 	defaultPageNumberValue,
 } from "../constants/defaultValueConstants.js";
 
+const getUrlParams = (data) => {
+	const params = [
+		"pageNumber",
+		"name",
+		"category",
+		"order",
+		"min",
+		"max",
+		"rating",
+	]
+		.map((prop) => {
+			if (data[prop]) {
+				return `${prop}=${data[prop]}`;
+			}
+		})
+		.filter(Boolean);
+
+	return `?${params.join("&")}`;
+};
+
 export default function SearchPage(props) {
-	const {
-		name = defaultNameValue,
-		category = defaultCategoryValue,
-		min = defaultMinValue,
-		max = defaultMaxValue,
-		rating = defaultRatingValue,
-		order,
-		pageNumber = defaultPageNumberValue,
-	} = useParams();
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products, page, totalpages } = productList;
@@ -41,41 +52,37 @@ export default function SearchPage(props) {
 		error: errorCategories,
 		categories,
 	} = productCategoryList;
+
 	const search = useLocation().search;
-	const searchCategory = new URLSearchParams(search).get("category");
-	const searchMin = new URLSearchParams(search).get("min");
-	const searchMax = new URLSearchParams(search).get("max");
-	const searchOrder = new URLSearchParams(search).get("order");
-	const searchRating = new URLSearchParams(search).get("rating");
-	const searchPageNumber = new URLSearchParams(search).get("pageNumber");
-	const searchName = new URLSearchParams(search).get("name");
+	const name = new URLSearchParams(search).get("name") || defaultNameValue;
+	const category =
+		new URLSearchParams(search).get("category") || defaultCategoryValue;
+	const min = new URLSearchParams(search).get("min") || defaultMinValue;
+	const max = new URLSearchParams(search).get("max") || defaultMaxValue;
+	const order = new URLSearchParams(search).get("order");
+	const rating =
+		new URLSearchParams(search).get("rating") || defaultRatingValue;
+	const pageNumber =
+		new URLSearchParams(search).get("pageNumber") || defaultPageNumberValue;
+
 	useEffect(() => {
 		dispatch(
 			listProducts({
-				pageNumber: searchPageNumber,
-				name: searchName !== "all" ? searchName : "",
-				category: searchCategory,
-				min: searchMin,
-				max: searchMax,
-				rating: searchRating,
-				order: searchOrder,
+				pageNumber: pageNumber,
+				name: name !== "all" ? name : "",
+				category: category,
+				min: min,
+				max: max,
+				rating: rating,
+				order: order,
 			})
 		);
-	}, [
-		dispatch,
-		searchName,
-		searchMin,
-		searchMax,
-		searchRating,
-		searchOrder,
-		searchCategory,
-		searchPageNumber,
-	]);
+	}, [dispatch, name, category, min, max, rating, order, pageNumber]);
 
 	const getFilterUrl = (filter) => {
 		const filterPage = filter.searchPageNumber || pageNumber;
 		const filterCategory = filter.searchCategory || category;
-		const filterName = filter.searchName || name;
+		const filterName = filter.name || name;
 		const filterRating = filter.searchRating || rating;
 		const sortOrder = filter.searchOrder || order;
 		let filterMin;
@@ -102,7 +109,15 @@ export default function SearchPage(props) {
 				filterMax = max;
 				break;
 		}
-		return `/search/?category=${filterCategory}&name=${filterName}&min=${filterMin}&max=${filterMax}&rating=${filterRating}&order=${sortOrder}&pageNumber=${filterPage}`;
+		return `/search${getUrlParams({
+			category: filterCategory,
+			name: filterName,
+			min: filterMin,
+			max: filterMax,
+			rating: filterRating,
+			order: sortOrder,
+			pageNumber: filterPage,
+		})}`;
 	};
 	return (
 		<div className="row top">
@@ -143,7 +158,7 @@ export default function SearchPage(props) {
 						<ul>
 							<li>
 								<Link
-									className={"all" === searchCategory ? "active" : ""}
+									className={"all" === category ? "active" : ""}
 									to={getFilterUrl({ searchCategory: "all" })}
 								>
 									Any
@@ -152,7 +167,7 @@ export default function SearchPage(props) {
 							{categories.map((c) => (
 								<li key={c.name}>
 									<Link
-										className={c.name === searchCategory ? "active" : ""}
+										className={c.name === category ? "active" : ""}
 										to={getFilterUrl({ searchCategory: c.id })}
 									>
 										{c.name}
@@ -169,7 +184,7 @@ export default function SearchPage(props) {
 							<li key={p.name}>
 								<Link
 									to={getFilterUrl({ searchMax: p.max })}
-									className={`${p.max}` === `${searchMax}` ? "active" : ""}
+									className={`${p.max}` === `${max}` ? "active" : ""}
 								>
 									{p.name}
 								</Link>
@@ -184,9 +199,7 @@ export default function SearchPage(props) {
 							<li key={r.name}>
 								<Link
 									to={getFilterUrl({ searchRating: r.rating })}
-									className={
-										`${r.rating}` === `${searchRating}` ? "active" : ""
-									}
+									className={`${r.rating}` === `${rating}` ? "active" : ""}
 								>
 									<Rating caption={" & up"} rating={r.rating}></Rating>
 								</Link>

@@ -135,26 +135,6 @@ function App() {
 					<Route path="/orderhistory" component={OrderHistoryPage}></Route>
 					<PrivateRoute path="/profile" component={ProfilePage}></PrivateRoute>
 					<Route path="/search" component={SearchPage} exact></Route>
-					{/* <Route
-						path="/search/name/:name?"
-						component={SearchPage}
-						exact
-					></Route>
-					<Route
-						path="/search/category/:category"
-						component={SearchPage}
-						exact
-					></Route>
-					<Route
-						path="/search/category/:category/name/:name"
-						component={SearchPage}
-						exact
-					></Route>
-					<Route
-						path="/search/category/:category/name/:name/min/:min/max/:max/rating/:ratingg/order/:order/pageNumber/:pageNumber"
-						component={SearchPage}
-						exact
-					></Route> */}
 				</main>
 				<footer className="row">
 					<label className="footer-label">All rights reserved</label>
