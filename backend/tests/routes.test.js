@@ -37,7 +37,7 @@ describe("Product route", () => {
 			brand: {
 				name: "nike",
 			},
-			totalRating: 3,
+			total: 3,
 		},
 		{
 			id: 2,
@@ -52,7 +52,7 @@ describe("Product route", () => {
 			brand: {
 				name: "adidas",
 			},
-			totalRating: 5,
+			total: 5,
 		},
 		{
 			id: 3,
@@ -67,7 +67,7 @@ describe("Product route", () => {
 			brand: {
 				name: "nike",
 			},
-			totalRating: 4,
+			total: 4,
 		},
 	];
 
@@ -80,7 +80,7 @@ describe("Product route", () => {
 		description: product.description,
 		category: product.category.name,
 		brand: product.brand.name,
-		rating: product.totalRating,
+		rating: product.total,
 	}));
 
 	it("should return all products", async () => {
