@@ -54,10 +54,9 @@ export const signInGoggle = (tokenId) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: USER_SIGNIN.FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
+			payload: error.response.data.message
+				? error.response.data.message
+				: error.message,
 		});
 	}
 };
