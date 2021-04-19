@@ -6,16 +6,16 @@ import MessageBox from "../components/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import {
-	defaultNameValue,
-	defaultCategoryValue,
-	defaultPageNumberValue,
+	DEFAULT_NAME_VALUE,
+	DEFAULT_CATEGORY_VALUE,
+	DEFAULT_PAGE_NUMBER_VALUE,
 } from "../constants/defaultValueConstants.js";
-import { Link } from "react-router-dom";
+import Pagination from "../components/Pagination";
 export default function HomePage() {
 	const {
-		name = defaultNameValue,
-		category = defaultCategoryValue,
-		pageNumber = defaultPageNumberValue,
+		name = DEFAULT_NAME_VALUE,
+		category = DEFAULT_CATEGORY_VALUE,
+		pageNumber = DEFAULT_PAGE_NUMBER_VALUE,
 	} = useParams();
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
@@ -48,33 +48,11 @@ export default function HomePage() {
 					))}
 				</div>
 			)}
-			<div className="row-center-pagination">
-				<div className="pagination">
-					<Link to={getFilterUrl({ searchPageNumber: page - 1 })}>
-						Previous
-					</Link>
-				</div>
-				<div className="pagination">
-					{[...Array(totalPages).keys()].map((x) => (
-						<Link
-							className={x + 1 === page ? "active" : ""}
-							key={x + 1}
-							to={getFilterUrl({ searchPageNumber: x + 1 })}
-						>
-							{x + 1}
-						</Link>
-					))}
-				</div>
-				<div className="pagination">
-					<Link
-						to={getFilterUrl({
-							searchPageNumber: page + 1 > totalPages ? page : totalPages,
-						})}
-					>
-						Next
-					</Link>
-				</div>
-			</div>
+			<Pagination
+				getFilterUrl={getFilterUrl}
+				page={page}
+				totalPages={totalPages}
+			/>
 		</div>
 	);
 }

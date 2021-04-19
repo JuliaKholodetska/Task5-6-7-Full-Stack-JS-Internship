@@ -8,18 +8,19 @@ import Product from "../components/Product";
 import Rating from "../components/Rating";
 import { useLocation } from "react-router-dom";
 import {
-	defaultCategoryValue,
-	defaultNameValue,
-	defaultMinValue,
-	defaultMaxValue,
-	defaultRatingValue,
-	highest,
-	lowest,
-	prices,
+	DEFAULT_CATEGORY_VALUE,
+	DEFAULT_NAME_VALUE,
+	DEFAULT_MIN_VALUE,
+	DEFAULT_MAX_VALUE,
+	DEFAULT_RATING_VALUE,
+	HIGHEST,
+	TOPRATED,
+	LOWEST,
+	PRICES,
 	ratings,
-	toprated,
-	defaultPageNumberValue,
+	DEFAULT_PAGE_NUMBER_VALUE,
 } from "../constants/defaultValueConstants.js";
+import Pagination from "../components/Pagination";
 
 const getUrlParams = (data) => {
 	const params = [
@@ -52,17 +53,17 @@ export default function SearchPage(props) {
 		categories,
 	} = productCategoryList;
 
-	const search = useLocation().search;
-	const name = new URLSearchParams(search).get("name") || defaultNameValue;
-	const category =
-		new URLSearchParams(search).get("category") || defaultCategoryValue;
-	const min = new URLSearchParams(search).get("min") || defaultMinValue;
-	const max = new URLSearchParams(search).get("max") || defaultMaxValue;
-	const order = new URLSearchParams(search).get("order");
-	const rating =
-		new URLSearchParams(search).get("rating") || defaultRatingValue;
-	const pageNumber =
-		new URLSearchParams(search).get("pageNumber") || defaultPageNumberValue;
+	function useQuery() {
+		return new URLSearchParams(useLocation().search);
+	}
+	let query = useQuery();
+	const name = query.get("name") || DEFAULT_NAME_VALUE;
+	const category = query.get("category") || DEFAULT_CATEGORY_VALUE;
+	const min = query.get("min") || DEFAULT_MIN_VALUE;
+	const max = query.get("max") || DEFAULT_MAX_VALUE;
+	const order = query.get("order");
+	const rating = query.get("rating") || DEFAULT_RATING_VALUE;
+	const pageNumber = query.get("pageNumber") || DEFAULT_PAGE_NUMBER_VALUE;
 
 	useEffect(() => {
 		dispatch(
@@ -90,9 +91,6 @@ export default function SearchPage(props) {
 			case filter.searchMin:
 				filterMin = filter.searchMin;
 				break;
-			case 0:
-				filterMin = 0;
-				break;
 			default:
 				filterMin = min;
 				break;
@@ -100,9 +98,6 @@ export default function SearchPage(props) {
 		switch (filter.searchMax) {
 			case filter.searchMax:
 				filterMax = filter.searchMax;
-				break;
-			case 0:
-				filterMax = 0;
 				break;
 			default:
 				filterMax = max;
@@ -140,9 +135,9 @@ export default function SearchPage(props) {
 							}}
 						>
 							<option>Newest Arrivals</option>
-							<option value={`${lowest}`}>Price: Low to High</option>
-							<option value={`${highest}`}>Price: High to Low</option>
-							<option value={`${toprated}`}>Avg. Customer Reviews</option>
+							<option value={`${LOWEST}`}>Price: Low to High</option>
+							<option value={`${HIGHEST}`}>Price: High to Low</option>
+							<option value={`${TOPRATED}`}>Avg. Customer Reviews</option>
 						</select>
 					</div>
 				</div>
@@ -179,7 +174,7 @@ export default function SearchPage(props) {
 				<div>
 					<h3>Price</h3>
 					<ul>
-						{prices.map((p) => (
+						{PRICES.map((p) => (
 							<li key={p.name}>
 								<Link
 									to={getFilterUrl({ searchMax: p.max })}
@@ -209,33 +204,11 @@ export default function SearchPage(props) {
 			</div>
 			<div className="col-3">
 				{" "}
-				<div className="row-center-pagination">
-					<div className="pagination">
-						<Link to={getFilterUrl({ searchPageNumber: page - 1 })}>
-							Previous
-						</Link>
-					</div>
-					<div className="pagination">
-						{[...Array(totalPages).keys()].map((x) => (
-							<Link
-								className={x + 1 === page ? "active" : ""}
-								key={x + 1}
-								to={getFilterUrl({ searchPageNumber: x + 1 })}
-							>
-								{x + 1}
-							</Link>
-						))}
-					</div>
-					<div className="pagination">
-						<Link
-							to={getFilterUrl({
-								searchPageNumber: page + 1 > totalPages ? page : totalPages,
-							})}
-						>
-							Next
-						</Link>
-					</div>
-				</div>{" "}
+				<Pagination
+					getFilterUrl={getFilterUrl}
+					page={page}
+					totalPages={totalPages}
+				/>{" "}
 				{loading ? (
 					<LoadingBox></LoadingBox>
 				) : error ? (

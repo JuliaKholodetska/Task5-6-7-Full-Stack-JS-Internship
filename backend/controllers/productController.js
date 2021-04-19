@@ -8,7 +8,6 @@ const { Op } = pkg;
 const productController = {
 	getProducts: async (req, res) => {
 		const { name, category, max, order, rating, pageNumber } = req.query;
-		const countOfProducts = await Product.count();
 		const page = Number(pageNumber) || 1;
 		const maxPrice = Number(max);
 		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
@@ -28,7 +27,7 @@ const productController = {
 				? ["price", "DESC"]
 				: ["id", "DESC"];
 
-		const productsFind = await Product.findAll({
+		const productsFind = await Product.findAndCountAll({
 			include: ["ratings", "category", "brand"],
 			attributes: [
 				"product.id",
@@ -62,8 +61,9 @@ const productController = {
 			subQuery: false,
 			order: [sortOrder],
 		});
-
-		const products = productsFind.map((product) => {
+		const productArray = productsFind.rows;
+		const countOfProducts = productsFind.count.length;
+		const products = productArray.map((product) => {
 			return {
 				id: product.id,
 				name: product.name,
@@ -76,7 +76,6 @@ const productController = {
 				rating: product.total,
 			};
 		});
-
 		res.send({
 			products,
 			page,
