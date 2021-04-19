@@ -22,9 +22,9 @@ export const register = (name, email, password) => async (dispatch) => {
 		dispatch({
 			type: USER_REGISTER.FAIL,
 			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
+				error.response && error.response.data.errors
+					? error.response.data.errors
+					: error.errors,
 		});
 	}
 };

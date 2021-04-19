@@ -21,7 +21,7 @@ const productController = {
 			categoryFilter = { categoryId: category };
 		}
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};
-		const ratingFilter = ratings ? { rating: { [Op.gte]: ratings } } : {};
+		const ratingFilter = ratings ? { total: { [Op.gte]: ratings } } : {};
 		const sortOrder =
 			order === PRODUCT_POPULATION.TOPRATED
 				? [Sequelize.literal("total DESC")]
@@ -65,6 +65,7 @@ const productController = {
 			subQuery: false,
 			order: [sortOrder],
 		});
+
 		const products = productsFind.map((product) => {
 			return {
 				id: product.id,
@@ -78,6 +79,7 @@ const productController = {
 				rating: product.total,
 			};
 		});
+
 		res.send({
 			products,
 			page,
