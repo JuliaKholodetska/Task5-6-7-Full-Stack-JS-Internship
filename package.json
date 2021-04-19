@@ -25,12 +25,14 @@
 		"express-async-handler": "^1.1.4",
 		"express-validator": "^6.10.0",
 		"google-auth-library": "^7.0.4",
+		"http": "^0.0.1-security",
 		"jsonwebtoken": "^8.5.1",
 		"pg": "^8.5.1",
 		"pg-hstore": "^2.3.3",
 		"pq": "^0.0.3",
 		"require": "^2.4.20",
 		"sequelize": "^6.6.2",
+		"socket.io": "^4.0.1",
 		"validator": "^13.5.2"
 	},
 	"devDependencies": {

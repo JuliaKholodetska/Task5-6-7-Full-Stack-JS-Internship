@@ -19,6 +19,8 @@ import SigninPadge from "./pages/SigninPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import PrivateRoute from "./components/PrivateRoute";
+import JoinPage from "./pages/JoinPage";
+import ChatPage from "./pages/ChatPage";
 function App() {
 	const cart = useSelector((state) => state.cart);
 	const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -81,6 +83,9 @@ function App() {
 										<Link to="/orderhistory">Order History</Link>
 									</li>
 									<li>
+										<Link to="/join">Join Chat</Link>
+									</li>
+									<li>
 										<Link to="#signout" onClick={signoutHandler}>
 											Sign Out
 										</Link>
@@ -133,6 +138,8 @@ function App() {
 					<Route path="/payment" component={PaymentMethodPage}></Route>
 					<Route path="/order/:id" component={OrderPage}></Route>
 					<Route path="/orderhistory" component={OrderHistoryPage}></Route>
+					<Route path="/join" component={JoinPage}></Route>
+					<Route path="/chat" component={ChatPage}></Route>
 					<PrivateRoute path="/profile" component={ProfilePage}></PrivateRoute>
 					<Route
 						path="/search/name/:name?"

@@ -12,9 +12,18 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { startDB } from "./db/index.js";
 import routes from "./routes/index.js";
+import { Server } from "socket.io";
+import { createServer } from "http";
 dotenv.config();
-
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
+io.on("connect", (socket) => {
+	console.log("we have a new connrct");
+	socket.on("disconnect", () => {
+		console.log("User had left");
+	});
+});
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
