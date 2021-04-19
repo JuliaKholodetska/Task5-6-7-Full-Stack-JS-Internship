@@ -3,3 +3,4 @@ export const PRODUCT_POPULATION = {
 	HIHGEST: "highest",
 	TOPRATED: "toprated",
 };
+export const lIMIT_PRODUCTS = 8;

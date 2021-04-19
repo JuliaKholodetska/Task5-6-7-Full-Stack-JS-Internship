@@ -10,8 +10,8 @@ import Order from "../models/orderModel.js";
 describe("Category route", () => {
 	it("should show all categories", async () => {
 		const data = [
-			{ id: 10, name: "test 1" },
-			{ id: 11, name: "test 2" },
+			{ id: 10, name: "category 1" },
+			{ id: 11, name: "category 2" },
 		];
 
 		jest.spyOn(Category, "findAll").mockReturnValue(data);
@@ -32,12 +32,12 @@ describe("Product route", () => {
 			image: "/images/p-9.jpg",
 			description: "cool product",
 			category: {
-				name: "test 1",
+				name: "category 1",
 			},
 			brand: {
 				name: "nike",
 			},
-			total: 3,
+			totalRating: 3,
 		},
 		{
 			id: 2,
@@ -47,12 +47,12 @@ describe("Product route", () => {
 			image: "/images/p-9.jpg",
 			description: "cool product 2",
 			category: {
-				name: "test 1",
+				name: "category 1",
 			},
 			brand: {
 				name: "adidas",
 			},
-			total: 5,
+			totalRating: 5,
 		},
 		{
 			id: 3,
@@ -62,12 +62,12 @@ describe("Product route", () => {
 			image: "/images/p-9.jpg",
 			description: "cool product 3",
 			category: {
-				name: "test 2",
+				name: "category 2",
 			},
 			brand: {
 				name: "nike",
 			},
-			total: 4,
+			totalRating: 4,
 		},
 	];
 
@@ -80,10 +80,10 @@ describe("Product route", () => {
 		description: product.description,
 		category: product.category.name,
 		brand: product.brand.name,
-		rating: product.total,
+		rating: product.totalRating,
 	}));
 
-	it("should show all products", async () => {
+	it("should return all products", async () => {
 		jest.spyOn(Product, "findAll").mockReturnValue(products);
 		const res = await request(app).get("/api/products");
 		expect(res.statusCode).toEqual(200);
