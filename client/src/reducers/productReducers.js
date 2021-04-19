@@ -15,7 +15,6 @@ export const productListReducer = (
 			return {
 				loading: false,
 				products: action.payload.products,
-				totalPages: action.payload.totalPages,
 				productsTotalCount: action.payload.productsTotalCount,
 				page: action.payload.page,
 			};

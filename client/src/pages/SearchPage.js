@@ -19,6 +19,8 @@ import {
 	PRICES,
 	ratings,
 	DEFAULT_PAGE_NUMBER_VALUE,
+	DEFAULT_lIMIT_PRODUCTS,
+	DEFAULT_TOTAL_PAGE_VALUE,
 } from "../constants/defaultValueConstants.js";
 import Pagination from "../components/Pagination";
 
@@ -45,23 +47,16 @@ const getUrlParams = (data) => {
 export default function SearchPage(props) {
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
-	const {
-		loading,
-		error,
-		products,
-		page,
-		totalPages,
-		productsTotalCount,
-	} = productList;
+	const { loading, error, products, page, productsTotalCount } = productList;
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,
 		error: errorCategories,
 		categories,
 	} = productCategoryList;
-	console.log(productsTotalCount);
-	const total = Math.ceil(productsTotalCount / 3);
-	console.log(total);
+	const totalPages =
+		Math.ceil(productsTotalCount / DEFAULT_lIMIT_PRODUCTS) ||
+		DEFAULT_TOTAL_PAGE_VALUE;
 	function useQuery() {
 		return new URLSearchParams(useLocation().search);
 	}
@@ -73,6 +68,7 @@ export default function SearchPage(props) {
 	const order = query.get("order");
 	const rating = query.get("rating") || DEFAULT_RATING_VALUE;
 	const pageNumber = query.get("pageNumber") || DEFAULT_PAGE_NUMBER_VALUE;
+	const limitProducts = query.get("limitProducts") || DEFAULT_lIMIT_PRODUCTS;
 
 	useEffect(() => {
 		dispatch(
@@ -84,12 +80,24 @@ export default function SearchPage(props) {
 				max: max,
 				rating: rating,
 				order: order,
+				limitProducts: limitProducts,
 			})
 		);
-	}, [dispatch, name, category, min, max, rating, order, pageNumber]);
+	}, [
+		dispatch,
+		name,
+		category,
+		min,
+		max,
+		rating,
+		order,
+		pageNumber,
+		limitProducts,
+	]);
 
 	const getFilterUrl = (filter) => {
 		const filterPage = filter.searchPageNumber || pageNumber;
+		const filterLimit = filter.searchLimitProducts || limitProducts;
 		const filterCategory = filter.searchCategory || category;
 		const filterName = filter.name || name;
 		const filterRating = filter.searchRating || rating;
@@ -105,6 +113,7 @@ export default function SearchPage(props) {
 			rating: filterRating,
 			order: sortOrder,
 			pageNumber: filterPage,
+			limitProducts: filterLimit,
 		})}`;
 	};
 	return (
