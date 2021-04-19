@@ -19,11 +19,11 @@ const productController = {
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};
 		const ratingFilter = ratings ? { total: { [Op.gte]: ratings } } : {};
 		const sortOrder =
-			order === PRODUCT_POPULATION.TOPRATED
+			order === PRODUCT_POPULATION.TOP_RATED
 				? [Sequelize.literal("total DESC")]
 				: order === PRODUCT_POPULATION.LOWEST
 				? ["price", "ASC"]
-				: order === PRODUCT_POPULATION.HIHGEST
+				: order === PRODUCT_POPULATION.HIGHEST
 				? ["price", "DESC"]
 				: ["id", "DESC"];
 
@@ -61,9 +61,9 @@ const productController = {
 			subQuery: false,
 			order: [sortOrder],
 		});
-		const productArray = productsFind.rows;
-		const countOfProducts = productsFind.count.length;
-		const products = productArray.map((product) => {
+
+		const productsTotalCount = productsFind.count.length;
+		const products = productsFind.rows.map((product) => {
 			return {
 				id: product.id,
 				name: product.name,
@@ -79,7 +79,8 @@ const productController = {
 		res.send({
 			products,
 			page,
-			totalPages: Math.ceil(countOfProducts / lIMIT_PRODUCTS),
+			totalPages: Math.ceil(productsTotalCount / lIMIT_PRODUCTS),
+			productsTotalCount,
 		});
 	},
 	getProductById: async (req, res) => {

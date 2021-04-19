@@ -1,12 +1,13 @@
 export const LOWEST = "lowest";
 export const HIGHEST = "highest";
-export const TOPRATED = "toprated";
+export const TOP_RATED = "toprated";
 export const DEFAULT_NAME_VALUE = "all";
 export const DEFAULT_CATEGORY_VALUE = "all";
 export const DEFAULT_MIN_VALUE = 0;
 export const DEFAULT_MAX_VALUE = 0;
 export const DEFAULT_RATING_VALUE = 0;
 export const DEFAULT_PAGE_NUMBER_VALUE = 1;
+export const lIMIT_PRODUCTS = 8;
 export const PRICES = [
 	{
 		name: "Any",

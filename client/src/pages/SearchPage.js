@@ -14,7 +14,7 @@ import {
 	DEFAULT_MAX_VALUE,
 	DEFAULT_RATING_VALUE,
 	HIGHEST,
-	TOPRATED,
+	TOP_RATED,
 	LOWEST,
 	PRICES,
 	ratings,
@@ -45,14 +45,23 @@ const getUrlParams = (data) => {
 export default function SearchPage(props) {
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, totalPages } = productList;
+	const {
+		loading,
+		error,
+		products,
+		page,
+		totalPages,
+		productsTotalCount,
+	} = productList;
 	const productCategoryList = useSelector((state) => state.productCategoryList);
 	const {
 		loading: loadingCategories,
 		error: errorCategories,
 		categories,
 	} = productCategoryList;
-
+	console.log(productsTotalCount);
+	const total = Math.ceil(productsTotalCount / 3);
+	console.log(total);
 	function useQuery() {
 		return new URLSearchParams(useLocation().search);
 	}
@@ -85,24 +94,9 @@ export default function SearchPage(props) {
 		const filterName = filter.name || name;
 		const filterRating = filter.searchRating || rating;
 		const sortOrder = filter.searchOrder || order;
-		let filterMin;
-		let filterMax;
-		switch (filter.searchMin) {
-			case filter.searchMin:
-				filterMin = filter.searchMin;
-				break;
-			default:
-				filterMin = min;
-				break;
-		}
-		switch (filter.searchMax) {
-			case filter.searchMax:
-				filterMax = filter.searchMax;
-				break;
-			default:
-				filterMax = max;
-				break;
-		}
+		const filterMin = filter.searchMin || min;
+		const filterMax = filter.searchMax || max;
+
 		return `/search${getUrlParams({
 			category: filterCategory,
 			name: filterName,
@@ -137,7 +131,7 @@ export default function SearchPage(props) {
 							<option>Newest Arrivals</option>
 							<option value={`${LOWEST}`}>Price: Low to High</option>
 							<option value={`${HIGHEST}`}>Price: High to Low</option>
-							<option value={`${TOPRATED}`}>Avg. Customer Reviews</option>
+							<option value={`${TOP_RATED}`}>Avg. Customer Reviews</option>
 						</select>
 					</div>
 				</div>

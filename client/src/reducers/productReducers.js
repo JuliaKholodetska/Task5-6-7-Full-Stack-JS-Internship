@@ -16,6 +16,7 @@ export const productListReducer = (
 				loading: false,
 				products: action.payload.products,
 				totalPages: action.payload.totalPages,
+				productsTotalCount: action.payload.productsTotalCount,
 				page: action.payload.page,
 			};
 		case PRODUCT_LIST.FAIL:
