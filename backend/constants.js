@@ -1,6 +1,6 @@
 export const PRODUCT_POPULATION = {
 	LOWEST: "lowest",
-	HIHGEST: "highest",
+	HIHGEST: "hihgest",
 	TOPRATED: "toprated",
 };
-export const limitProducts = 8;
+export const lIMIT_PRODUCTS = 8;
