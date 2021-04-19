@@ -127,8 +127,14 @@ a.brand {
 
 .row.center {
 	justify-content: center;
-	margin-left: 150px;
-	margin-right: 150px;
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
+.row.center-search {
+	justify-content: center;
+	margin-left: 90px;
+	margin-right: 90px;
 }
 
 .row-product.center {
@@ -142,10 +148,12 @@ a.brand {
 	justify-content: space-between;
 	align-items: center;
 }
+
 .footer-label {
 	display: block;
 	margin: 0 auto;
 }
+
 img {
 	border-radius: 0.1rem;
 	width: 160px;
@@ -173,6 +181,7 @@ img {
 .card-body > * {
 	margin-bottom: 0.2rem;
 }
+
 .card-body-order {
 	border: 0.1rem #ffffff solid;
 	background-color: #fbf0f0;
@@ -181,6 +190,7 @@ img {
 	padding: 1rem;
 	background-color: #fbf0f0;
 }
+
 .price {
 	font-size: 2rem;
 }
@@ -214,12 +224,15 @@ img {
 .col-1 {
 	flex: 1 1 25rem;
 }
+
 .col-2 {
 	flex: 2 1 50rem;
 }
+
 .col-3 {
 	flex: 32 1 80rem;
 }
+
 .row.top {
 	align-items: flex-start;
 }
@@ -239,10 +252,12 @@ img {
 	color: #e02020;
 	background-color: #ffe0e0e0;
 }
+
 .alert-success {
 	color: #20a020;
 	background-color: #eeffe0;
 }
+
 .link-main-page {
 	font: 3.5rem "Poiret One", cursive;
 	color: rgb(8, 3, 3);
@@ -282,10 +297,12 @@ img {
 	margin: 1rem 0;
 	display: block;
 }
+
 .dropdown {
 	display: inline-block;
 	position: relative;
 }
+
 .dropdown-content {
 	position: absolute;
 	display: none;
@@ -298,9 +315,11 @@ img {
 	margin-top: 0.4rem;
 	border-radius: 0.5rem;
 }
+
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+
 .checkout-steps > div {
 	border-top: 0.3rem #c0c0c0 solid;
 	color: #c0c0c0;
@@ -309,6 +328,7 @@ img {
 	font-weight: bold;
 	font-size: 2rem;
 }
+
 .checkout-steps > div.active {
 	border-top-color: #ffaaaa;
 	color: #ffaaaa;
@@ -319,14 +339,17 @@ img {
 	border-right: none;
 	margin-right: 0.5rem;
 }
+
 .search input {
 	border-radius: 0.5rem 0 0 0.5rem;
 	border-right: none;
 	margin-left: 0.5rem;
 }
+
 .search-container {
 	padding-right: 1rem;
 }
+
 aside {
 	position: fixed;
 	width: 30rem;
@@ -339,6 +362,7 @@ aside {
 aside.open {
 	transform: translateX(0);
 }
+
 button.open-sidebar {
 	font-size: 3rem;
 	padding: 0.2rem 0.5rem;
@@ -347,21 +371,26 @@ button.open-sidebar {
 	color: #ffffff;
 	cursor: pointer;
 }
+
 button.open-sidebar:hover {
 	border-color: #ffffff;
 }
+
 aside ul {
 	padding: 0;
 	list-style: none;
 }
+
 aside li {
 	display: flex;
 	justify-content: space-between;
 	padding: 1rem;
 }
+
 button.close-sidebar {
 	padding: 0.3rem 0.8rem;
 }
+
 .active {
 	font-weight: bold;
 	color: #f8cfcf;
@@ -374,16 +403,45 @@ button.close-sidebar {
 .table tbody tr:nth-of-type(odd) {
 	background-color: #fae8e8;
 }
+
 .table td,
 .table th {
 	text-align: left;
 	border: 0.1rem solid #fde4e4;
 	padding: 0.5rem;
 }
+
 .table button {
 	margin: 0 0.2rem;
 }
 
 .underline-link {
 	text-decoration: underline;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination a {
+	padding: 1rem;
+	margin: 0.5rem;
+	border-radius: 0.5rem;
+	border: 0.1rem #a4a4a4 solid;
+	font-size: 1.6rem;
+	font-family: Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.pagination a.active {
+	font-weight: bold;
+}
+
+.row-center-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
