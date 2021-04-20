@@ -2,7 +2,7 @@ import request from "supertest";
 import Product from "../models/productModel.js";
 import app from "../server.js";
 
-describe("Product route", () => {
+export const productTests = () => {
 	const products = [
 		{
 			id: 1,
@@ -105,4 +105,4 @@ describe("Product route", () => {
 			.send();
 		expect(res.statusCode).toEqual(404);
 	});
-});
+};

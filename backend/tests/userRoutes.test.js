@@ -4,7 +4,7 @@ import app from "../server.js";
 import { generateToken } from "../utils.js";
 import bcrypt from "bcryptjs";
 
-describe("User route", () => {
+export const userTests = () => {
 	it("should update user profile", async () => {
 		const user = {
 			id: 1,
@@ -227,4 +227,4 @@ describe("User route", () => {
 		expect(res.statusCode).toEqual(200);
 		expect(res.body).toStrictEqual(users);
 	});
-});
+};

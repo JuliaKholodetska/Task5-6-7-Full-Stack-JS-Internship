@@ -6,7 +6,7 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
-		"test": "jest backend/tests/orderRoutes.test.js"
+		"test": "jest backend/tests/index.test.js"
 	},
 	"repository": {
 		"type": "git",

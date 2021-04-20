@@ -2,7 +2,7 @@ import request from "supertest";
 import Category from "../models/categoryModel.js";
 import app from "../server.js";
 
-describe("Category route", () => {
+export const categoryTests = () => {
 	it("should return all categories", async () => {
 		const data = [
 			{ id: 10, name: "category 1" },
@@ -15,4 +15,4 @@ describe("Category route", () => {
 		expect(res.statusCode).toEqual(200);
 		expect(res.body).toMatchObject(data);
 	});
-});
+};

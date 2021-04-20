@@ -3,7 +3,7 @@ import app from "../server.js";
 import { generateToken } from "../utils.js";
 import Order from "../models/orderModel.js";
 
-describe("Order route", () => {
+export const orderTests = () => {
 	const user = {
 		id: 1,
 		name: "Julia",
@@ -212,4 +212,4 @@ describe("Order route", () => {
 			orders.filter((order) => order.userId === user.id)
 		);
 	});
-});
+};
