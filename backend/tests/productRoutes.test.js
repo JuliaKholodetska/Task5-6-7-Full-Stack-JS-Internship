@@ -95,14 +95,9 @@ export const productTests = () => {
 	});
 
 	it("should return 404 if product is not Found", async () => {
-		jest.spyOn(Product, "findByPk").mockReturnValue({
-			dataValues: expectedProducts[0],
-			ratings: [{ rating: expectedProducts[0].rating }],
-		});
+		jest.spyOn(Product, "findByPk").mockImplementation((productId) => null);
+		const res = await request(app).get(`/api/users/101`).send();
 
-		const res = await request(app)
-			.get(`/api/products/${expectedProducts[10].id}`)
-			.send();
 		expect(res.statusCode).toEqual(404);
 	});
 };

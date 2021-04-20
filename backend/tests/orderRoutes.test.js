@@ -116,9 +116,7 @@ export const orderTests = () => {
 	});
 
 	it("should return 404 if order is not found", async () => {
-		jest
-			.spyOn(Order, "findByPk")
-			.mockReturnValue({ ...dbOrder, dataValues: dbOrder });
+		jest.spyOn(Order, "findByPk").mockImplementation((orderId) => null);
 
 		const userToken = generateToken(user);
 

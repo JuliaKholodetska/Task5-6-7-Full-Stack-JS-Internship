@@ -74,7 +74,7 @@ const orderController = {
 		res.send({ message: "Order Paid", order: updatedOrder });
 	},
 	getUserOrder: async (req, res) => {
-		const orders = await Order.findAll({ user: req.user.id });
+		const orders = await Order.findAll({ userId: req.user.id });
 		res.send(orders);
 	},
 };
