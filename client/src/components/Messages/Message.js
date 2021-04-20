@@ -1,28 +1,35 @@
 import React from "react";
 import ReactEmoji from "react-emoji";
 
-const Message = ({ message: { text, user }, name }) => {
-	let isSentByCurrentUser = false;
-
+const Message = ({
+	message,
+	name = "",
+	isSentByCurrentUser = false,
+	createdAt,
+}) => {
 	const trimmedName = name.trim().toLowerCase();
-
-	if (user === trimmedName) {
-		isSentByCurrentUser = true;
-	}
 
 	return isSentByCurrentUser ? (
 		<div className="messageContainer justifyEnd">
-			<p className="sentText pr-10">{trimmedName}</p>
-			<div className="messageBox backgroundBlue">
-				<p className="messageText colorWhite">{ReactEmoji.emojify(text)}</p>
-			</div>
+			<p className="sentText pl-10">{createdAt.toLocaleString()}</p>
+			<ul className="justifyEnd">
+				<p className="sentText pr-10 justifyEnd">Me</p>
+				<div className="messageBox backgroundBlue justifyEnd">
+					<p className="messageText colorWhite">
+						{ReactEmoji.emojify(message)}
+					</p>
+				</div>
+			</ul>
 		</div>
 	) : (
 		<div className="messageContainer justifyStart">
-			<div className="messageBox backgroundLight">
-				<p className="messageText colorDark">{ReactEmoji.emojify(text)}</p>
-			</div>
-			<p className="sentText pl-10 ">{user}</p>
+			<ul>
+				<p className="sentText pl-10 ">{trimmedName}</p>
+				<div className="messageBox backgroundLight ">
+					<p className="messageText colorDark">{ReactEmoji.emojify(message)}</p>
+				</div>
+			</ul>
+			<p className="sentText pl-10">{createdAt.toLocaleString()}</p>
 		</div>
 	);
 };

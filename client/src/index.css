@@ -443,8 +443,8 @@ button.close-sidebar {
 	justify-content: space-between;
 	background: #ffecec;
 	border-radius: 8px;
-	height: 60%;
-	width: 24%;
+	height: 100%;
+	width: 50%;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -533,6 +533,7 @@ button.close-sidebar {
 	font-family: Helvetica;
 	color: #828282;
 	letter-spacing: 0.3px;
+	margin: 4px;
 }
 
 .pl-10 {
