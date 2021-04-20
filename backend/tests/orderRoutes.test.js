@@ -72,6 +72,25 @@ describe("Order route", () => {
 		});
 	});
 
+	it("should return 400 if cart is empty", async () => {
+		jest
+			.spyOn(Order, "create")
+			.mockReturnValue({ ...dbOrder, dataValues: dbOrder });
+
+		const orderItem = [];
+		const userToken = generateToken(user);
+
+		const res = await request(app)
+			.post("/api/orders")
+			.set("Authorization", `Bearer ${userToken}`)
+			.send({
+				...order,
+				orderItem,
+			});
+
+		expect(res.statusCode).toEqual(400);
+	});
+
 	it("should return order by id", async () => {
 		jest
 			.spyOn(Order, "findByPk")
@@ -94,6 +113,25 @@ describe("Order route", () => {
 			...additionalOrderData,
 			orderItem: [orderItem],
 		});
+	});
+
+	it("should return 404 if order is not found", async () => {
+		jest
+			.spyOn(Order, "findByPk")
+			.mockReturnValue({ ...dbOrder, dataValues: dbOrder });
+
+		const userToken = generateToken(user);
+
+		const res = await request(app)
+			.get("/api/orders/99")
+			.set("Authorization", `Bearer ${userToken}`)
+			.send({
+				...order,
+				...additionalOrderData,
+				orderItem,
+			});
+
+		expect(res.statusCode).toEqual(404);
 	});
 
 	it("should return user orders", async () => {

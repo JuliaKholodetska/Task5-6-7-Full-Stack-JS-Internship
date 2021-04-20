@@ -13,17 +13,15 @@ const userController = {
 	signinUser: async (req, res) => {
 		const { email, password } = req.body;
 		const user = await User.findOne({ where: { email } });
-		if (user) {
-			if (bcrypt.compareSync(password, user.password)) {
-				res.send({
-					id: user.id,
-					name: user.name,
-					email: user.email,
-					isAdmin: user.isAdmin,
-					token: generateToken(user),
-				});
-				return;
-			}
+		if (user && bcrypt.compareSync(password, user.password)) {
+			res.send({
+				id: user.id,
+				name: user.name,
+				email: user.email,
+				isAdmin: user.isAdmin,
+				token: generateToken(user),
+			});
+			return;
 		}
 		res.status(401).send({ message: "Invalid email or password" });
 	},
@@ -50,7 +48,7 @@ const userController = {
 	getUser: async (req, res) => {
 		const user = await User.findByPk(req.params.id);
 		if (!user) {
-			res.status(404).send({ message: "User Not Found" });
+			return res.status(404).send({ message: "User Not Found" });
 		}
 		res.send(user);
 	},

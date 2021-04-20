@@ -63,22 +63,46 @@ describe("Product route", () => {
 		rating: product.total,
 	}));
 
+	const pageNumber = 1;
+	const limitProducts = 3;
+	const productsTotalCount = 16;
+
 	it("should return all products", async () => {
 		jest.spyOn(Product, "findAll").mockReturnValue(products);
-		const res = await request(app).get("/api/products");
+		const res = await request(app).get(
+			`/api/products?pageNumber=${pageNumber}&limitProducts=${limitProducts}`
+		);
+
 		expect(res.statusCode).toEqual(200);
-		expect(res.body).toStrictEqual(expectedProducts);
+		expect(res.body).toStrictEqual({
+			products: expectedProducts,
+			page: pageNumber,
+			productsTotalCount: productsTotalCount,
+		});
 	});
 
-	it("should show product by id", async () => {
+	it("should return product by id", async () => {
 		jest.spyOn(Product, "findByPk").mockReturnValue({
 			dataValues: expectedProducts[0],
 			ratings: [{ rating: expectedProducts[0].rating }],
 		});
+
 		const res = await request(app)
 			.get(`/api/products/${expectedProducts[0].id}`)
 			.send();
 		expect(res.statusCode).toEqual(200);
 		expect(res.body).toStrictEqual(expectedProducts[0]);
+	});
+
+	it("should return 404 if product is not Found", async () => {
+		jest.spyOn(Product, "findByPk").mockReturnValue({
+			dataValues: expectedProducts[0],
+			ratings: [{ rating: expectedProducts[0].rating }],
+		});
+
+		const res = await request(app)
+			.get(`/api/products/${expectedProducts[10].id}`)
+			.send();
+		expect(res.statusCode).toEqual(404);
 	});
 });

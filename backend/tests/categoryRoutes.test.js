@@ -3,7 +3,7 @@ import Category from "../models/categoryModel.js";
 import app from "../server.js";
 
 describe("Category route", () => {
-	it("should show all categories", async () => {
+	it("should return all categories", async () => {
 		const data = [
 			{ id: 10, name: "category 1" },
 			{ id: 11, name: "category 2" },

@@ -21,7 +21,7 @@ const productController = {
 		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
 		let categoryFilter;
-		if (category !== "all") {
+		if (category && category !== "all") {
 			categoryFilter = { categoryId: category };
 		}
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};

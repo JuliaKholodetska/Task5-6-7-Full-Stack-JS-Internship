@@ -45,12 +45,10 @@ const orderController = {
 				},
 			],
 		});
-		res.send(formatOrderResponse(order));
-		if (order) {
-			res.send(formatOrderResponse(order));
-		} else {
+		if (!order) {
 			res.status(404).send({ message: "Order Not Found" });
 		}
+		res.send(formatOrderResponse(order));
 	},
 	putPay: async (req, res) => {
 		const order = await Order.findByPk(id);
