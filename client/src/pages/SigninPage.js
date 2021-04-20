@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signin } from "../actions/userActions";
+import { signin, signInGoggle } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import Googlelogin from "react-google-login";
+import { Button } from "@material-ui/core";
+import Icon from "../components/Icon.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function SigninPadge(props) {
 	const [email, setEmail] = useState("");
@@ -15,16 +20,23 @@ export default function SigninPadge(props) {
 
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo, loading, error } = userSignin;
-	const dispath = useDispatch();
+	const dispatch = useDispatch();
 	const submitHandler = (e) => {
 		e.preventDefault();
-		dispath(signin(email, password));
+		dispatch(signin(email, password));
 	};
 	useEffect(() => {
 		if (userInfo) {
 			props.history.push(redirect);
 		}
 	}, [props.history, redirect, userInfo]);
+
+	const googleSuccess = async (res) => {
+		dispatch(signInGoggle(res.tokenId));
+	};
+	const googleError = () =>
+		alert("Google Sign In was unsuccessful. Try again later");
+
 	return (
 		<div>
 			<form className="form" onSubmit={submitHandler}>
@@ -58,12 +70,34 @@ export default function SigninPadge(props) {
 					<button className="primary" type="submit">
 						Sign In
 					</button>
+					<label />
+
+					<Googlelogin
+						clientId="565759498706-9bu6o9jqq50uspku8e9hjj3utptlng7t.apps.googleusercontent.com"
+						render={(renderProps) => (
+							<Button
+								className="googleSignIn"
+								fullWidth
+								onClick={renderProps.onClick}
+								disabled={renderProps.disabled}
+								startIcon={<Icon />}
+								variant="contained"
+							>
+								Google Sign In
+							</Button>
+						)}
+						onSuccess={googleSuccess}
+						onFailure={googleError}
+					/>
 				</div>
 				<div>
 					<label />
 					<div>
 						New customer?{" "}
-						<Link to={`/register?redirect=${redirect}`}>
+						<Link
+							to={`/register?redirect=${redirect}`}
+							className="underline-link"
+						>
 							Create your account
 						</Link>
 					</div>

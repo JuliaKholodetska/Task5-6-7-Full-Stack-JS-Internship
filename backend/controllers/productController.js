@@ -1,19 +1,23 @@
 import Product from "../models/productModel.js";
 import { PRODUCT_POPULATION } from "../constants.js";
-import Category from "../models/categoryModel.js";
 import pkg from "sequelize";
 import { getSum } from "../utils.js";
 import { Sequelize } from "sequelize";
-import Rating from "../models/ratingModel.js";
 const { Op } = pkg;
 
 const productController = {
 	getProducts: async (req, res) => {
-		const { name, category, max, order, rating } = req.query;
-		let maxPrice;
-		if (Number(max)) {
-			maxPrice = Number(max) !== 0 ? Number(max) : 0;
-		}
+		const {
+			name,
+			category,
+			max,
+			order,
+			rating,
+			pageNumber,
+			limitProducts,
+		} = req.query;
+		const page = Number(pageNumber) || 1;
+		const maxPrice = Number(max);
 		const ratings = Number(rating) && Number(rating) !== 0 ? Number(rating) : 0;
 		const nameFilter = name ? { name: { [Op.iRegexp]: name } } : {};
 		let categoryFilter;
@@ -21,17 +25,17 @@ const productController = {
 			categoryFilter = { categoryId: category };
 		}
 		const priceFilter = maxPrice ? { price: { [Op.lte]: maxPrice } } : {};
-		const ratingFilter = ratings ? { rating: { [Op.gte]: ratings } } : {};
+		const ratingFilter = ratings ? { total: { [Op.gte]: ratings } } : {};
 		const sortOrder =
-			order === PRODUCT_POPULATION.TOPRATED
+			order === PRODUCT_POPULATION.TOP_RATED
 				? [Sequelize.literal("total DESC")]
 				: order === PRODUCT_POPULATION.LOWEST
 				? ["price", "ASC"]
-				: order === PRODUCT_POPULATION.HIHGEST
+				: order === PRODUCT_POPULATION.HIGHEST
 				? ["price", "DESC"]
 				: ["id", "DESC"];
 
-		const products = await Product.findAll({
+		const productsFind = await Product.findAndCountAll({
 			include: ["ratings", "category", "brand"],
 			attributes: [
 				"product.id",
@@ -60,23 +64,31 @@ const productController = {
 				...priceFilter,
 				...ratingFilter,
 			},
+			offset: limitProducts * (page - 1),
+			limit: limitProducts,
+			subQuery: false,
 			order: [sortOrder],
 		});
-		res.send(
-			products.map((product) => {
-				return {
-					id: product.id,
-					name: product.name,
-					price: product.price,
-					countInStock: product.countInStock,
-					image: product.image,
-					description: product.description,
-					category: product?.category?.name,
-					brand: product?.brand?.name,
-					rating: product.total,
-				};
-			})
-		);
+
+		const productsTotalCount = productsFind.count.length;
+		const products = productsFind.rows.map((product) => {
+			return {
+				id: product.id,
+				name: product.name,
+				price: product.price,
+				countInStock: product.countInStock,
+				image: product.image,
+				description: product.description,
+				category: product?.category?.name,
+				brand: product?.brand?.name,
+				rating: product.total,
+			};
+		});
+		res.send({
+			products,
+			page,
+			productsTotalCount,
+		});
 	},
 	getProductById: async (req, res) => {
 		const product = await Product.findByPk(req.params.id, {
