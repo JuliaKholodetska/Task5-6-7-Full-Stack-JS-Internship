@@ -1,4 +1,5 @@
 import express from "express";
+import messageRouter from "./messageRouter.js";
 import orderRouter from "./orderRouter.js";
 import productRouter from "./productRouter.js";
 import userRouter from "./userRouter.js";
@@ -9,6 +10,8 @@ routes.use("/api/users", userRouter);
 routes.use("/api/products", productRouter);
 
 routes.use("/api/orders", orderRouter);
+
+routes.use("/api/message", messageRouter);
 
 routes.get("/api/config/paypal", (req, res) => {
 	res.send(process.env.PAYPAL_CLIENT_ID || "sb");

@@ -433,7 +433,7 @@ button.close-sidebar {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 95vh;
 	background-color: #ffffff;
 }
 
@@ -443,7 +443,7 @@ button.close-sidebar {
 	justify-content: space-between;
 	background: #ffecec;
 	border-radius: 8px;
-	height: 100%;
+	height: 90%;
 	width: 50%;
 }
 
