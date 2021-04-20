@@ -2,6 +2,7 @@ import sequelizeDB from "../sequelize.js";
 import dataTypes from "sequelize";
 import Order from "./orderModel.js";
 import Rating from "./ratingModel.js";
+import Message from "./messageModel.js";
 const { DataTypes } = dataTypes;
 
 const User = sequelizeDB.define(
@@ -18,6 +19,9 @@ const User = sequelizeDB.define(
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(Message);
+Message.belongsTo(User);
 
 User.hasMany(Rating);
 Rating.belongsTo(User);
