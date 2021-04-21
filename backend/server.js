@@ -56,3 +56,4 @@ server.listen(port, () => {
 });
 
 startDB();
+export default app;

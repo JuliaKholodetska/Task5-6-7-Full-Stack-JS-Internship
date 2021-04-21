@@ -116,7 +116,7 @@ function App() {
 							categories.map((c) => (
 								<li key={c.name}>
 									<Link
-										to={`/search/category/${c.id}`}
+										to={`/search/?category=${c.id}`}
 										onClick={() => setSidebarIsOpen(false)}
 									>
 										{c.name}
@@ -139,26 +139,7 @@ function App() {
 					<Route path="/orderhistory" component={OrderHistoryPage}></Route>
 					<Route path="/chat" component={ChatPage}></Route>
 					<PrivateRoute path="/profile" component={ProfilePage}></PrivateRoute>
-					<Route
-						path="/search/name/:name?"
-						component={SearchPage}
-						exact
-					></Route>
-					<Route
-						path="/search/category/:category"
-						component={SearchPage}
-						exact
-					></Route>
-					<Route
-						path="/search/category/:category/name/:name"
-						component={SearchPage}
-						exact
-					></Route>
-					<Route
-						path="/search/category/:category/name/:name/min/:min/max/:max/rating/:ratingg/order/:order"
-						component={SearchPage}
-						exact
-					></Route>
+					<Route path="/search" component={SearchPage} exact></Route>
 				</main>
 				<footer className="row">
 					<label className="footer-label">All rights reserved</label>
