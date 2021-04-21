@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import Message from "../models/messageModel.js";
+import User from "../models/userModel.js";
 
 let userSocketIdHashMap = {};
 
