@@ -17,4 +17,5 @@ routes.get("/api/config/paypal", (req, res) => {
 routes.get("/", (req, res) => {
 	res.send("Server is ready");
 });
+
 export default routes;
