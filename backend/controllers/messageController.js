@@ -5,14 +5,17 @@ dotenv.config();
 
 const messageController = {
 	getMessagesByRoomId: async (req, res) => {
-		const messages = await Message.findAll({
-			include: ["user"],
-			where: { roomId: req.query.room },
-			order: [["createdAt", "Asc"]],
-		});
+		if (req.user.isAdmin === true || req.user.userId === req.user.roomId) {
+			const messages = await Message.findAll({
+				include: ["user"],
+				where: { roomId: req.param("roomId") },
+				order: [["createdAt", "Asc"]],
+			});
 
-		res.send(messages);
+			res.send(messages);
+		} else {
+			res.status(401).send({ error: "Can get into chat" });
+		}
 	},
 };
-
 export default messageController;

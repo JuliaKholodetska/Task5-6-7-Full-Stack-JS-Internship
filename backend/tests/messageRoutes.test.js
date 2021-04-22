@@ -47,7 +47,7 @@ export const messageTests = () => {
 		expect(res.body).toMatchObject(messages);
 	});
 
-	it("should return 401", async () => {
+	it("should return 401 if user is not an admin or owner of the room", async () => {
 		const res = await request(app).get("/api/message/all");
 		expect(res.statusCode).toEqual(401);
 	});
