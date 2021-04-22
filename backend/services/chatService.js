@@ -2,14 +2,17 @@ import jwt from "jsonwebtoken";
 import Message from "../models/messageModel.js";
 import User from "../models/userModel.js";
 
-let userSocketIdHashMap = {};
+const userSocketIdHashMap = {};
 
-export let chatService = {
-	io: null,
+class chatService {
+	//	 io: null,
 
+	constructor(io) {
+		this.io = null;
+	}
 	setIo(io) {
 		this.io = io;
-	},
+	}
 
 	joinChat(socket, jwtToken, roomId, callback) {
 		jwt.verify(jwtToken, process.env.JWT_SECRET, (err, decode) => {
@@ -25,11 +28,11 @@ export let chatService = {
 				callback();
 			}
 		});
-	},
+	}
 
 	disconnectChat(socketId) {
 		delete userSocketIdHashMap[socketId];
-	},
+	}
 
 	async sendMessage(socketId, message, roomId, callback) {
 		try {
@@ -51,5 +54,8 @@ export let chatService = {
 		} catch (err) {
 			callback(err);
 		}
-	},
-};
+	}
+}
+
+let сlassChatService = new chatService();
+export default сlassChatService;
