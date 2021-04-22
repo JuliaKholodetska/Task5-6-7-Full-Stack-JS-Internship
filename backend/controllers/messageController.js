@@ -7,7 +7,7 @@ const messageController = {
 	getMessagesByRoomId: async (req, res) => {
 		const messages = await Message.findAll({
 			include: ["user"],
-			where: { roomId: req.query.room },
+			where: { roomId: req.param("roomId") },
 			order: [["createdAt", "Asc"]],
 		});
 

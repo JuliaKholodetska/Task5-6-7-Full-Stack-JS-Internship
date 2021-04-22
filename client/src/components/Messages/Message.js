@@ -15,7 +15,7 @@ const Message = ({
 			<ul className="justifyEnd">
 				<p className="sentText pr-10 justifyEnd">Me</p>
 				<div className="messageBox backgroundBlue justifyEnd">
-					<p className="messageText colorWhite">
+					<p className="message-text colorWhite">
 						{ReactEmoji.emojify(message)}
 					</p>
 				</div>
@@ -26,7 +26,9 @@ const Message = ({
 			<ul>
 				<p className="sentText pl-10 ">{trimmedName}</p>
 				<div className="messageBox backgroundLight ">
-					<p className="messageText colorDark">{ReactEmoji.emojify(message)}</p>
+					<p className="message-text colorDark">
+						{ReactEmoji.emojify(message)}
+					</p>
 				</div>
 			</ul>
 			<p className="sentText pl-10">{createdAt.toLocaleString()}</p>

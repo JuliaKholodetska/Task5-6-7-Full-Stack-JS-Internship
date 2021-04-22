@@ -36,7 +36,7 @@ export default function ChatPage({ location, history }) {
 	useEffect(() => {
 		const { room } = queryString.parse(location.search);
 
-		Axios.get(`/api/message/all?room=${room}`, {
+		Axios.get(`/api/messages/${room}`, {
 			headers: {
 				Authorization: `Bearer ${userInfo.token}`,
 			},

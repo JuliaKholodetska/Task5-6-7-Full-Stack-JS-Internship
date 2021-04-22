@@ -5,7 +5,7 @@ import asyncHandler from "express-async-handler";
 const messageRouter = express.Router();
 
 messageRouter.get(
-	"/all",
+	"/:roomId",
 	ensureAuthenticated,
 	asyncHandler(messageController.getMessagesByRoomId)
 );

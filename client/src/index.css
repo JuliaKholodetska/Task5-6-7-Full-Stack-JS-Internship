@@ -101,6 +101,7 @@ button.primary {
 	background-color: #f59595;
 	color: #ffffff;
 }
+
 button.primary.join {
 	color: #fff !important;
 	text-decoration: none;
@@ -495,7 +496,7 @@ button.close-sidebar {
 	}
 }
 
-.infoBar {
+.info-bar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -504,7 +505,7 @@ button.close-sidebar {
 	height: 60px;
 	width: 100%;
 }
-.text-infobar {
+.text-info-bar {
 	margin-left: 15px;
 }
 .leftInnerContainer {
@@ -539,7 +540,7 @@ button.close-sidebar {
 	max-width: 80%;
 }
 
-.messageText {
+.message-text {
 	width: 100%;
 	letter-spacing: 0;
 	float: left;
@@ -547,7 +548,7 @@ button.close-sidebar {
 	word-wrap: break-word;
 }
 
-.messageText img {
+.message-text img {
 	vertical-align: middle;
 }
 
