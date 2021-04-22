@@ -16,35 +16,25 @@ import routes from "./routes/index.js";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import jwt from "jsonwebtoken";
-import сlassChatService from "./services/chatService.js";
+import ChatService from "./services/chatService.js";
 dotenv.config();
 const app = express();
 const server = createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
-
-let userSocketIdHashMap = {};
-
-сlassChatService.setIo(io);
+const chatService = new ChatService(io);
 
 io.on("connect", (socket) => {
 	socket.on("join", ({ token, roomId }, callback) =>
-		сlassChatService.joinChat(socket, token, roomId, callback)
+		chatService.joinChat(socket, token, roomId, callback)
 	);
 
 	socket.on(
 		"sendMessage",
 		async ({ message, roomId }, callback) =>
-			await сlassChatService.sendMessage(
-				socket.client.id,
-				message,
-				roomId,
-				callback
-			)
+			await chatService.sendMessage(socket.client.id, message, roomId, callback)
 	);
 
-	socket.on("disconnect", () =>
-		сlassChatService.disconnectChat(socket.client.id)
-	);
+	socket.on("disconnect", () => chatService.disconnectChat(socket.client.id));
 });
 app.use(cors());
 app.use(express.json());

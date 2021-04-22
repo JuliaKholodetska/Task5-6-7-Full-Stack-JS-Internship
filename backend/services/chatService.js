@@ -2,16 +2,10 @@ import jwt from "jsonwebtoken";
 import Message from "../models/messageModel.js";
 import User from "../models/userModel.js";
 
-const userSocketIdHashMap = {};
-
-class chatService {
-	//	 io: null,
-
+class ChatService {
 	constructor(io) {
-		this.io = null;
-	}
-	setIo(io) {
 		this.io = io;
+		this.userSocketIdHashMap = {};
 	}
 
 	joinChat(socket, jwtToken, roomId, callback) {
@@ -21,7 +15,7 @@ class chatService {
 			} else {
 				socket.join(roomId);
 
-				userSocketIdHashMap[socket.client.id] = {
+				this.userSocketIdHashMap[socket.client.id] = {
 					userId: decode.id,
 					isAdmin: decode.isAdmin,
 				};
@@ -31,12 +25,12 @@ class chatService {
 	}
 
 	disconnectChat(socketId) {
-		delete userSocketIdHashMap[socketId];
+		delete this.userSocketIdHashMap[socketId];
 	}
 
 	async sendMessage(socketId, message, roomId, callback) {
 		try {
-			const { userId, isAdmin } = userSocketIdHashMap[socketId];
+			const { userId, isAdmin } = this.userSocketIdHashMap[socketId];
 
 			const messageData = await Message.create({
 				roomId: isAdmin ? roomId : userId,
@@ -57,5 +51,4 @@ class chatService {
 	}
 }
 
-let сlassChatService = new chatService();
-export default сlassChatService;
+export default ChatService;
