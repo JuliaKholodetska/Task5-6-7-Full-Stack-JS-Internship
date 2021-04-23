@@ -4,7 +4,7 @@ import { generateToken } from "../utils.js";
 import Message from "../models/messageModel.js";
 
 export const messageTests = () => {
-	it("should return all message", async () => {
+	it("should return all messages", async () => {
 		const user = {
 			id: 1,
 			name: "Julia",
