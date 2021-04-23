@@ -546,7 +546,7 @@ button.close-sidebar {
 	padding: 5px 20px;
 	color: white;
 	display: inline-block;
-	max-width: 80%;
+	max-width: 100%;
 }
 
 .message-text {
@@ -559,6 +559,9 @@ button.close-sidebar {
 
 .message-text img {
 	vertical-align: middle;
+	margin: auto 0;
+	height: 15%;
+	width: 15%;
 }
 
 .message-container {
