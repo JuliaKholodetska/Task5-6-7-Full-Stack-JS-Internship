@@ -47,7 +47,6 @@ export default function ChatPage({ location, history }) {
 				.then(() => setMessage(""))
 				.catch((error) => {
 					alert("Message was not sent");
-					console.error(error);
 				});
 		}
 	};
@@ -58,7 +57,7 @@ export default function ChatPage({ location, history }) {
 	}
 
 	return (
-		<div className="outerContainer">
+		<div className="outer-container">
 			<div className="container">
 				<InfoBar room={room} />
 				<Messages messages={messages} name={name} currentUserId={userInfo.id} />
