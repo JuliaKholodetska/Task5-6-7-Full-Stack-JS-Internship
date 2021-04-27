@@ -101,6 +101,7 @@ button.primary {
 	background-color: #f59595;
 	color: #ffffff;
 }
+
 button.primary.join {
 	color: #fff !important;
 	text-decoration: none;
@@ -112,6 +113,7 @@ button.primary.join {
 	width: 100%;
 	margin-top: 10px;
 }
+
 button.block {
 	margin-top: 10px;
 	width: 100%;
@@ -428,7 +430,8 @@ button.close-sidebar {
 .underline-link {
 	text-decoration: underline;
 }
-.joinOuterContainer {
+
+.join-outer-container {
 	display: flex;
 	justify-content: center;
 	text-align: center;
@@ -436,9 +439,11 @@ button.close-sidebar {
 	align-items: center;
 	background-color: #ffffff;
 }
-.joinInnerContainer {
+
+.joinInner-container {
 	width: 20%;
 }
+
 .heading {
 	color: rgb(0, 0, 0);
 	font-size: 2.5em;
@@ -447,20 +452,21 @@ button.close-sidebar {
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-	.joinOuterContainer {
+	.join-outer-container {
 		height: 100%;
 	}
 
-	.joinInnerContainer {
+	.joinInner-container {
 		width: 90%;
 	}
 }
 
-.joinInput {
+.join-input {
 	margin-top: 10px;
 	width: 90%;
 }
-.outerContainer {
+
+.outer-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -479,7 +485,7 @@ button.close-sidebar {
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-	.outerContainer {
+	.outer-container {
 		height: 100%;
 	}
 
@@ -495,7 +501,7 @@ button.close-sidebar {
 	}
 }
 
-.infoBar {
+.info-bar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -504,10 +510,12 @@ button.close-sidebar {
 	height: 60px;
 	width: 100%;
 }
-.text-infobar {
+
+.text-info-bar {
 	margin-left: 15px;
 }
-.leftInnerContainer {
+
+.leftInner-container {
 	flex: 0.5;
 	display: flex;
 	align-items: center;
@@ -515,31 +523,33 @@ button.close-sidebar {
 	color: white;
 }
 
-.rightInnerContainer {
+.rightInner-continer {
 	display: flex;
 	flex: 0.5;
 	justify-content: flex-end;
 	margin-right: 5%;
 }
 
-.onlineIcon {
+.online-icon {
 	margin-right: 5%;
 }
+
 .messages {
 	padding: 5% 0;
 	overflow: auto;
 	flex: auto;
 }
-.messageBox {
+
+.message-box {
 	background: #f3f3f3;
 	border-radius: 20px;
 	padding: 5px 20px;
 	color: white;
 	display: inline-block;
-	max-width: 80%;
+	max-width: 100%;
 }
 
-.messageText {
+.message-text {
 	width: 100%;
 	letter-spacing: 0;
 	float: left;
@@ -547,18 +557,21 @@ button.close-sidebar {
 	word-wrap: break-word;
 }
 
-.messageText img {
+.message-text img {
 	vertical-align: middle;
+	margin: auto 0;
+	height: 15%;
+	width: 15%;
 }
 
-.messageContainer {
+.message-container {
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 5%;
 	margin-top: 3px;
 }
 
-.sentText {
+.sent-text {
 	display: flex;
 	align-items: center;
 	font-family: Helvetica;
@@ -575,31 +588,31 @@ button.close-sidebar {
 	padding-right: 10px;
 }
 
-.justifyStart {
+.justify-start {
 	justify-content: flex-start;
 }
 
-.justifyEnd {
+.justify-end {
 	justify-content: flex-end;
 }
 
-.colorWhite {
+.color-white {
 	color: white;
 }
 
-.colorDark {
+.color-dark {
 	color: #353535;
 }
 
-.backgroundBlue {
+.background-blue {
 	background: #f7bbbb;
 }
 
-.backgroundLight {
+.background-light {
 	background: #ffffff;
 }
 
-.textContainer {
+.text-container {
 	display: flex;
 	flex-direction: column;
 	margin-left: 100px;
@@ -608,30 +621,31 @@ button.close-sidebar {
 	justify-content: space-between;
 }
 
-.activeContainer {
+.active-Container {
 	display: flex;
 	align-items: center;
 	margin-bottom: 50%;
 }
 
-.activeItem {
+.active-item {
 	display: flex;
 	align-items: center;
 }
 
-.activeContainer img {
+.active-Container img {
 	padding-left: 10px;
 }
 
-.textContainer h1 {
+.text-container h1 {
 	margin-bottom: 0px;
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {
-	.textContainer {
+	.text-container {
 		display: none;
 	}
 }
+
 .form-chat {
 	display: flex;
 	border-top: 2px solid #d3d3d3;
@@ -651,7 +665,7 @@ select:focus {
 	outline: none;
 }
 
-.sendButton {
+.send-button {
 	color: #fff !important;
 	text-transform: uppercase;
 	text-decoration: none;

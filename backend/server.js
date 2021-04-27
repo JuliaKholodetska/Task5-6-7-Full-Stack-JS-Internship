@@ -2,7 +2,7 @@ import express from "express";
 import User from "./models/userModel.js";
 import Rating from "./models/ratingModel.js";
 import Product from "./models/productModel.js";
-import PaymentStatus from "./models/paymenrStatusModel.js";
+import PaymentStatus from "./models/paymentStatusModel.js";
 import OrderStatus from "./models/orderStatusModel.js";
 import Order from "./models/orderModel.js";
 import OrderItem from "./models/orderItemModel.js";
@@ -16,15 +16,12 @@ import routes from "./routes/index.js";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import jwt from "jsonwebtoken";
-import { chatService } from "./services/chatService.js";
+import ChatService from "./services/chatService.js";
 dotenv.config();
 const app = express();
 const server = createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
-
-let userSocketIdHashMap = {};
-
-chatService.setIo(io);
+const chatService = new ChatService(io);
 
 io.on("connect", (socket) => {
 	socket.on("join", ({ token, roomId }, callback) =>

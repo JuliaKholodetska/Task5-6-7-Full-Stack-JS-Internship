@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
+
 import Messages from "../components/Messages/Messages";
 import InfoBar from "../components/InfoBar";
 import Input from "../components/Input";
 import { ENDPOINT } from "../constants/chatConstants";
 import { useSelector } from "react-redux";
-import Axios from "axios";
-
-let socket;
+import ChatService from "../services/chatService";
 
 export default function ChatPage({ location, history }) {
 	const [room, setRoom] = useState("");
@@ -16,54 +15,51 @@ export default function ChatPage({ location, history }) {
 	const [messages, setMessages] = useState([]);
 	const name = useSelector((state) => state.userSignin?.userInfo?.name);
 	const userInfo = useSelector((state) => state.userSignin?.userInfo);
+	const chatServiceRef = useRef();
+
+	const messageReceiver = (message) =>
+		setMessages((messages) => [...messages, message]);
 
 	useEffect(() => {
 		const { room } = queryString.parse(location.search);
 
-		socket = io(ENDPOINT);
-
 		setRoom(room);
-
-		socket.emit("join", { token: userInfo?.token, roomId: room }, (error) => {
-			if (error) {
-				history.push("/");
-				alert("Cannot connect to chat");
-			}
-		});
+		chatServiceRef.current = new ChatService(
+			userInfo?.token,
+			room,
+			messageReceiver,
+			history
+		);
 	}, [ENDPOINT, location.search, userInfo]);
 
 	useEffect(() => {
-		const { room } = queryString.parse(location.search);
+		chatServiceRef.current
+			.joinChat()
+			.then(({ messages }) => setMessages(messages));
 
-		Axios.get(`/api/message/all?room=${room}`, {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		}).then(({ data }) => {
-			setMessages(data);
-		});
-
-		socket.on("message", (message) => {
-			setMessages((messages) => [...messages, message]);
-		});
+		return chatServiceRef.current.disconnect;
 	}, []);
 
 	const sendMessage = (event) => {
-		const { room } = queryString.parse(location.search);
 		event.preventDefault();
 
 		if (message) {
-			socket.emit("sendMessage", { message, roomId: room }, (err, message) => {
-				if (err) {
-					return alert("Message was not sent");
-				}
-			});
-			setMessage("");
+			chatServiceRef.current
+				.sendMessage(message)
+				.then(() => setMessage(""))
+				.catch((error) => {
+					alert("Message was not sent");
+				});
 		}
 	};
 
+	if (!userInfo) {
+		history.push("/signin");
+		return null;
+	}
+
 	return (
-		<div className="outerContainer">
+		<div className="outer-container">
 			<div className="container">
 				<InfoBar room={room} />
 				<Messages messages={messages} name={name} currentUserId={userInfo.id} />
