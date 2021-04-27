@@ -15,9 +15,11 @@ const messageController = {
 			where: { roomId: roomId },
 			order: [["createdAt", "Asc"]],
 		});
-
-		res.send(messages);
+    
+			res.send(messages);
+		} else {
+			res.status(401).send({ error: "Can get into chat" });
+		}
 	},
 };
-
 export default messageController;
