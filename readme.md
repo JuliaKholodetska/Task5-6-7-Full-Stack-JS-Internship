@@ -11,9 +11,9 @@ The user can easily and conveniently search/sort goods, add them to the cart, pl
 
 Data base:
 - Aggregation
- *Filter products by price, category, rating;
- *Sort products by price and arrival order;
- *Serch products by name.
+- Filter products by price, category, rating;
+- Sort products by price and arrival order;
+- Search products by name.
 - Pagination;
 
 Security fundamentals features:
