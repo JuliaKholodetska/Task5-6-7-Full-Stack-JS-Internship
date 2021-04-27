@@ -22,7 +22,7 @@ class ChatService {
 			},
 		});
 
-		this._sendJoinChat();
+		sendJoinChat(this.socket, this.history, this.token, this.roomId);
 		this.socket.on("message", this.messageReceiver);
 
 		return { messages };
@@ -55,19 +55,13 @@ class ChatService {
 
 		this.socket.disconnect();
 	}
-
-	_sendJoinChat() {
-		this.socket.emit(
-			"join",
-			{ token: this.token, roomId: this.roomId },
-			(error) => {
-				if (error) {
-					this.history.push("/");
-					alert("Cannot connect to chat");
-				}
-			}
-		);
-	}
 }
-
+const sendJoinChat = (socket, history, token, roomId) => {
+	socket.emit("join", { token: token, roomId: roomId }, (error) => {
+		if (error) {
+			history.push("/");
+			alert("Cannot connect to chat");
+		}
+	});
+};
 export default ChatService;

@@ -2,7 +2,7 @@ import express from "express";
 import User from "./models/userModel.js";
 import Rating from "./models/ratingModel.js";
 import Product from "./models/productModel.js";
-import PaymentStatus from "./models/paymenrStatusModel.js";
+import PaymentStatus from "./models/paymentStatusModel.js";
 import OrderStatus from "./models/orderStatusModel.js";
 import Order from "./models/orderModel.js";
 import OrderItem from "./models/orderItemModel.js";
