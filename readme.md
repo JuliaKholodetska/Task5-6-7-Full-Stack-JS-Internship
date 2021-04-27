@@ -1,5 +1,3 @@
-# Task5-6-7 Full-Stack-JS-Intership
-
 # eShop - "Beauty Beach"
 
 # Features
