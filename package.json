@@ -5,7 +5,7 @@
 	"description": "",
 	"main": "server.js",
 	"scripts": {
-		"start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
+		"start": "node backend/server.js",
 		"test": "jest backend/tests/index.test.js"
 	},
 	"repository": {
