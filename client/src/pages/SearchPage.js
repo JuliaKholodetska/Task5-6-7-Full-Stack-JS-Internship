@@ -144,7 +144,6 @@ export default function SearchPage(props) {
 						</select>
 					</div>
 				</div>
-
 				<h3>Category</h3>
 				<div>
 					{loadingCategories ? (
@@ -195,7 +194,7 @@ export default function SearchPage(props) {
 						{ratings.map((r) => (
 							<li key={r.name}>
 								<Link
-									to={getFilterUrl({ searchRating: r.rating })}
+									to={getFilterUrl({ searchRating: r.ratingg })}
 									className={`${r.rating}` === `${rating}` ? "active" : ""}
 								>
 									<Rating caption={" & up"} rating={r.rating}></Rating>
@@ -203,7 +202,8 @@ export default function SearchPage(props) {
 							</li>
 						))}
 					</ul>
-				</div>
+				</div>{" "}
+				<div id="div-1" className="add-slot"></div>
 			</div>
 			<div className="col-3">
 				{" "}

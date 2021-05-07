@@ -139,14 +139,14 @@ a.brand {
 
 .row.center {
 	justify-content: center;
-	margin-left: 200px;
-	margin-right: 200px;
+	margin-left: 300px;
+	margin-right: 300px;
 }
 
 .row.center-search {
 	justify-content: center;
-	margin-left: 90px;
-	margin-right: 90px;
+	margin-left: 190px;
+	margin-right: 190px;
 }
 
 .row-product.center {
@@ -235,6 +235,7 @@ img {
 
 .col-1 {
 	flex: 1 1 25rem;
+	height: 100%;
 }
 
 .col-2 {
@@ -560,8 +561,8 @@ button.close-sidebar {
 .message-text img {
 	vertical-align: middle;
 	margin: auto 0;
-	height: 15%;
-	width: 15%;
+	height: 5%;
+	width: 5%;
 }
 
 .message-container {
@@ -700,5 +701,12 @@ select:focus {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	align-items: center;
+}
+
+.add-slot {
+	width: 100%;
+	justify-content: center;
+	display: flex;
 	align-items: center;
 }
