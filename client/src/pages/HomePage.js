@@ -68,7 +68,7 @@ export default function HomePage() {
 	return (
 		<div className="col-1">
 			{" "}
-			<div id="div-2" className="add-slot"></div>{" "}
+			<div id="div-2" className="ad-slot-home-page"></div>{" "}
 			<Pagination
 				getFilterUrl={getFilterUrl}
 				page={page}

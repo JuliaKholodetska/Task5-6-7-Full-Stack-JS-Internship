@@ -704,9 +704,12 @@ select:focus {
 	align-items: center;
 }
 
-.add-slot {
+.ad-slot-home-page {
 	width: 100%;
 	justify-content: center;
 	display: flex;
 	align-items: center;
+}
+.ad-slot-search-page {
+	margin-top: 20px;
 }
