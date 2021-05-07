@@ -67,22 +67,25 @@ export default function HomePage() {
 	};
 	return (
 		<div className="col-1">
+			{" "}
+			<div id="div-2" className="add-slot"></div>{" "}
+			<Pagination
+				getFilterUrl={getFilterUrl}
+				page={page}
+				totalPages={totalPages}
+			/>{" "}
 			{loading ? (
 				<LoadingBox></LoadingBox>
 			) : error ? (
 				<MessageBox variant="danger">{error}</MessageBox>
 			) : (
 				<div className="row center">
+					{" "}
 					{products.map((product) => (
 						<Product key={product.id} product={product}></Product>
 					))}
 				</div>
 			)}
-			<Pagination
-				getFilterUrl={getFilterUrl}
-				page={page}
-				totalPages={totalPages}
-			/>
 		</div>
 	);
 }
