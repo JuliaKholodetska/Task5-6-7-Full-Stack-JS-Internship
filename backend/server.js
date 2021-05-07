@@ -5,7 +5,7 @@ import Product from "./models/productModel.js";
 import PaymentStatus from "./models/paymenrStatusModel.js";
 import OrderStatus from "./models/orderStatusModel.js";
 import Order from "./models/orderModel.js";
-import OrderItem from "./models/OrderItemModel.js";
+import OrderItem from "./models/orderItemModel.js";
 import Category from "./models/categoryModel.js";
 import Brand from "./models/brandModel.js";
 import dotenv from "dotenv";
