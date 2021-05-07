@@ -104,6 +104,7 @@ export default function SearchPage(props) {
 		const sortOrder = filter.searchOrder || order;
 		const filterMin = filter.searchMin || min;
 		const filterMax = filter.searchMax || max;
+
 		return `/search${getUrlParams({
 			category: filterCategory,
 			name: filterName,
