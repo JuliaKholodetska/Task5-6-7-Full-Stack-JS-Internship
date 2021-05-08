@@ -15,7 +15,6 @@ const messageController = {
 			where: { roomId: roomId },
 			order: [["createdAt", "Asc"]],
 		});
-
 		res.send(messages);
 	},
 };
