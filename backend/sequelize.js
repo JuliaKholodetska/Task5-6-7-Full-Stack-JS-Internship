@@ -11,7 +11,7 @@ const sequelizeDB = new Sequelize(
 		dialectOptions: {
 			ssl: {
 				require: true,
-				rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
+				rejectUnauthorized: false,
 			},
 		},
 		host: process.env.DB_HOST,
