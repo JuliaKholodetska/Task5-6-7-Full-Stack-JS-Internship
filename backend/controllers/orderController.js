@@ -20,8 +20,8 @@ const orderController = {
 					orderItem: orderItem,
 					shippingAddress: shippingAddress.address,
 					paymentMethod: paymentMethod,
-					shippingPrice: shippingPrice,
-					taxPrice: taxPrice,
+					shippingPrice: Number(shippingPrice),
+					taxPrice: Number(taxPrice),
 					userId: req.user.id,
 					fullName: shippingAddress.fullName,
 					city: shippingAddress.city,
@@ -86,9 +86,10 @@ const formatOrderResponse = (order) => {
 	return {
 		...order.dataValues,
 		itemsPrice,
-		taxPrice: order.taxPrice,
-		shippingPrice: order.shippingPrice,
-		totalPrice: itemsPrice + order.taxPrice + order.shippingPrice,
+		taxPrice: Number(order.taxPrice),
+		shippingPrice: Number(order.shippingPrice),
+		totalPrice:
+			itemsPrice + Number(order.taxPrice) + Number(order.shippingPrice),
 	};
 };
 
