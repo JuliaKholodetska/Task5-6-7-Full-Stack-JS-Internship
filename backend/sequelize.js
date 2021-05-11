@@ -14,9 +14,7 @@ const sequelizeDB = new Sequelize(
 				require: true,
 				rejectUnauthorized: false,
 			},
-		// dialectOptions: {
-		// 	ssl: true,
-		// },
+		},
 		host: process.env.DB_HOST,
 		port: process.env.DB_PORT,
 		logging: false,
