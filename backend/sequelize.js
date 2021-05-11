@@ -2,14 +2,15 @@ import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 const sequelizeDB = new Sequelize(
-	process.env.DB_NAME,
+	// process.env.DB_NAME,
 	// process.env.DB_USER,
 	// process.env.DB_PASSWORD,
-	process.env.DATABASE_URL,
+
 	{
+		connectionString: process.env.DATABASE_URL,
 		ssl: true,
 		dialect: "postgres",
-		// сonnectionSsl: true,
+		сonnectionSsl: true,
 		dialectOptions: {
 			ssl: {
 				require: true,
