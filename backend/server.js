@@ -16,6 +16,7 @@ import routes from "./routes/index.js";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import jwt from "jsonwebtoken";
+import path from "path";
 import ChatService from "./services/chatService.js";
 dotenv.config();
 const app = express();
@@ -48,6 +49,7 @@ app.use((err, req, res, next) => {
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
+
 const port = process.env.PORT || 5000;
 
 server.listen(port, () => {
