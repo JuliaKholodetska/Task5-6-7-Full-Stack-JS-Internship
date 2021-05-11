@@ -45,7 +45,9 @@ app.use("/", routes);
 app.use((err, req, res, next) => {
 	res.status(500).send({ message: err.message });
 });
-
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 const port = process.env.PORT || 5000;
 
 server.listen(port, () => {
