@@ -19,7 +19,9 @@ import jwt from "jsonwebtoken";
 import path from "path";
 import ChatService from "./services/chatService.js";
 dotenv.config();
+const __dirname = path.resolve(path.dirname(""));
 const app = express();
+app.use(express.static(path.join(__dirname, "client/build")));
 const server = createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 const chatService = new ChatService(io);
@@ -46,6 +48,7 @@ app.use("/", routes);
 app.use((err, req, res, next) => {
 	res.status(500).send({ message: err.message });
 });
+
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
