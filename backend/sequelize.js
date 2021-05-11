@@ -16,13 +16,14 @@ const sequelizeDB = new Sequelize({
 			rejectUnauthorized: false,
 		},
 	},
-	title: {
-		type: Sequelize.STRING,
-		allowNull: false,
-	},
+
 	host: process.env.DB_HOST,
 	port: process.env.DB_PORT,
 	logging: false,
+	middle_name: {
+		type: Sequelize.STRING,
+		allowNull: false,
+	},
 });
 
 export default sequelizeDB;
