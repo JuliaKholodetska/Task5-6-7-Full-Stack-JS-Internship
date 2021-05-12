@@ -35,7 +35,9 @@
     <title>React App</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
-    <script async src="//acdn.adnxs.com/prebid/not-for-prod/prebid.js"></script>
+    <!-- <script async src="//acdn.adnxs.com/prebid/not-for-prod/prebid.js"></script> -->
+    <script async src="prebid4.38.0.js"></script>
+   
     <script>
       var div_1_sizes = [
         [300, 250],
@@ -50,7 +52,7 @@
 
       var adUnits = [
         {
-          code: "/19968336/header-bid-tag-0",
+          code: "myAdUnit-1'",
           mediaTypes: {
             banner: {
               sizes: div_1_sizes,
@@ -58,7 +60,7 @@
           },
           bids: [
             {
-              bidder: "appnexus",
+              bidder: "rubicon",
               params: {
                 placementId: 13144370,
               },
@@ -66,7 +68,7 @@
           ],
         },
         {
-          code: "/19968336/header-bid-tag-1",
+          code: "myAdUnit-2",
           mediaTypes: {
             banner: {
               sizes: div_2_sizes,
@@ -74,9 +76,9 @@
           },
           bids: [
             {
-              bidder: "appnexus",
+              bidder: "rubicon",
               params: {
-                placementId: 13144370,
+                placementId: 1314437,
               },
             },
           ],
