@@ -5,6 +5,9 @@
 Cosmetics store which contains products of different types of the company Inglot.
 The user can easily and conveniently search/sort goods, add them to the cart, place an order and pay for it via PayPal. Implemented possibility to create an account or log in through a Google account. Also is possibility to change the profile (email name, etc.) and possibility to view the order history. Also implemented a chat with the administrator.
 
+Live Demo here:
+https://beauty-beach-shop.herokuapp.com/
+
 # Code features:
 
 Data base:
