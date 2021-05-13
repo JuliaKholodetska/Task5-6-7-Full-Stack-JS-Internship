@@ -1,5 +1,5 @@
-/* prebid.js v4.38.0
-Updated : 2021-05-05*/
+/* prebid.js v4.39.0
+Updated : 2021-05-12*/
 !(function (u) {
 	var s = window.pbjsChunk;
 	window.pbjsChunk = function (e, t, n) {
@@ -17,7 +17,6 @@ Updated : 2021-05-05*/
 		var t = (n[e] = { i: e, l: !1, exports: {} });
 		return u[e].call(t.exports, t, t.exports, f), (t.l = !0), t.exports;
 	}
-	// eslint-disable-next-line no-unused-expressions
 	(f.m = u),
 		(f.c = n),
 		(f.d = function (e, t, n) {
@@ -155,7 +154,7 @@ Updated : 2021-05-05*/
 				);
 			}),
 			(t.getParameterByName = function (e) {
-				return je(V().search)[e] || "";
+				return Ce(V().search)[e] || "";
 			}),
 			(t.isA = X),
 			(t.isFn = Z),
@@ -525,8 +524,8 @@ Updated : 2021-05-05*/
 					return e[n] < t[n] ? 1 : e[n] > t[n] ? -1 : 0;
 				};
 			}),
-			(t.parseQS = je),
-			(t.formatQS = Ce),
+			(t.parseQS = Ce),
+			(t.formatQS = je),
 			(t.parseUrl = function (e, t) {
 				var n = document.createElement("a");
 				t && "noDecodeWholeURL" in t && t.noDecodeWholeURL
@@ -726,12 +725,12 @@ Updated : 2021-05-05*/
 			O = "Number",
 			T = "Object",
 			I = "Boolean",
-			j = Object.prototype.toString,
-			C = Boolean(window.console),
-			w = Boolean(C && window.console.log),
-			_ = Boolean(C && window.console.info),
-			B = Boolean(C && window.console.warn),
-			x = Boolean(C && window.console.error),
+			C = Object.prototype.toString,
+			j = Boolean(window.console),
+			w = Boolean(j && window.console.log),
+			_ = Boolean(j && window.console.info),
+			B = Boolean(j && window.console.warn),
+			x = Boolean(j && window.console.error),
 			U = n(9),
 			R = {
 				checkCookieSupport: Ee,
@@ -747,8 +746,8 @@ Updated : 2021-05-05*/
 				logWarn: J,
 				logMessage: H,
 				logInfo: K,
-				parseQS: je,
-				formatQS: Ce,
+				parseQS: Ce,
+				formatQS: je,
 				deepEqual: we,
 			},
 			k = {};
@@ -835,7 +834,7 @@ Updated : 2021-05-05*/
 			return !!i.b.getConfig("debug");
 		}
 		function X(e, t) {
-			return j.call(e) === "[object " + t + "]";
+			return C.call(e) === "[object " + t + "]";
 		}
 		function Z(e) {
 			return X(e, E);
@@ -992,7 +991,7 @@ Updated : 2021-05-05*/
 				? Number.isInteger(e)
 				: "number" == typeof e && isFinite(e) && Math.floor(e) === e;
 		}
-		function je(e) {
+		function Ce(e) {
 			return e
 				? e
 						.replace(/^\?/, "")
@@ -1010,7 +1009,7 @@ Updated : 2021-05-05*/
 						}, {})
 				: {};
 		}
-		function Ce(e) {
+		function je(e) {
 			return Object.keys(e)
 				.map(function (t) {
 					return Array.isArray(e[t])
@@ -1112,7 +1111,7 @@ Updated : 2021-05-05*/
 			y = n(34),
 			u = n(44),
 			o = n(38),
-			a = n(25),
+			a = n(24),
 			i = n(5),
 			h = n.n(i),
 			s = n(9),
@@ -1206,8 +1205,8 @@ Updated : 2021-05-05*/
 				}).apply(this, arguments);
 		}
 		var I = Object(b.a)("bidderFactory"),
-			j = ["requestId", "cpm", "ttl", "creativeId", "netRevenue", "currency"],
-			C = 1;
+			C = ["requestId", "cpm", "ttl", "creativeId", "netRevenue", "currency"],
+			j = 1;
 		function w(p) {
 			return T(new r.a(p.code), {
 				getSpec: function () {
@@ -1403,7 +1402,7 @@ Updated : 2021-05-05*/
 					var e = c.default.getBidAdapter(n);
 					if (e.getSpec().getMappingFileInfo) {
 						var t = e.getSpec().getMappingFileInfo(),
-							r = t.refreshInDays ? t.refreshInDays : C,
+							r = t.refreshInDays ? t.refreshInDays : j,
 							i = t.localStorageKey ? t.localStorageKey : e.getSpec().code,
 							o = I.getDataFromLocalStorage(i);
 						try {
@@ -1452,7 +1451,7 @@ Updated : 2021-05-05*/
 			return e
 				? t
 					? ((i = Object.keys(t)),
-					  j.every(function (e) {
+					  C.every(function (e) {
 							return f()(i, e) && !f()([void 0, null], t[e]);
 					  })
 							? "native" !== t.mediaType || Object(o.g)(t, n)
@@ -1858,7 +1857,7 @@ Updated : 2021-05-05*/
 		var s = n(33).f,
 			d = n(85),
 			f = n(122),
-			l = n(24),
+			l = n(25),
 			p = n(84),
 			g = n(18),
 			a = n(66),
@@ -2375,7 +2374,7 @@ Updated : 2021-05-05*/
 	134: function (e, t, n) {
 		"use strict";
 		var s = n(21),
-			d = n(24),
+			d = n(25),
 			f = n(18);
 		e.exports = function (e, t, n) {
 			var r,
@@ -2477,7 +2476,7 @@ Updated : 2021-05-05*/
 			m = n(100).f,
 			S = n(102),
 			A = n(43),
-			E = n(24),
+			E = n(25),
 			O = n(32),
 			T = n(28);
 		e.exports = function (e, t) {
@@ -2542,7 +2541,7 @@ Updated : 2021-05-05*/
 		var r = n(14),
 			i = n(16),
 			o = n(15),
-			a = n(24),
+			a = n(25),
 			c = n(37),
 			u = n(18);
 		r(
@@ -2598,7 +2597,7 @@ Updated : 2021-05-05*/
 			c = n(29),
 			u = n(15),
 			s = n(21),
-			d = n(24),
+			d = n(25),
 			f = n(41),
 			l = n(37),
 			p = n(18);
@@ -2632,7 +2631,7 @@ Updated : 2021-05-05*/
 		var r = n(14),
 			i = n(16),
 			o = n(15),
-			a = n(24),
+			a = n(25),
 			c = n(37),
 			u = n(18);
 		r(
@@ -2788,7 +2787,7 @@ Updated : 2021-05-05*/
 			c = n(29),
 			u = n(15),
 			s = n(21),
-			d = n(24),
+			d = n(25),
 			f = n(41),
 			l = n(37),
 			p = n(18);
@@ -2857,7 +2856,7 @@ Updated : 2021-05-05*/
 		var r = n(14),
 			i = n(16),
 			o = n(15),
-			a = n(24),
+			a = n(25),
 			c = n(37),
 			u = n(18);
 		r(
@@ -2948,7 +2947,7 @@ Updated : 2021-05-05*/
 	},
 	157: function (e, t, n) {
 		"use strict";
-		var v = n(24),
+		var v = n(25),
 			y = n(57),
 			h = n(83),
 			m = n(82),
@@ -3367,7 +3366,7 @@ Updated : 2021-05-05*/
 		var g = n(15),
 			b = n(82),
 			v = n(50),
-			y = n(24),
+			y = n(25),
 			h = n(61),
 			m = n(83);
 		(e.exports = function (e, t, n, r, i) {
@@ -3934,33 +3933,6 @@ Updated : 2021-05-05*/
 		});
 	},
 	24: function (e, t, n) {
-		var o = n(21);
-		e.exports = function (r, i, e) {
-			if ((o(r), void 0 === i)) return r;
-			switch (e) {
-				case 0:
-					return function () {
-						return r.call(i);
-					};
-				case 1:
-					return function (e) {
-						return r.call(i, e);
-					};
-				case 2:
-					return function (e, t) {
-						return r.call(i, e, t);
-					};
-				case 3:
-					return function (e, t, n) {
-						return r.call(i, e, t, n);
-					};
-			}
-			return function () {
-				return r.apply(i, arguments);
-			};
-		};
-	},
-	25: function (e, t, n) {
 		"use strict";
 		n.d(t, "b", function () {
 			return c;
@@ -3998,6 +3970,33 @@ Updated : 2021-05-05*/
 			},
 			"checkVideoBidSetup"
 		);
+	},
+	25: function (e, t, n) {
+		var o = n(21);
+		e.exports = function (r, i, e) {
+			if ((o(r), void 0 === i)) return r;
+			switch (e) {
+				case 0:
+					return function () {
+						return r.call(i);
+					};
+				case 1:
+					return function (e) {
+						return r.call(i, e);
+					};
+				case 2:
+					return function (e, t) {
+						return r.call(i, e, t);
+					};
+				case 3:
+					return function (e, t, n) {
+						return r.call(i, e, t, n);
+					};
+			}
+			return function () {
+				return r.apply(i, arguments);
+			};
+		};
 	},
 	26: function (n, e, t) {
 		(function (e) {
@@ -4131,11 +4130,11 @@ Updated : 2021-05-05*/
 			};
 		var T,
 			I,
-			j,
 			C,
+			j,
 			w,
 			_ =
-				((C = []),
+				((j = []),
 				(w = null),
 				B(),
 				{
@@ -4160,9 +4159,9 @@ Updated : 2021-05-05*/
 							) {
 								var r = { topic: e, callback: n };
 								return (
-									C.push(r),
+									j.push(r),
 									function () {
-										C.splice(C.indexOf(r), 1);
+										j.splice(j.indexOf(r), 1);
 									}
 								);
 							}
@@ -4221,13 +4220,13 @@ Updated : 2021-05-05*/
 									throw "setBidderConfig bidder options must contain a config object";
 							})(i),
 								i.bidders.forEach(function (r) {
-									j[r] || (j[r] = {}),
+									C[r] || (C[r] = {}),
 										Object.keys(i.config).forEach(function (e) {
 											var t = "fpd" === e ? "ortb2" : e,
 												n = "fpd" === e ? U(i.config[e]) : i.config[e];
 											v.isPlainObject(n)
-												? (j[r][t] = g({}, j[r][t] || {}, n))
-												: (j[r][t] = n);
+												? (C[r][t] = g({}, C[r][t] || {}, n))
+												: (C[r][t] = n);
 										});
 								});
 						} catch (e) {
@@ -4235,7 +4234,7 @@ Updated : 2021-05-05*/
 						}
 					},
 					getBidderConfig: function () {
-						return j;
+						return C;
 					},
 					convertAdUnitFpd: function (e) {
 						var t = [];
@@ -4482,11 +4481,11 @@ Updated : 2021-05-05*/
 					}, {})
 				),
 				(I = n),
-				(j = {});
+				(C = {});
 		}
 		function x() {
-			if (w && j && v.isPlainObject(j[w])) {
-				var n = j[w],
+			if (w && C && v.isPlainObject(C[w])) {
+				var n = C[w],
 					e = new s.a(Object.keys(I).concat(Object.keys(n)));
 				return b(e).reduce(function (e, t) {
 					return (
@@ -4554,16 +4553,20 @@ Updated : 2021-05-05*/
 		}
 		function k(t) {
 			var n = Object.keys(t);
-			C.filter(function (e) {
-				return c()(n, e.topic);
-			}).forEach(function (e) {
-				e.callback(l({}, e.topic, t[e.topic]));
-			}),
-				C.filter(function (e) {
-					return "*" === e.topic;
-				}).forEach(function (e) {
-					return e.callback(t);
-				});
+			j
+				.filter(function (e) {
+					return c()(n, e.topic);
+				})
+				.forEach(function (e) {
+					e.callback(l({}, e.topic, t[e.topic]));
+				}),
+				j
+					.filter(function (e) {
+						return "*" === e.topic;
+					})
+					.forEach(function (e) {
+						return e.callback(t);
+					});
 		}
 		function D(e, t) {
 			w = e;
@@ -4725,7 +4728,7 @@ Updated : 2021-05-05*/
 											return !t.has(e.bidder);
 										});
 									})
-									.reduce(C.flatten, [])
+									.reduce(j.flatten, [])
 									.map(function (e) {
 										return {
 											bidId: e.bidId,
@@ -4742,7 +4745,7 @@ Updated : 2021-05-05*/
 									var e;
 									null != g &&
 										((e = f
-											.filter(P.bind.call(C.adUnitsFilter, this, d))
+											.filter(P.bind.call(j.adUnitsFilter, this, d))
 											.reduce(ee, {})),
 										g.apply(pbjs, [e, n, p]),
 										(g = null));
@@ -4764,7 +4767,7 @@ Updated : 2021-05-05*/
 				function I(e) {
 					A.add(e);
 				}
-				function j(n) {
+				function C(n) {
 					var f = this;
 					n.forEach(function (e) {
 						var t;
@@ -4804,7 +4807,7 @@ Updated : 2021-05-05*/
 														o = r.start,
 														a = D({}, n, {
 															auctionId: i,
-															responseTimestamp: Object(C.timestamp)(),
+															responseTimestamp: Object(j.timestamp)(),
 															requestTimestamp: o,
 															cpm: parseFloat(n.cpm) || 0,
 															bidder: n.bidderCode,
@@ -4868,14 +4871,14 @@ Updated : 2021-05-05*/
 												"video" === n.mediaType
 													? (function (e, t, n, r) {
 															var i = !0,
-																o = Object(C.getBidRequest)(
+																o = Object(j.getBidRequest)(
 																	t.originalRequestId || t.requestId,
 																	[n]
 																),
 																a =
 																	o &&
-																	Object(C.deepAccess)(o, "mediaTypes.video"),
-																c = a && Object(C.deepAccess)(a, "context");
+																	Object(j.deepAccess)(o, "mediaTypes.video"),
+																c = a && Object(j.deepAccess)(a, "context");
 															B.b.getConfig("cache.url") &&
 																c !== R.b &&
 																(!t.videoCacheKey ||
@@ -4991,7 +4994,7 @@ Updated : 2021-05-05*/
 						P.logInfo("Bids Requested for Auction with id: ".concat(p), e),
 							e.length < 1
 								? (P.logWarn("No valid bid requests returned for auction"), T())
-								: Y.call({ dispatch: j, context: this }, e);
+								: Y.call({ dispatch: C, context: this }, e);
 					},
 					addWinningBid: function (e) {
 						(S = S.concat(e)), M.callBidWonBidder(e.bidder, e, o);
@@ -5046,7 +5049,7 @@ Updated : 2021-05-05*/
 				return l;
 			}),
 			(t.j = g);
-		var C = n(0),
+		var j = n(0),
 			w = n(45),
 			a = n(38),
 			o = n(95),
@@ -5058,7 +5061,7 @@ Updated : 2021-05-05*/
 			x = n.n(c),
 			u = n(13),
 			U = n.n(u),
-			R = n(25),
+			R = n(24),
 			s = n(2);
 		function k(e) {
 			return (k =
@@ -5223,7 +5226,7 @@ Updated : 2021-05-05*/
 		function Z(e, t, n) {
 			if (e && n) {
 				if (e === s.d) {
-					var r = Object(C.deepAccess)(
+					var r = Object(j.deepAccess)(
 						t,
 						"mediaTypes.".concat(s.d, ".context"),
 						"instream"
@@ -5278,7 +5281,7 @@ Updated : 2021-05-05*/
 									return t(e);
 							  }
 							: function (e) {
-									return Object(C.getValue)(e, t);
+									return Object(j.getValue)(e, t);
 							  },
 				};
 			}
@@ -5319,7 +5322,7 @@ Updated : 2021-05-05*/
 					!B.b.getConfig("cache.url") ||
 						(t &&
 							!1 === P.deepAccess(u, "".concat(t, ".sendStandardTargeting"))) ||
-						((o = Object(C.parseUrl)(B.b.getConfig("cache.url"))),
+						((o = Object(j.parseUrl)(B.b.getConfig("cache.url"))),
 						void 0 ===
 							x()(i, function (e) {
 								return e.key === a.CACHE_HOST;
@@ -5474,18 +5477,6 @@ Updated : 2021-05-05*/
 				var n = Object(d.getBidRequest)(t.requestId, e);
 				if (!n) return !1;
 				if (!Object(d.deepAccess)(t, "native.clickUrl")) return !1;
-				if (
-					Object(d.deepAccess)(t, "native.image") &&
-					(!Object(d.deepAccess)(t, "native.image.height") ||
-						!Object(d.deepAccess)(t, "native.image.width"))
-				)
-					return !1;
-				if (
-					Object(d.deepAccess)(t, "native.icon") &&
-					(!Object(d.deepAccess)(t, "native.icon.height") ||
-						!Object(d.deepAccess)(t, "native.icon.width"))
-				)
-					return !1;
 				var r = n.nativeParams;
 				if (!r) return !0;
 				var i = Object.keys(r).filter(function (e) {
@@ -5867,8 +5858,8 @@ Updated : 2021-05-05*/
 			T = n.n(c),
 			u = n(10),
 			I = n.n(u);
-		function j() {
-			return (j =
+		function C() {
+			return (C =
 				Object.assign ||
 				function (e) {
 					for (var t = 1; t < arguments.length; t++) {
@@ -5879,7 +5870,7 @@ Updated : 2021-05-05*/
 					return e;
 				}).apply(this, arguments);
 		}
-		function C(e, t, n) {
+		function j(e, t, n) {
 			return (
 				t in e
 					? Object.defineProperty(e, t, {
@@ -6053,7 +6044,7 @@ Updated : 2021-05-05*/
 							(s = N.getWinningBids(c, u)),
 							(d = G()),
 							(s = s.map(function (o) {
-								return C(
+								return j(
 									{},
 									o.adUnitCode,
 									Object.keys(o.adserverTargeting)
@@ -6066,10 +6057,10 @@ Updated : 2021-05-05*/
 										})
 										.reduce(function (e, t) {
 											var n = [o.adserverTargeting[t]],
-												r = C({}, t.substring(0, 20), n);
+												r = j({}, t.substring(0, 20), n);
 											if (t !== B.TARGETING_KEYS.DEAL)
 												return [].concat(w(e), [r]);
-											var i = C(
+											var i = j(
 												{},
 												"".concat(t, "_").concat(o.bidderCode).substring(0, 20),
 												n
@@ -6085,7 +6076,7 @@ Updated : 2021-05-05*/
 											return T()(a, e.adUnitCode);
 										})
 										.map(function (e) {
-											return j({}, e);
+											return C({}, e);
 										})
 										.reduce(W, [])
 										.map(L)
@@ -6102,7 +6093,7 @@ Updated : 2021-05-05*/
 										  R(r, A.getHighestCpm, o)
 												.map(function (t) {
 													if (P(t, n))
-														return C(
+														return j(
 															{},
 															t.adUnitCode,
 															F(
@@ -6126,7 +6117,7 @@ Updated : 2021-05-05*/
 												return R(t, A.getHighestCpm)
 													.map(function (t) {
 														if (t.dealId && P(t, e))
-															return C(
+															return j(
 																{},
 																t.adUnitCode,
 																F(
@@ -6149,12 +6140,12 @@ Updated : 2021-05-05*/
 											return T()(t, e.code) && g(e);
 										})
 										.map(function (e) {
-											return C(
+											return j(
 												{},
 												e.code,
 												((t = g(e)),
 												Object.keys(t).map(function (e) {
-													return C(
+													return j(
 														{},
 														e,
 														_.isArray(t[e]) ? t[e] : t[e].split(",")
@@ -6175,12 +6166,12 @@ Updated : 2021-05-05*/
 							});
 						});
 					});
-					var b = Object.keys(j({}, B.DEFAULT_TARGETING_KEYS, B.NATIVE_KEYS)),
+					var b = Object.keys(C({}, B.DEFAULT_TARGETING_KEYS, B.NATIVE_KEYS)),
 						v = E.b.getConfig("targetingControls.allowTargetingKeys") || b;
 					Array.isArray(v) &&
 						0 < v.length &&
 						(p = (function (e, r) {
-							var i = j({}, B.TARGETING_KEYS, B.NATIVE_KEYS),
+							var i = C({}, B.TARGETING_KEYS, B.NATIVE_KEYS),
 								o = Object.keys(i),
 								a = {};
 							Object(A.logInfo)(
@@ -6227,25 +6218,25 @@ Updated : 2021-05-05*/
 						})(p, v)),
 						(p = p
 							.map(function (e) {
-								return C(
+								return j(
 									{},
 									Object.keys(e)[0],
 									e[Object.keys(e)[0]]
 										.map(function (e) {
-											return C(
+											return j(
 												{},
 												Object.keys(e)[0],
 												e[Object.keys(e)[0]].join(", ")
 											);
 										})
 										.reduce(function (e, t) {
-											return j(t, e);
+											return C(t, e);
 										}, {})
 								);
 							})
 							.reduce(function (e, t) {
 								var n = Object.keys(t)[0];
-								return (e[n] = j({}, e[n], t[n])), e;
+								return (e[n] = C({}, e[n], t[n])), e;
 							}, {}));
 					var y,
 						h,
@@ -6485,19 +6476,19 @@ Updated : 2021-05-05*/
 			};
 		}
 		function L(t) {
-			return C(
+			return j(
 				{},
 				t.adUnitCode,
 				Object.keys(t.adserverTargeting)
 					.filter(p())
 					.map(function (e) {
-						return C({}, e.substring(0, 20), [t.adserverTargeting[e]]);
+						return j({}, e.substring(0, 20), [t.adserverTargeting[e]]);
 					})
 			);
 		}
 		function F(t, e) {
 			return e.map(function (e) {
-				return C({}, "".concat(e, "_").concat(t.bidderCode).substring(0, 20), [
+				return j({}, "".concat(e, "_").concat(t.bidderCode).substring(0, 20), [
 					t.adserverTargeting[e],
 				]);
 			});
@@ -7155,7 +7146,7 @@ Updated : 2021-05-05*/
 				return h ? -1 : v || y ? y : l;
 			};
 		}
-		var S = n(24),
+		var S = n(25),
 			A = n(73),
 			E = n(57),
 			O = n(50),
@@ -7302,9 +7293,9 @@ Updated : 2021-05-05*/
 			T = n(87),
 			r = n(22),
 			I = n(16),
-			j = n(40),
+			C = n(40),
 			i = n(88),
-			C = i.IteratorPrototype,
+			j = i.IteratorPrototype,
 			w = i.BUGGY_SAFARI_ITERATORS,
 			_ = r("iterator"),
 			B = "values",
@@ -7338,13 +7329,13 @@ Updated : 2021-05-05*/
 			if (
 				(v &&
 					((u = S(v.call(new e()))),
-					C !== Object.prototype &&
+					j !== Object.prototype &&
 						u.next &&
 						(I ||
-							S(u) === C ||
-							(A ? A(u, C) : "function" != typeof u[_] && O(u, _, y)),
+							S(u) === j ||
+							(A ? A(u, j) : "function" != typeof u[_] && O(u, _, y)),
 						E(u, f, !0, !0),
-						I && (j[f] = y))),
+						I && (C[f] = y))),
 				i == B &&
 					g &&
 					g.name !== B &&
@@ -7353,7 +7344,7 @@ Updated : 2021-05-05*/
 						return g.call(this);
 					})),
 				(I && !a) || p[_] === b || O(p, _, b),
-				(j[t] = b),
+				(C[t] = b),
 				i)
 			)
 				if (((s = { values: c(B), keys: o ? b : c("keys"), entries: c(x) }), a))
@@ -7687,13 +7678,13 @@ Updated : 2021-05-05*/
 			O = n(0),
 			T = n(8).default,
 			I = n(9),
-			j = a.a.triggerUserSyncs,
-			C = E.EVENTS,
-			w = C.ADD_AD_UNITS,
-			_ = C.BID_WON,
-			B = C.REQUEST_BIDS,
-			x = C.SET_TARGETING,
-			U = C.AD_RENDER_FAILED,
+			C = a.a.triggerUserSyncs,
+			j = E.EVENTS,
+			w = j.ADD_AD_UNITS,
+			_ = j.BID_WON,
+			B = j.REQUEST_BIDS,
+			x = j.SET_TARGETING,
+			U = j.AD_RENDER_FAILED,
 			R = E.AD_RENDER_FAILED_REASON,
 			k = R.PREVENT_WRITING_ON_MAIN_DOCUMENT,
 			D = R.NO_AD,
@@ -7803,11 +7794,11 @@ Updated : 2021-05-05*/
 		Object(u.a)(),
 			(A.bidderSettings = A.bidderSettings || {}),
 			(A.libLoaded = !0),
-			(A.version = "v4.38.0"),
-			O.logInfo("Prebid.js v4.38.0 loaded"),
+			(A.version = "v4.39.0"),
+			O.logInfo("Prebid.js v4.39.0 loaded"),
 			(A.installedModules = []),
 			(A.adUnits = A.adUnits || []),
-			(A.triggerUserSyncs = j);
+			(A.triggerUserSyncs = C);
 		var V = {
 				validateBannerMediaType: L,
 				validateVideoMediaType: F,
@@ -8560,8 +8551,8 @@ Updated : 2021-05-05*/
 			O = n(5),
 			T = n(9),
 			I = {},
-			j = (I.bidderRegistry = {}),
-			C = (I.aliasRegistry = {}),
+			C = (I.bidderRegistry = {}),
+			j = (I.aliasRegistry = {}),
 			w = [];
 		a.b.getConfig("s2sConfig", function (e) {
 			e &&
@@ -8724,7 +8715,7 @@ Updated : 2021-05-05*/
 		}
 		function M(t, n, e) {
 			try {
-				var r = j[t].getSpec();
+				var r = C[t].getSpec();
 				r &&
 					r[n] &&
 					"function" == typeof r[n] &&
@@ -8868,7 +8859,7 @@ Updated : 2021-05-05*/
 								timeout: i,
 								refererInfo: g,
 							},
-							r = j[e];
+							r = C[e];
 						r ||
 							E.logError(
 								"Trying to make a request for bidder that does not exist: ".concat(
@@ -8928,7 +8919,7 @@ Updated : 2021-05-05*/
 										: void 0
 								)),
 								(n = e.bidders),
-								(r = j[e.adapter]),
+								(r = C[e.adapter]),
 								(i = b[v].tid),
 								(o = b[v].adUnitsS2SCopy),
 								(a = g.filter(function (e) {
@@ -8978,7 +8969,7 @@ Updated : 2021-05-05*/
 					  }),
 					  r.forEach(function (t) {
 							t.start = Object(h.timestamp)();
-							var e = j[t.bidderCode];
+							var e = C[t.bidderCode];
 							a.b.runWithBidder(t.bidderCode, function () {
 								E.logMessage("CALLING BIDDER"),
 									T.emit(O.EVENTS.BID_REQUESTED, t);
@@ -9030,7 +9021,7 @@ Updated : 2021-05-05*/
 					r = void 0 === n ? [] : n;
 				e && t
 					? "function" == typeof e.callBids
-						? ((j[t] = e),
+						? ((C[t] = e),
 						  m()(r, "video") && I.videoAdapters.push(t),
 						  m()(r, "native") && g.f.push(t))
 						: E.logError(
@@ -9042,15 +9033,15 @@ Updated : 2021-05-05*/
 			}),
 			(I.aliasBidAdapter = function (n, r, e) {
 				var t, i;
-				if (void 0 === j[r]) {
-					var o = j[n];
+				if (void 0 === C[r]) {
+					var o = C[n];
 					if (void 0 === o) {
 						var a = [];
 						w.forEach(function (e) {
 							var t;
 							e.bidders &&
 								e.bidders.length &&
-								((t = e && e.bidders), e && m()(t, r) ? (C[r] = n) : a.push(n));
+								((t = e && e.bidders), e && m()(t, r) ? (j[r] = n) : a.push(n));
 						}),
 							a.forEach(function (e) {
 								E.logError(
@@ -9078,7 +9069,7 @@ Updated : 2021-05-05*/
 								  (d = Object(l.newBidder)(
 										v({}, c, { code: r, gvlid: u, skipPbsAliasing: s })
 								  )),
-								  (C[r] = n)),
+								  (j[r] = n)),
 								I.registerBidAdapter(d, r, { supportedMediaTypes: f });
 						} catch (e) {
 							E.logError(
@@ -9121,7 +9112,7 @@ Updated : 2021-05-05*/
 					});
 			}),
 			(I.getBidAdapter = function (e) {
-				return j[e];
+				return C[e];
 			}),
 			(I.getAnalyticsAdapter = function (e) {
 				return _[e];
@@ -9743,481 +9734,6 @@ Updated : 2021-05-05*/
 	},
 });
 pbjsChunk(
-	[189],
-	{
-		687: function (e, t, n) {
-			e.exports = n(688);
-		},
-		688: function (e, t, n) {
-			"use strict";
-			Object.defineProperty(t, "__esModule", { value: !0 }),
-				n.d(t, "USER_ID_CODE_TO_QUERY_ARG", function () {
-					return l;
-				}),
-				n.d(t, "spec", function () {
-					return h;
-				});
-			var o = n(3),
-				r = n(1),
-				c = n(0),
-				u = n(2);
-			function d(e, t) {
-				return (
-					(function (e) {
-						if (Array.isArray(e)) return e;
-					})(e) ||
-					(function (e, t) {
-						if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e)))
-							return;
-						var n = [],
-							r = !0,
-							a = !1,
-							i = void 0;
-						try {
-							for (
-								var d, s = e[Symbol.iterator]();
-								!(r = (d = s.next()).done) &&
-								(n.push(d.value), !t || n.length !== t);
-								r = !0
-							);
-						} catch (e) {
-							(a = !0), (i = e);
-						} finally {
-							try {
-								r || null == s.return || s.return();
-							} finally {
-								if (a) throw i;
-							}
-						}
-						return n;
-					})(e, t) ||
-					(function (e, t) {
-						if (!e) return;
-						if ("string" == typeof e) return a(e, t);
-						var n = Object.prototype.toString.call(e).slice(8, -1);
-						"Object" === n && e.constructor && (n = e.constructor.name);
-						if ("Map" === n || "Set" === n) return Array.from(e);
-						if (
-							"Arguments" === n ||
-							/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
-						)
-							return a(e, t);
-					})(e, t) ||
-					(function () {
-						throw new TypeError(
-							"Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
-						);
-					})()
-				);
-			}
-			function a(e, t) {
-				(null == t || t > e.length) && (t = e.length);
-				for (var n = 0, r = new Array(t); n < t; n++) r[n] = e[n];
-				return r;
-			}
-			var i = [u.b, u.d],
-				p = "hb_pb",
-				m = "3.0.3",
-				s = "USD",
-				l = {
-					britepoolid: "britepoolid",
-					criteoId: "criteoid",
-					fabrickId: "nuestarid",
-					haloId: "audigentid",
-					id5id: "id5id",
-					idl_env: "lre",
-					IDP: "zeotapid",
-					idxId: "idxid",
-					intentIqId: "intentiqid",
-					lipb: "lipbid",
-					lotamePanoramaId: "lotameid",
-					merkleId: "merkleid",
-					netId: "netid",
-					parrableId: "parrableid",
-					pubcid: "pubcid",
-					quantcastId: "quantcastid",
-					sharedId: "sharedid",
-					tapadId: "tapadid",
-					tdid: "ttduuid",
-					verizonMediaId: "verizonmediaid",
-				},
-				h = {
-					code: "openx",
-					gvlid: 69,
-					supportedMediaTypes: i,
-					isBidRequestValid: function (e) {
-						var t = e.params.delDomain || e.params.platform;
-						return c.deepAccess(e, "mediaTypes.banner") && t
-							? !!e.params.unit ||
-									0 < c.deepAccess(e, "mediaTypes.banner.sizes.length")
-							: !(!e.params.unit || !t);
-					},
-					buildRequests: function (e, r) {
-						if (0 === e.length) return [];
-						var a = [],
-							t = d(
-								e.reduce(
-									function (e, t) {
-										var n;
-										return (
-											(n = t),
-											(c.deepAccess(n, "mediaTypes.video") &&
-												!c.deepAccess(n, "mediaTypes.banner")) ||
-											n.mediaType === u.d
-												? e[0].push(t)
-												: e[1].push(t),
-											e
-										);
-									},
-									[[], []]
-								),
-								2
-							),
-							n = t[0],
-							i = t[1];
-						return (
-							0 < i.length &&
-								a.push(
-									(function (e, t) {
-										var r = [],
-											a = !1,
-											n = f(e, t),
-											i = c._map(e, function (e) {
-												return e.params.unit;
-											});
-										(n.aus = c
-											._map(e, function (e) {
-												return c
-													.parseSizesInput(e.mediaTypes.banner.sizes)
-													.join(",");
-											})
-											.join("|")),
-											(n.divIds = c
-												._map(e, function (e) {
-													return encodeURIComponent(e.adUnitCode);
-												})
-												.join(",")),
-											i.some(function (e) {
-												return e;
-											}) && (n.auid = i.join(","));
-										e.some(function (e) {
-											return e.params.doNotTrack;
-										}) && (n.ns = 1);
-										(!0 !== o.b.getConfig("coppa") &&
-											!e.some(function (e) {
-												return e.params.coppa;
-											})) ||
-											(n.tfcd = 1);
-										e.forEach(function (t) {
-											var e, n;
-											t.params.customParams
-												? ((e = c._map(
-														Object.keys(t.params.customParams),
-														function (e) {
-															return (function (e, t) {
-																var n = t[e];
-																c.isArray(n) && (n = n.join(","));
-																return (e.toLowerCase() + "=" + n.toLowerCase())
-																	.replace("+", ".")
-																	.replace("/", "_");
-															})(e, t.params.customParams);
-														}
-												  )),
-												  (n = window.btoa(e.join("&"))),
-												  (a = !0),
-												  r.push(n))
-												: r.push("");
-										}),
-											a && (n.tps = r.join(","));
-										return (
-											b(n, u.b, e),
-											{
-												method: "GET",
-												url: n.ph
-													? "https://u.openx.net/w/1.0/arj"
-													: "https://".concat(
-															e[0].params.delDomain,
-															"/w/1.0/arj"
-													  ),
-												data: n,
-												payload: { bids: e, startTime: new Date() },
-											}
-										);
-									})(i, r)
-								),
-							0 < n.length &&
-								n.forEach(function (e) {
-									var t, n;
-									a.push({
-										method: "GET",
-										url: (n = (function (e, t) {
-											var n,
-												r,
-												a = f([e], t),
-												i = c.deepAccess(e, "params.video") || {},
-												d = c.deepAccess(e, "mediaTypes.video.context"),
-												s = c.deepAccess(e, "mediaTypes.video.playerSize");
-											c.isArray(e.sizes) &&
-											2 === e.sizes.length &&
-											!c.isArray(e.sizes[0])
-												? ((n = parseInt(e.sizes[0], 10)),
-												  (r = parseInt(e.sizes[1], 10)))
-												: c.isArray(e.sizes) &&
-												  c.isArray(e.sizes[0]) &&
-												  2 === e.sizes[0].length
-												? ((n = parseInt(e.sizes[0][0], 10)),
-												  (r = parseInt(e.sizes[0][1], 10)))
-												: c.isArray(s) &&
-												  2 === s.length &&
-												  ((n = parseInt(s[0], 10)), (r = parseInt(s[1], 10)));
-											Object.keys(i).forEach(function (e) {
-												"openrtb" === e
-													? ((i[e].w = n || i[e].w),
-													  (i[e].v = r || i[e].v),
-													  (a[e] = JSON.stringify(i[e])))
-													: e in a || "url" === e || (a[e] = i[e]);
-											}),
-												(a.auid = e.params.unit),
-												(a.vwd = n || i.vwd),
-												(a.vht = r || i.vht),
-												"outstream" === d && (a.vos = "101");
-											i.mimes && (a.vmimes = i.mimes);
-											e.params.test && (a.vtest = 1);
-											return b(a, u.d, [e]), a;
-										})((t = e), r)).ph
-											? "https://u.openx.net/v/1.0/avjp"
-											: "https://".concat(t.params.delDomain, "/v/1.0/avjp"),
-										data: n,
-										payload: { bid: t, startTime: new Date() },
-									});
-								}),
-							a
-						);
-					},
-					interpretResponse: function (e, t) {
-						var n = e.body;
-						return (
-							(/avjp$/.test(t.url) ? u.d : u.b) === u.d
-								? function (e, t) {
-										var n = t.bid,
-											r = (t.startTime, []);
-										{
-											var a, i;
-											void 0 !== e &&
-												"" !== e.vastUrl &&
-												0 < e.pub_rev &&
-												((a = c.parseUrl(e.vastUrl).search || {}),
-												((i = {}).requestId = n.bidId),
-												e.deal_id && (i.dealId = e.deal_id),
-												(i.ttl = 300),
-												(i.netRevenue = !0),
-												(i.currency = e.currency),
-												(i.cpm = parseInt(e.pub_rev, 10) / 1e3),
-												(i.width = parseInt(e.width, 10)),
-												(i.height = parseInt(e.height, 10)),
-												(i.creativeId = e.adid),
-												(i.vastUrl = e.vastUrl),
-												(i.mediaType = u.d),
-												(e.ph = a.ph),
-												(e.colo = a.colo),
-												(e.ts = a.ts),
-												r.push(i));
-										}
-										return r;
-								  }
-								: function (e, t) {
-										for (
-											var n = t.bids,
-												r = (t.startTime, e.ads.ad),
-												a = [],
-												i = 0;
-											i < r.length;
-											i++
-										) {
-											var d,
-												s = r[i],
-												o = parseInt(s.idx, 10),
-												c = {};
-											(c.requestId = n[o].bidId),
-												s.pub_rev &&
-													((c.cpm = Number(s.pub_rev) / 1e3),
-													(d = s.creative[0]) &&
-														((c.width = d.width), (c.height = d.height)),
-													(c.creativeId = d.id),
-													(c.ad = s.html),
-													s.deal_id && (c.dealId = s.deal_id),
-													(c.ttl = 300),
-													(c.netRevenue = !0),
-													(c.currency = s.currency),
-													s.tbd && (c.tbd = s.tbd),
-													(c.ts = s.ts),
-													(c.meta = {}),
-													s.brand_id && (c.meta.brandId = s.brand_id),
-													s.adomain && 0 < length(s.adomain)
-														? (c.meta.advertiserDomains = s.adomain)
-														: (c.meta.advertiserDomains = []),
-													s.adv_id && (c.meta.dspid = s.adv_id),
-													a.push(c));
-										}
-										return a;
-								  }
-						)(n, t.payload);
-					},
-					getUserSyncs: function (e, t, n, r) {
-						if (e.iframeEnabled || e.pixelEnabled)
-							return [
-								{
-									type: e.iframeEnabled ? "iframe" : "image",
-									url:
-										c.deepAccess(t, "0.body.ads.pixels") ||
-										c.deepAccess(t, "0.body.pixels") ||
-										(function (e, t) {
-											var n = [];
-											e &&
-												(n.push("gdpr=" + (e.gdprApplies ? 1 : 0)),
-												n.push(
-													"gdpr_consent=" +
-														encodeURIComponent(e.consentString || "")
-												));
-											t && n.push("us_privacy=" + encodeURIComponent(t));
-											return ""
-												.concat("https://u.openx.net/w/1.0/pd")
-												.concat(0 < n.length ? "?" + n.join("&") : "");
-										})(n, r),
-								},
-							];
-					},
-					transformBidParams: function (e) {
-						return c.convertTypes({ unit: "string", customFloor: "number" }, e);
-					},
-				};
-			function f(e, t) {
-				var n,
-					r,
-					a,
-					i,
-					d = c.inIframe(),
-					s = {
-						ju: o.b.getConfig("pageUrl") || t.refererInfo.referer,
-						ch: document.charSet || document.characterSet,
-						res: ""
-							.concat(screen.width, "x")
-							.concat(screen.height, "x")
-							.concat(screen.colorDepth),
-						ifr: d,
-						tz: new Date().getTimezoneOffset(),
-						tws: (function (e) {
-							var t,
-								n,
-								r,
-								a = window,
-								i = document,
-								d = i.documentElement;
-							if (e) {
-								try {
-									(a = window.top), (i = window.top.document);
-								} catch (e) {
-									return;
-								}
-								(d = i.documentElement),
-									(r = i.body),
-									(t = a.innerWidth || d.clientWidth || r.clientWidth),
-									(n = a.innerHeight || d.clientHeight || r.clientHeight);
-							} else
-								(d = i.documentElement),
-									(t = a.innerWidth || d.clientWidth),
-									(n = a.innerHeight || d.clientHeight);
-							return "".concat(t, "x").concat(n);
-						})(d),
-						be: 1,
-						bc: e[0].params.bc || "".concat(p, "_").concat(m),
-						dddid: c
-							._map(e, function (e) {
-								return e.transactionId;
-							})
-							.join(","),
-						nocache: new Date().getTime(),
-					};
-				return (
-					e[0].params.platform && (s.ph = e[0].params.platform),
-					t.gdprConsent &&
-						(void 0 !== (n = t.gdprConsent).consentString &&
-							(s.gdpr_consent = n.consentString),
-						void 0 !== n.gdprApplies && (s.gdpr = n.gdprApplies ? 1 : 0),
-						"iab" === o.b.getConfig("consentManagement.cmpApi") &&
-							(s.x_gdpr_f = 1)),
-					t && t.uspConsent && (s.us_privacy = t.uspConsent),
-					c.deepAccess(e[0], "crumbs.pubcid") &&
-						c.deepSetValue(
-							e[0],
-							"userId.pubcid",
-							c.deepAccess(e[0], "crumbs.pubcid")
-						),
-					(r = s),
-					(a = e[0].userId),
-					c._each(a, function (e, t) {
-						var n = l[t];
-						if (l.hasOwnProperty(t))
-							switch (t) {
-								case "lipb":
-									r[n] = e.lipbid;
-									break;
-								case "parrableId":
-									r[n] = e.eid;
-									break;
-								case "id5id":
-									r[n] = e.uid;
-									break;
-								default:
-									r[n] = e;
-							}
-					}),
-					(s = r),
-					e[0].schain &&
-						(s.schain =
-							((i = e[0].schain),
-							""
-								.concat(i.ver, ",")
-								.concat(i.complete, "!")
-								.concat(
-									(function (e) {
-										var n = ["asi", "sid", "hp", "rid", "name", "domain"];
-										return e
-											.map(function (t) {
-												return n
-													.map(function (e) {
-														return t[e] || "";
-													})
-													.join(",");
-											})
-											.join("!");
-									})(i.nodes)
-								))),
-					s
-				);
-			}
-			function b(e, n, t) {
-				var r = [],
-					a = !1;
-				t.forEach(function (e) {
-					var t = (function (e, t) {
-						var n = {},
-							r = o.b.getConfig("currency.adServerCurrency") || s;
-						"function" == typeof e.getFloor &&
-							(n = e.getFloor({ currency: r, mediaType: t, size: "*" }));
-						var a = n.floor || e.params.customFloor || 0;
-						return Math.round(1e3 * a);
-					})(e, n);
-					t ? (r.push(t), (a = !0)) : r.push(0);
-				}),
-					a && (e.aumfs = r.join(","));
-			}
-			Object(r.registerBidder)(h);
-		},
-	},
-	[687]
-);
-pbjsChunk(
 	[143],
 	{
 		808: function (e, r, t) {
@@ -10227,9 +9743,9 @@ pbjsChunk(
 			"use strict";
 			Object.defineProperty(r, "__esModule", { value: !0 }),
 				t.d(r, "spec", function () {
-					return _;
+					return A;
 				}),
-				(r.hasVideoMediaType = I),
+				(r.hasVideoMediaType = d),
 				t.d(r, "resetRubiConf", function () {
 					return w;
 				}),
@@ -10264,12 +9780,12 @@ pbjsChunk(
 					n
 				);
 			}
-			function d(r) {
+			function g(r) {
 				for (var e = 1; e < arguments.length; e++) {
 					var t = null != arguments[e] ? arguments[e] : {};
 					e % 2
 						? o(Object(t), !0).forEach(function (e) {
-								v(r, e, t[e]);
+								y(r, e, t[e]);
 						  })
 						: Object.getOwnPropertyDescriptors
 						? Object.defineProperties(r, Object.getOwnPropertyDescriptors(t))
@@ -10283,8 +9799,8 @@ pbjsChunk(
 				}
 				return r;
 			}
-			function g() {
-				return (g =
+			function b() {
+				return (b =
 					Object.assign ||
 					function (e) {
 						for (var r = 1; r < arguments.length; r++) {
@@ -10295,7 +9811,7 @@ pbjsChunk(
 						return e;
 					}).apply(this, arguments);
 			}
-			function b(e, r) {
+			function v(e, r) {
 				return (
 					(function (e) {
 						if (Array.isArray(e)) return e;
@@ -10349,7 +9865,7 @@ pbjsChunk(
 				for (var t = 0, n = new Array(r); t < r; t++) n[t] = e[t];
 				return n;
 			}
-			function v(e, r, t) {
+			function y(e, r, t) {
 				return (
 					r in e
 						? Object.defineProperty(e, r, {
@@ -10362,8 +9878,8 @@ pbjsChunk(
 					e
 				);
 			}
-			function y(e) {
-				return (y =
+			function x(e) {
+				return (x =
 					"function" == typeof Symbol && "symbol" == typeof Symbol.iterator
 						? function (e) {
 								return typeof e;
@@ -10377,11 +9893,11 @@ pbjsChunk(
 									: typeof e;
 						  })(e);
 			}
-			var x = {};
+			var h = {};
 			u.b.getConfig("rubicon", function (e) {
-				l.mergeDeep(x, e.rubicon);
+				l.mergeDeep(h, e.rubicon);
 			});
-			var h = {
+			var _ = {
 				1: "468x60",
 				2: "728x90",
 				5: "120x90",
@@ -10473,15 +9989,15 @@ pbjsChunk(
 				552: "300x200",
 				558: "640x640",
 			};
-			l._each(h, function (e, r) {
-				return (h[e] = r);
+			l._each(_, function (e, r) {
+				return (_[e] = r);
 			});
-			var _ = {
+			var A = {
 				code: "rubicon",
 				gvlid: 52,
 				supportedMediaTypes: [m.b, m.d],
 				isBidRequestValid: function (e) {
-					if ("object" !== y(e.params)) return !1;
+					if ("object" !== x(e.params)) return !1;
 					for (
 						var r = 0, t = ["accountId", "siteId", "zoneId"];
 						r < t.length;
@@ -10519,14 +10035,14 @@ pbjsChunk(
 											exp: u.b.getConfig("s2sConfig.defaultTtl"),
 											id: e.adUnitCode,
 											secure: 1,
-											ext: v({}, e.bidder, e.params),
+											ext: y({}, e.bidder, e.params),
 											video: l.deepAccess(e, "mediaTypes.video") || {},
 										},
 									],
 									ext: {
 										prebid: {
 											cache: {
-												vastxml: { returnCreative: !0 === x.returnVast },
+												vastxml: { returnCreative: !0 === h.returnVast },
 											},
 											targeting: {
 												includewinners: !0,
@@ -10534,13 +10050,13 @@ pbjsChunk(
 												pricegranularity: z(u.b),
 											},
 											bidders: {
-												rubicon: { integration: x.int_type || "pbjs" },
+												rubicon: { integration: h.int_type || "pbjs" },
 											},
 										},
 									},
 								};
 								"rubicon" !== e.bidder &&
-									(r.ext.prebid.aliases = v({}, e.bidder, "rubicon"));
+									(r.ext.prebid.aliases = y({}, e.bidder, "rubicon"));
 								var t,
 									n,
 									i,
@@ -10551,7 +10067,7 @@ pbjsChunk(
 										l.deepSetValue(r, "ext.prebid.analytics", {
 											rubicon: { "client-analytics": !0 },
 										}),
-									"function" != typeof e.getFloor || x.disableFloors)
+									"function" != typeof e.getFloor || h.disableFloors)
 								)
 									t = parseFloat(l.deepAccess(e, "params.floor"));
 								else {
@@ -10559,13 +10075,13 @@ pbjsChunk(
 										n = e.getFloor({
 											currency: "USD",
 											mediaType: "video",
-											size: S(e, "video"),
+											size: C(e, "video"),
 										});
 									} catch (e) {
 										l.logError("Rubicon: getFloor threw an error: ", e);
 									}
 									t =
-										"object" !== y(n) ||
+										"object" !== x(n) ||
 										"USD" !== n.currency ||
 										isNaN(parseInt(n.floor))
 											? void 0
@@ -10575,34 +10091,34 @@ pbjsChunk(
 									(r.imp[0].ext[e.bidder].video.size_id = R(e)),
 									(function (r, t, e) {
 										if (!r) return;
-										"object" === y(u.b.getConfig("app"))
+										"object" === x(u.b.getConfig("app"))
 											? (r.app = u.b.getConfig("app"))
-											: (r.site = { page: A(t, e) });
-										"object" === y(u.b.getConfig("device")) &&
+											: (r.site = { page: j(t, e) });
+										"object" === x(u.b.getConfig("device")) &&
 											(r.device = u.b.getConfig("device"));
 										t.params.video.language &&
 											["site", "device"].forEach(function (e) {
 												r[e] &&
-													(r[e].content = g(
+													(r[e].content = b(
 														{ language: t.params.video.language },
 														r[e].content
 													));
 											});
 									})(r, e, d),
 									(function (e, r) {
-										"object" === y(e.imp[0].video) &&
+										"object" === x(e.imp[0].video) &&
 											void 0 === e.imp[0].video.skip &&
 											(e.imp[0].video.skip = r.params.video.skip);
-										"object" === y(e.imp[0].video) &&
+										"object" === x(e.imp[0].video) &&
 											void 0 === e.imp[0].video.skipafter &&
 											(e.imp[0].video.skipafter = r.params.video.skipdelay);
-										"object" === y(e.imp[0].video) &&
+										"object" === x(e.imp[0].video) &&
 											void 0 === e.imp[0].video.pos &&
 											("atf" === r.params.position
 												? (e.imp[0].video.pos = 1)
 												: "btf" === r.params.position &&
 												  (e.imp[0].video.pos = 3));
-										var t = S(r, "video");
+										var t = C(r, "video");
 										(e.imp[0].video.w = t[0]), (e.imp[0].video.h = t[1]);
 									})(r, e),
 									d.gdprConsent &&
@@ -10642,7 +10158,7 @@ pbjsChunk(
 												);
 											}, [])
 										),
-									C(e, m.d, r),
+									I(e, m.d, r),
 									e.storedAuctionResponse &&
 										l.deepSetValue(
 											r.imp[0],
@@ -10657,7 +10173,7 @@ pbjsChunk(
 									{
 										method: "POST",
 										url: "https://".concat(
-											x.videoHost || "prebid-server",
+											h.videoHost || "prebid-server",
 											".rubiconproject.com/openrtb2/auction"
 										),
 										data: r,
@@ -10665,22 +10181,22 @@ pbjsChunk(
 									}
 								);
 							});
-					return !0 !== x.singleRequest
+					return !0 !== h.singleRequest
 						? r.concat(
 								e
 									.filter(function (e) {
 										return "banner" === O(e);
 									})
 									.map(function (e) {
-										var n = _.createSlotParams(e, d);
+										var n = A.createSlotParams(e, d);
 										return {
 											method: "GET",
 											url: "https://".concat(
-												x.bannerHost || "fastlane",
+												h.bannerHost || "fastlane",
 												".rubiconproject.com/a/api/fastlane.json"
 											),
 											data:
-												_.getOrderedParams(n).reduce(function (e, r) {
+												A.getOrderedParams(n).reduce(function (e, r) {
 													var t = n[r];
 													return (l.isStr(t) && "" !== t) || l.isNumber(t)
 														? "".concat(e).concat(U(r, t), "&")
@@ -10713,19 +10229,19 @@ pbjsChunk(
 												return e;
 											})
 											.forEach(function (e) {
-												var n = _.combineSlotUrlParams(
+												var n = A.combineSlotUrlParams(
 													e.map(function (e) {
-														return _.createSlotParams(e, d);
+														return A.createSlotParams(e, d);
 													})
 												);
 												r.push({
 													method: "GET",
 													url: "https://".concat(
-														x.bannerHost || "fastlane",
+														h.bannerHost || "fastlane",
 														".rubiconproject.com/a/api/fastlane.json"
 													),
 													data:
-														_.getOrderedParams(n).reduce(function (e, r) {
+														A.getOrderedParams(n).reduce(function (e, r) {
 															var t = n[r];
 															return (l.isStr(t) && "" !== t) || l.isNumber(t)
 																? "".concat(e).concat(U(r, t), "&")
@@ -10821,8 +10337,8 @@ pbjsChunk(
 					e.startTime = new Date().getTime();
 					var t,
 						n = e.params,
-						i = S(e, "banner"),
-						o = b(n.latLong || [], 2),
+						i = C(e, "banner"),
+						o = v(n.latLong || [], 2),
 						a = o[0],
 						s = o[1],
 						c = {
@@ -10834,7 +10350,7 @@ pbjsChunk(
 							rp_floor:
 								0.01 <= (n.floor = parseFloat(n.floor)) ? n.floor : void 0,
 							rp_secure: "1",
-							tk_flint: "".concat(x.int_type || "pbjs_lite", "_v4.38.0"),
+							tk_flint: "".concat(h.int_type || "pbjs_lite", "_v4.39.0"),
 							"x_source.tid": e.transactionId,
 							"x_source.pchain": n.pchain,
 							p_screen_res: [window.screen.width, window.screen.height].join(
@@ -10848,9 +10364,9 @@ pbjsChunk(
 								? void 0
 								: parseFloat(s).toFixed(4),
 							"tg_fl.eid": e.code,
-							rf: A(e, r),
+							rf: j(e, r),
 						};
-					if ("function" == typeof e.getFloor && !x.disableFloors) {
+					if ("function" == typeof e.getFloor && !h.disableFloors) {
 						try {
 							t = e.getFloor({
 								currency: "USD",
@@ -10861,7 +10377,7 @@ pbjsChunk(
 							l.logError("Rubicon: getFloor threw an error: ", e);
 						}
 						c.rp_hard_floor =
-							"object" !== y(t) ||
+							"object" !== x(t) ||
 							"USD" !== t.currency ||
 							isNaN(parseInt(t.floor))
 								? void 0
@@ -10919,11 +10435,11 @@ pbjsChunk(
 							(c.gdpr_consent = r.gdprConsent.consentString)),
 						r.uspConsent && (c.us_privacy = encodeURIComponent(r.uspConsent)),
 						(c.rp_maxbids = r.bidLimit || 1),
-						C(e, m.b, c),
+						I(e, m.b, c),
 						!0 === u.b.getConfig("coppa") && (c.coppa = 1),
 						e.schain &&
 							T(e.schain) &&
-							(c.rp_schain = _.serializeSupplyChain(e.schain)),
+							(c.rp_schain = A.serializeSupplyChain(e.schain)),
 						c
 					);
 				},
@@ -10935,7 +10451,7 @@ pbjsChunk(
 					return ""
 						.concat(r, ",")
 						.concat(t, "!")
-						.concat(_.serializeSupplyChainNodes(n));
+						.concat(A.serializeSupplyChainNodes(n));
 				},
 				serializeSupplyChainNodes: function (e) {
 					var t = ["asi", "sid", "hp", "rid", "name", "domain"];
@@ -10951,7 +10467,7 @@ pbjsChunk(
 				},
 				interpretResponse: function (c, e) {
 					var d = e.bidRequest;
-					if (!(c = c.body) || "object" !== y(c)) return [];
+					if (!(c = c.body) || "object" !== x(c)) return [];
 					if (c.seatbid) {
 						var r = l.deepAccess(c, "ext.errors.rubicon");
 						Array.isArray(r) &&
@@ -10968,7 +10484,7 @@ pbjsChunk(
 										cpm: e.price || 0,
 										bidderCode: i.seat,
 										ttl: 300,
-										netRevenue: !1 !== x.netRevenue,
+										netRevenue: !1 !== h.netRevenue,
 										width:
 											e.w ||
 											l.deepAccess(d, "mediaTypes.video.w") ||
@@ -10999,10 +10515,10 @@ pbjsChunk(
 											? ((r.mediaType = m.d),
 											  l.deepSetValue(r, "meta.mediaType", m.d),
 											  (t = l.deepAccess(e, "ext.prebid.targeting")) &&
-													"object" === y(t) &&
+													"object" === x(t) &&
 													(r.adserverTargeting = t),
 											  e.ext.prebid.cache &&
-											  "object" === y(e.ext.prebid.cache.vastXml) &&
+											  "object" === x(e.ext.prebid.cache.vastXml) &&
 											  e.ext.prebid.cache.vastXml.cacheId &&
 											  e.ext.prebid.cache.vastXml.url
 													? ((r.videoCacheKey =
@@ -11028,14 +10544,14 @@ pbjsChunk(
 														var r = a.a.install({
 															id: e.adId,
 															url:
-																x.rendererUrl ||
+																h.rendererUrl ||
 																"https://video-outstream.rubiconproject.com/apex-2.0.0.js",
-															config: x.rendererConfig || {},
+															config: h.rendererConfig || {},
 															loaded: !1,
 															adUnitCode: e.adUnitCode,
 														});
 														try {
-															r.setRender(j);
+															r.setRender(S);
 														} catch (e) {
 															l.logWarn(
 																"Prebid Error calling setRender on renderer",
@@ -11057,10 +10573,10 @@ pbjsChunk(
 						t = c.ads,
 						p = 0;
 					return (
-						"object" !== y(d) ||
+						"object" !== x(d) ||
 							Array.isArray(d) ||
 							"video" !== O(d) ||
-							"object" !== y(t) ||
+							"object" !== x(t) ||
 							(t = t[d.adUnitCode]),
 						!Array.isArray(t) || t.length < 1
 							? []
@@ -11079,7 +10595,7 @@ pbjsChunk(
 											a,
 											s = Array.isArray(d) ? d[t - p] : d;
 										return (
-											s && "object" === y(s)
+											s && "object" === x(s)
 												? ((n = {
 														requestId: s.bidId,
 														currency: "USD",
@@ -11091,7 +10607,7 @@ pbjsChunk(
 														cpm: r.cpm || 0,
 														dealId: r.deal,
 														ttl: 300,
-														netRevenue: !1 !== x.netRevenue,
+														netRevenue: !1 !== h.netRevenue,
 														rubicon: {
 															advertiserId: r.advertiser,
 															networkId: r.network,
@@ -11125,8 +10641,8 @@ pbjsChunk(
 																		o,
 																		"</script>\n</div>\n</body>\n</html>"
 																	))),
-														  (i = b(
-																h[r.size_id].split("x").map(function (e) {
+														  (i = v(
+																_[r.size_id].split("x").map(function (e) {
 																	return Number(e);
 																}),
 																2
@@ -11177,7 +10693,7 @@ pbjsChunk(
 								type: "iframe",
 								url:
 									"https://".concat(
-										x.syncHost || "eus",
+										h.syncHost || "eus",
 										".rubiconproject.com/usync.html"
 									) + i,
 							}
@@ -11191,14 +10707,14 @@ pbjsChunk(
 					);
 				},
 			};
-			function A(e, r) {
+			function j(e, r) {
 				var t = u.b.getConfig("pageUrl"),
 					t = e.params.referrer
 						? e.params.referrer
 						: t || r.refererInfo.referer;
 				return e.params.secure ? t.replace(/^http:/i, "https:") : t;
 			}
-			function j(e) {
+			function S(e) {
 				var r,
 					t,
 					n,
@@ -11226,7 +10742,7 @@ pbjsChunk(
 					});
 				});
 			}
-			function S(e, r) {
+			function C(e, r) {
 				var t = e.params;
 				if ("video" === r) {
 					var n = [];
@@ -11256,10 +10772,10 @@ pbjsChunk(
 					k(i)
 				);
 			}
-			function C(e, r, s) {
+			function I(e, r, s) {
 				var t = {
-					user: { ext: { data: d({}, e.params.visitor) } },
-					site: { ext: { data: d({}, e.params.inventory) } },
+					user: { ext: { data: g({}, e.params.visitor) } },
+					site: { ext: { data: g({}, e.params.inventory) } },
 				};
 				e.params.keywords &&
 					(t.site.keywords = l.isArray(e.params.keywords)
@@ -11267,14 +10783,15 @@ pbjsChunk(
 						: e.params.keywords);
 				function n(e, r, t, n) {
 					var i = !(3 < arguments.length && void 0 !== n) || n,
-						o = (function (e, r) {
+						o = (function (e, r, t) {
 							if ("data" === r && Array.isArray(e))
 								return e
 									.filter(function (e) {
 										return (
 											e.segment &&
-											l.deepAccess(e, "ext.taxonomyname") &&
-											l.deepAccess(e, "ext.taxonomyname").match(/iab/i)
+											l.deepAccess(e, "ext.segtax") &&
+											c[t] &&
+											-1 !== c[t].indexOf(l.deepAccess(e, "ext.segtax"))
 										);
 									})
 									.map(function (e) {
@@ -11288,12 +10805,12 @@ pbjsChunk(
 										if (0 < r.length) return r.toString();
 									})
 									.toString();
-							if ("object" !== y(e) || Array.isArray(e)) {
+							if ("object" !== x(e) || Array.isArray(e)) {
 								if (void 0 !== e)
 									return Array.isArray(e)
 										? e
 												.filter(function (e) {
-													return "object" !== y(e) && void 0 !== e
+													return "object" !== x(e) && void 0 !== e
 														? e.toString()
 														: void l.logWarn(
 																"Rubicon: Filtered value: ",
@@ -11311,18 +10828,19 @@ pbjsChunk(
 									r,
 									": Expected value to be string, integer, or an array of strings/ints"
 								);
-						})(e, t),
+						})(e, t, r),
 						a =
-							c[t] && i
-								? "".concat(c[t])
+							d[t] && i
+								? "".concat(d[t])
 								: "data" === t
-								? "".concat(c[r], "iab")
-								: "".concat(c[r]).concat(t);
+								? "".concat(d[r], "iab")
+								: "".concat(d[r]).concat(t);
 					s[a] = s[a] ? s[a].concat(",", o) : o;
 				}
 				var i = l.mergeDeep({}, u.b.getConfig("ortb2") || {}, t),
 					o = l.deepAccess(e.ortb2Imp, "ext.data") || {},
-					c = {
+					c = { user: [3], site: [1, 2] },
+					d = {
 						user: "tg_v.",
 						site: "tg_i.",
 						adserver: "tg_i.dfp_ad_unit_code",
@@ -11339,7 +10857,9 @@ pbjsChunk(
 					r === m.b
 						? (["site", "user"].forEach(function (r) {
 								Object.keys(i[r]).forEach(function (e) {
-									"ext" !== e
+									"site" === r && "content" === e && i[r][e].data
+										? n(i[r][e].data, r, "data")
+										: "ext" !== e
 										? n(i[r][e], r, e)
 										: i[r][e].data &&
 										  Object.keys(i[r].ext.data).forEach(function (e) {
@@ -11355,19 +10875,19 @@ pbjsChunk(
 			}
 			function c(e) {
 				return l.parseSizesInput(e).reduce(function (e, r) {
-					var t = parseInt(h[r], 10);
+					var t = parseInt(_[r], 10);
 					return t && e.push(t), e;
 				}, []);
 			}
-			function I(e) {
+			function d(e) {
 				return (
-					"object" === y(l.deepAccess(e, "params.video")) &&
+					"object" === x(l.deepAccess(e, "params.video")) &&
 					void 0 !== l.deepAccess(e, "mediaTypes.".concat(m.d))
 				);
 			}
 			function O(e, r) {
 				var t = 1 < arguments.length && void 0 !== r && r;
-				return I(e)
+				return d(e)
 					? -1 ===
 					  ["outstream", "instream"].indexOf(
 							l.deepAccess(e, "mediaTypes.".concat(m.d, ".context"))
@@ -11378,7 +10898,7 @@ pbjsChunk(
 									"Rubicon: mediaTypes.video.context must be outstream or instream"
 								)
 						  )
-						: S(e, "video").length < 2
+						: C(e, "video").length < 2
 						? void (
 								t &&
 								l.logError(
@@ -11391,7 +10911,7 @@ pbjsChunk(
 									e.adUnitCode
 								),
 						  "video")
-					: 0 === S(e, "banner").length
+					: 0 === C(e, "banner").length
 					? void (
 							t &&
 							l.logError(
@@ -11406,7 +10926,7 @@ pbjsChunk(
 					  "banner");
 			}
 			var w = function () {
-				return (x = {});
+				return (h = {});
 			};
 			function k(e) {
 				var i = [15, 2, 9];
@@ -11500,379 +11020,9 @@ pbjsChunk(
 					: "".concat(e, "=").concat(encodeURIComponent(r));
 			}
 			var P = !1;
-			Object(n.registerBidder)(_);
+			Object(n.registerBidder)(A);
 		},
 	},
 	[808]
-);
-pbjsChunk(
-	[10],
-	{
-		19: function (e, t, r) {
-			"use strict";
-			(t.b = function (e) {
-				var t = [];
-				for (var r in e) {
-					var i;
-					e.hasOwnProperty(r) &&
-						("pubProvidedId" === r
-							? (t = t.concat(e.pubProvidedId))
-							: (i = (function (e, t) {
-									var r = s[t];
-									if (r && e) {
-										var i = {};
-										i.source = r.source;
-										var n = u.isFn(r.getValue) ? r.getValue(e) : e;
-										if (u.isStr(n)) {
-											var a,
-												o,
-												d = { id: n, atype: r.atype };
-											return (
-												!u.isFn(r.getUidExt) ||
-													((a = r.getUidExt(e)) && (d.ext = a)),
-												(i.uids = [d]),
-												!u.isFn(r.getEidExt) ||
-													((o = r.getEidExt(e)) && (i.ext = o)),
-												i
-											);
-										}
-									}
-									return null;
-							  })(e[r], r)) && t.push(i));
-				}
-				return t;
-			}),
-				(t.a = function (e) {
-					var r = [];
-					return (
-						e
-							.filter(function (e) {
-								return u.isPlainObject(e.idObj) && Object.keys(e.idObj).length;
-							})
-							.forEach(function (t) {
-								Object.keys(t.idObj).forEach(function (e) {
-									u.deepAccess(t, "config.bidders") &&
-										Array.isArray(t.config.bidders) &&
-										u.deepAccess(s, e + ".source") &&
-										r.push({ source: s[e].source, bidders: t.config.bidders });
-								});
-							}),
-						r
-					);
-				});
-			var u = r(0),
-				s = {
-					intentIqId: { source: "intentiq.com", atype: 1 },
-					pubcid: { source: "pubcid.org", atype: 1 },
-					tdid: {
-						source: "adserver.org",
-						atype: 1,
-						getUidExt: function () {
-							return { rtiPartner: "TDID" };
-						},
-					},
-					id5id: {
-						getValue: function (e) {
-							return e.uid;
-						},
-						source: "id5-sync.com",
-						atype: 1,
-						getUidExt: function (e) {
-							if (e.ext) return e.ext;
-						},
-					},
-					parrableId: {
-						source: "parrable.com",
-						atype: 1,
-						getValue: function (e) {
-							return e.eid ? e.eid : e.ccpaOptout ? "" : null;
-						},
-						getUidExt: function (e) {
-							var t = u.pick(e, ["ibaOptout", "ccpaOptout"]);
-							if (Object.keys(t).length) return t;
-						},
-					},
-					idl_env: { source: "liveramp.com", atype: 3 },
-					lipb: {
-						getValue: function (e) {
-							return e.lipbid;
-						},
-						source: "liveintent.com",
-						atype: 3,
-						getEidExt: function (e) {
-							if (Array.isArray(e.segments) && e.segments.length)
-								return { segments: e.segments };
-						},
-					},
-					britepoolid: { source: "britepool.com", atype: 3 },
-					dmdId: { source: "hcn.health", atype: 3 },
-					lotamePanoramaId: { source: "crwdcntrl.net", atype: 1 },
-					criteoId: { source: "criteo.com", atype: 1 },
-					merkleId: {
-						source: "merkleinc.com",
-						atype: 3,
-						getValue: function (e) {
-							return e.id;
-						},
-						getUidExt: function (e) {
-							return e && e.keyID ? { keyID: e.keyID } : void 0;
-						},
-					},
-					netId: { source: "netid.de", atype: 1 },
-					sharedid: {
-						source: "sharedid.org",
-						atype: 1,
-						getValue: function (e) {
-							return e.id;
-						},
-						getUidExt: function (e) {
-							return e && e.third ? { third: e.third } : void 0;
-						},
-					},
-					IDP: { source: "zeotap.com", atype: 1 },
-					haloId: { source: "audigent.com", atype: 1 },
-					quantcastId: { source: "quantcast.com", atype: 1 },
-					nextrollId: { source: "nextroll.com", atype: 1 },
-					idx: { source: "idx.lat", atype: 1 },
-					connectid: { source: "verizonmedia.com", atype: 3 },
-					fabrickId: { source: "neustar.biz", atype: 1 },
-					mwOpenLinkId: { source: "mediawallahscript.com", atype: 1 },
-					tapadId: { source: "tapad.com", atype: 1 },
-					novatiq: {
-						getValue: function (e) {
-							return e.snowflake;
-						},
-						source: "novatiq.com",
-						atype: 1,
-					},
-					uid2: {
-						source: "uidapi.com",
-						atype: 3,
-						getValue: function (e) {
-							return e.id;
-						},
-					},
-					deepintentId: { source: "deepintent.com", atype: 3 },
-					admixerId: { source: "admixer.net", atype: 3 },
-				};
-		},
-		872: function (e, t, r) {
-			e.exports = r(873);
-		},
-		873: function (e, t, r) {
-			"use strict";
-			Object.defineProperty(t, "__esModule", { value: !0 }),
-				r.d(t, "spec", function () {
-					return n;
-				});
-			var l = r(0),
-				i = r(1),
-				a = r(2),
-				f = r(19),
-				g = r(3),
-				n = {
-					code: "sovrn",
-					supportedMediaTypes: [a.b],
-					gvlid: 13,
-					isBidRequestValid: function (e) {
-						return !(
-							!e.params.tagid ||
-							isNaN(parseFloat(e.params.tagid)) ||
-							!isFinite(e.params.tagid)
-						);
-					},
-					buildRequests: function (e, t) {
-						try {
-							var o,
-								d,
-								u,
-								s,
-								c = [],
-								p = [];
-							l._each(e, function (e) {
-								!u &&
-									e.userId &&
-									(u = Object(f.b)(e.userId)).forEach(function (e) {
-										e.uids &&
-											e.uids[0] &&
-											("criteo.com" === e.source && (s = e.uids[0].id),
-											p.push({ source: e.source, uid: e.uids[0].id }));
-									}),
-									e.schain && (d = d || e.schain),
-									(o = o || l.getBidIdParameter("iv", e.params));
-								var t =
-										(e.mediaTypes &&
-											e.mediaTypes.banner &&
-											e.mediaTypes.banner.sizes) ||
-										e.sizes,
-									r = (t = (t =
-										l.isArray(t) && l.isArray(t[0]) ? t : [t]).filter(function (
-										e
-									) {
-										return l.isArray(e);
-									})).map(function (e) {
-										return { w: parseInt(e[0], 10), h: parseInt(e[1], 10) };
-									}),
-									i =
-										e.getFloor && "function" == typeof e.getFloor
-											? e.getFloor({
-													currency: "USD",
-													mediaType: "banner",
-													size: "*",
-											  })
-											: {};
-								i.floor = i.floor || l.getBidIdParameter("bidfloor", e.params);
-								var n = {
-									adunitcode: e.adUnitCode,
-									id: e.bidId,
-									banner: { format: r, w: 1, h: 1 },
-									tagid: String(l.getBidIdParameter("tagid", e.params)),
-									bidfloor: i.floor,
-								};
-								n.ext = l.getBidIdParameter("ext", e.ortb2Imp) || void 0;
-								var a = l.getBidIdParameter("segments", e.params);
-								a &&
-									((n.ext = n.ext || {}),
-									(n.ext.deals = a.split(",").map(function (e) {
-										return e.trim();
-									}))),
-									c.push(n);
-							});
-							var r = g.b.getConfig("ortb2") || {},
-								i = r.site || {};
-							(i.page = t.refererInfo.referer),
-								(i.domain = l.parseUrl(i.page).hostname);
-							var n = {
-								id: l.getUniqueIdentifierStr(),
-								imp: c,
-								site: i,
-								user: r.user || {},
-							};
-							d && (n.source = { ext: { schain: d } }),
-								t.gdprConsent &&
-									(l.deepSetValue(
-										n,
-										"regs.ext.gdpr",
-										+t.gdprConsent.gdprApplies
-									),
-									l.deepSetValue(
-										n,
-										"user.ext.consent",
-										t.gdprConsent.consentString
-									)),
-								t.uspConsent &&
-									l.deepSetValue(n, "regs.ext.us_privacy", t.uspConsent),
-								u &&
-									(l.deepSetValue(n, "user.ext.eids", u),
-									l.deepSetValue(n, "user.ext.tpid", p),
-									s && l.deepSetValue(n, "user.ext.prebid_criteoid", s));
-							var a = "https://ap.lijit.com/rtb/bid?src=prebid_prebid_4.38.0";
-							return (
-								o && (a += "&iv=".concat(o)),
-								{
-									method: "POST",
-									url: a,
-									data: JSON.stringify(n),
-									options: { contentType: "text/plain" },
-								}
-							);
-						} catch (e) {
-							l.logError("Could not build bidrequest, error deatils:", e);
-						}
-					},
-					interpretResponse: function (e) {
-						var t = e.body,
-							r = t.id,
-							i = t.seatbid;
-						try {
-							var n = [];
-							return (
-								r &&
-									i &&
-									0 < i.length &&
-									i[0].bid &&
-									0 < i[0].bid.length &&
-									i[0].bid.map(function (e) {
-										n.push({
-											requestId: e.impid,
-											cpm: parseFloat(e.price),
-											width: parseInt(e.w),
-											height: parseInt(e.h),
-											creativeId: e.crid || e.id,
-											dealId: e.dealid || null,
-											currency: "USD",
-											netRevenue: !0,
-											mediaType: a.b,
-											ad: decodeURIComponent(
-												"".concat(e.adm, '<img src="').concat(e.nurl, '">')
-											),
-											ttl: (e.ext && e.ext.ttl) || 90,
-										});
-									}),
-								n
-							);
-						} catch (e) {
-							l.logError("Could not intrepret bidresponse, error deatils:", e);
-						}
-					},
-					getUserSyncs: function (e, t, r, i) {
-						try {
-							var n,
-								a,
-								o = [];
-							return (
-								t &&
-									0 !== t.length &&
-									(e.iframeEnabled &&
-										((n = t
-											.filter(function (e) {
-												return l.deepAccess(e, "body.ext.iid");
-											})
-											.map(function (e) {
-												return e.body.ext.iid;
-											})),
-										(a = []),
-										r &&
-											r.gdprApplies &&
-											"string" == typeof r.consentString &&
-											a.push(["gdpr_consent", r.consentString]),
-										i && a.push(["us_privacy", i]),
-										n[0] &&
-											(a.push(["informer", n[0]]),
-											o.push({
-												type: "iframe",
-												url:
-													"https://ap.lijit.com/beacon?" +
-													a
-														.map(function (e) {
-															return e.join("=");
-														})
-														.join("&"),
-											}))),
-									e.pixelEnabled &&
-										t
-											.filter(function (e) {
-												return l.deepAccess(e, "body.ext.sync.pixels");
-											})
-											.reduce(function (e, t) {
-												return e.concat(t.body.ext.sync.pixels);
-											}, [])
-											.map(function (e) {
-												return e.url;
-											})
-											.forEach(function (e) {
-												return o.push({ type: "image", url: e });
-											})),
-								o
-							);
-						} catch (e) {
-							return [];
-						}
-					},
-				};
-			Object(i.registerBidder)(n);
-		},
-	},
-	[872]
 );
 pbjs.processQueue();
