@@ -203,30 +203,7 @@ export default function SearchPage(props) {
 						))}
 					</ul>
 				</div>{" "}
-				<div id="div-1" className="ad-slot-search-page">
-					<script type="text/javascript">
-						{
-							// eslint-disable-next-line no-undef
-							googletag.cmd.push(function () {
-								// eslint-disable-next-line no-undef
-								googletag
-									// eslint-disable-next-line no-undef
-									.defineSlot(
-										"/19968336/header-bid-tag-0",
-										// eslint-disable-next-line no-undef
-										div_1_sizes,
-										"div-1"
-									)
-									// eslint-disable-next-line no-undef
-									.addService(googletag.pubads());
-								// eslint-disable-next-line no-undef
-								googletag.pubads().enableSingleRequest();
-								// eslint-disable-next-line no-undef
-								googletag.enableServices();
-							})
-						}
-					</script>
-				</div>
+				<div id="div-1" className="ad-slot-search-page"></div>
 			</div>
 			<div className="col-3">
 				{" "}

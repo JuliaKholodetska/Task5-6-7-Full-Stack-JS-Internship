@@ -1,151 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <script
-      src="https://kit.fontawesome.com/fc31dedf63.js"
-      crossorigin="anonymous"
-    ></script>
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#000000" />
+		<meta
+			name="description"
+			content="Web site created using create-react-app"
+		/>
+		<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+		<script
+			src="https://kit.fontawesome.com/fc31dedf63.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+		<title>React App</title>
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
+		<script async src="prebid4.38.0.js"></script>
+		<script async src="prebidService.js"></script>
+	</head>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
-     <!-- <script async src="//acdn.adnxs.com/prebid/not-for-prod/prebid.js"></script>  -->
-   <script async src="prebid4.38.0.js"></script> 
-   
-    <script>
-      var intViewportWidth = window.innerWidth;
-      var div_2_sizes;
-      var div_1_sizes;
-      if (intViewportWidth > 800 ){
-        div_2_sizes = [
-        [728, 90],
-        [970, 250],
-      ];
-        div_1_sizes = [
-        [300, 250],
-        [300, 600],
-      ];
-    }else{
-      div_2_sizes = [
-        [300, 50],
-        [336, 280],
-      ];
-      div_1_sizes = [
-        [300, 50],
-        [336, 280],
-      ];
-    }; 
-      
-      var PREBID_TIMEOUT = 1000;
-      var FAILSAFE_TIMEOUT = 3000;
-
-      var adUnits = [
-        {
-          code: "myAdUnit-1'",
-          mediaTypes: {
-            banner: {
-              sizes: div_1_sizes,
-            },
-          },
-          bids: [
-            {
-              bidder: "rubicon",
-              params: {
-                placementId: 1314437,
-              },
-            },
-          ],
-        },
-        {
-          code: "myAdUnit-2",
-          mediaTypes: {
-            banner: {
-              sizes: div_2_sizes,
-            },
-          },
-          bids: [
-            {
-              bidder: "rubicon",
-              params: {
-                placementId: 1314437,
-              },
-            },
-          ],
-        },
-      ];
-
-      // ======== DO NOT EDIT BELOW THIS LINE =========== //
-      var googletag = googletag || {};
-      googletag.cmd = googletag.cmd || [];
-      googletag.cmd.push(function () {
-        googletag.pubads().disableInitialLoad();
-      });
-
-      var pbjs = pbjs || {};
-      pbjs.que = pbjs.que || [];
-
-      pbjs.que.push(function () {
-        pbjs.addAdUnits(adUnits);
-        pbjs.requestBids({
-          bidsBackHandler: initAdserver,
-          timeout: PREBID_TIMEOUT,
-        });
-      });
-
-      function initAdserver() {
-        if (pbjs.initAdserverSet) return;
-        pbjs.initAdserverSet = true;
-        googletag.cmd.push(function () {
-          pbjs.que.push(function () {
-            pbjs.setTargetingForGPTAsync();
-            googletag.pubads().refresh();
-          });
-        });
-      }
-      // in case PBJS doesn't load
-      setTimeout(function () {
-        initAdserver();
-      }, FAILSAFE_TIMEOUT);
-    </script>
-  </head>
-
-  <body><div id="root">
-  </div>
-    </div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+	<body>
+		<div id="root"></div>
+	</body>
 </html>
