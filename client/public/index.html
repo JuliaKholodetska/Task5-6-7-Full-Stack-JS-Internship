@@ -35,22 +35,39 @@
     <title>React App</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
-    <script async src="//acdn.adnxs.com/prebid/not-for-prod/prebid.js"></script>
+     <script async src="//acdn.adnxs.com/prebid/not-for-prod/prebid.js"></script> 
+    <!-- <script async src="prebid4.38.0.js"></script> -->
+   
     <script>
-      var div_1_sizes = [
-        [300, 250],
-        [300, 600],
-      ];
-      var div_2_sizes = [
+      var intViewportWidth = window.innerWidth;
+      var div_2_sizes;
+      var div_1_sizes;
+      if (intViewportWidth > 800 ){
+        div_2_sizes = [
         [728, 90],
         [970, 250],
       ];
+        div_1_sizes = [
+        [300, 250],
+        [300, 600],
+      ];
+    }else{
+      div_2_sizes = [
+        [300, 50],
+        [336, 280],
+      ];
+      div_1_sizes = [
+        [300, 50],
+        [336, 280],
+      ];
+    }; 
+      
       var PREBID_TIMEOUT = 1000;
       var FAILSAFE_TIMEOUT = 3000;
 
       var adUnits = [
         {
-          code: "/19968336/header-bid-tag-0",
+          code: "myAdUnit-1'",
           mediaTypes: {
             banner: {
               sizes: div_1_sizes,
@@ -58,7 +75,7 @@
           },
           bids: [
             {
-              bidder: "appnexus",
+              bidder: "rubicon",
               params: {
                 placementId: 13144370,
               },
@@ -66,7 +83,7 @@
           ],
         },
         {
-          code: "/19968336/header-bid-tag-1",
+          code: "myAdUnit-2",
           mediaTypes: {
             banner: {
               sizes: div_2_sizes,
@@ -74,9 +91,9 @@
           },
           bids: [
             {
-              bidder: "appnexus",
+              bidder: "rubicon",
               params: {
-                placementId: 13144370,
+                placementId: 1314437,
               },
             },
           ],
@@ -115,45 +132,11 @@
       setTimeout(function () {
         initAdserver();
       }, FAILSAFE_TIMEOUT);
-      googletag.cmd.push(function () {
-        googletag
-          .defineSlot("/19968336/header-bid-tag-0", div_1_sizes, "div-1")
-          .addService(googletag.pubads());
-        googletag.pubads().enableSingleRequest();
-        googletag.enableServices();
-      });
-      googletag.cmd.push(function () {
-        googletag
-          .defineSlot("/19968336/header-bid-tag-1", div_2_sizes, "div-2")
-          .addService(googletag.pubads());
-        googletag.pubads().enableSingleRequest();
-        googletag.enableServices();
-      });
     </script>
   </head>
 
   <body><div id="root">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <h2>Basic Prebid.js Example</h2>
-    <h5>Div-1</h5>
-    <div id="div-1">
-      <script type="text/javascript">
-        googletag.cmd.push(function () {
-          googletag.display("div-1");
-        });
-      </script>
-    </div>
-
-    <br />
-
-    <h5>Div-2</h5>
-    <div id="div-2">
-      <script type="text/javascript">
-        googletag.cmd.push(function () {
-          googletag.display("div-2");
-        });
-      </script>
-    </div></div>
+  </div>
     </div>
     <!--
       This HTML file is a template.

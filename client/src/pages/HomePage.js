@@ -68,7 +68,25 @@ export default function HomePage() {
 	return (
 		<div className="col-1">
 			{" "}
-			<div id="div-2" className="ad-slot-home-page"></div>{" "}
+			<div id="div-2" className="ad-slot-home-page">
+				<script type="text/javascript">
+					{
+						// eslint-disable-next-line no-undef
+						googletag.cmd.push(function () {
+							// eslint-disable-next-line no-undef
+							googletag
+								// eslint-disable-next-line no-undef
+								.defineSlot("/19968336/header-bid-tag-1", div_2_sizes, "div-2")
+								// eslint-disable-next-line no-undef
+								.addService(googletag.pubads());
+							// eslint-disable-next-line no-undef
+							googletag.pubads().enableSingleRequest();
+							// eslint-disable-next-line no-undef
+							googletag.enableServices();
+						})
+					}
+				</script>
+			</div>{" "}
 			<Pagination
 				getFilterUrl={getFilterUrl}
 				page={page}
