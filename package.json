@@ -53,5 +53,8 @@
 			"/node_modules/"
 		],
 		"collectCoverage": true
+	},
+	"optionalDependencies": {
+		"fsevents": "^2.3.2"
 	}
 }
