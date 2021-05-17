@@ -95,8 +95,14 @@ export default function HomePage() {
 			{" "}
 			{/* <AdProvider adUnits={adUnits}>
 				<AdPlacement id="div-2" />
-			</AdProvider>*/}
-			<div id="div-2" className="ad-slot-home-page"></div>
+			</AdProvider> */}
+			<div id="div-2" className="ad-slot-home-page">
+				<script>
+					{window.googletag.cmd.push(function () {
+						window.googletag.display("div-2");
+					})}
+				</script>
+			</div>
 			<Pagination
 				getFilterUrl={getFilterUrl}
 				page={page}
