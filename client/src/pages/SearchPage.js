@@ -203,7 +203,6 @@ export default function SearchPage(props) {
 						))}
 					</ul>
 				</div>{" "}
-				<div id="div-1" className="ad-slot-search-page"></div>
 			</div>
 			<div className="col-3">
 				{" "}
