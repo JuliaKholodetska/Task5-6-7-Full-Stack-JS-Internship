@@ -25,7 +25,7 @@ var adUnits = [
 		},
 		bids: [
 			{
-				bidder: "pubmatic",
+				bidder: "appnexus",
 				params: {
 					placementId: 13144370,
 				},
