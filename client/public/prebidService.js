@@ -17,7 +17,8 @@ var FAILSAFE_TIMEOUT = 3000;
 
 var adUnits = [
 	{
-		code: "/19968336/header-bid-tag-1",
+		path: "/19968336/header-bid-tag-1",
+		code: "div-2",
 		mediaTypes: {
 			banner: {
 				sizes: div_2_sizes,
