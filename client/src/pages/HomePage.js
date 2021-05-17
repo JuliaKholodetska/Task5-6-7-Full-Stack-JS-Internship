@@ -94,8 +94,6 @@ export default function HomePage() {
 		<div className="col-1">
 			{" "}
 			<AdProvider adUnits={adUnits}>
-				{" "}
-				{/* <div id="div-2"></div> */}
 				<AdPlacement id="div-2" />
 			</AdProvider>
 			<Pagination
