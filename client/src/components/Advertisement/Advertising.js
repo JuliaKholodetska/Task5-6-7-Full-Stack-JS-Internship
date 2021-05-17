@@ -1,7 +1,7 @@
 /* global pbjs, googletag */
 
-googletag.cmd = googletag.cmd || [];
-googletag.cmd.push(function () {
+window.googletag.cmd = googletag.cmd || [];
+window.googletag.cmd.push(function () {
 	googletag.pubads().disableInitialLoad();
 });
 

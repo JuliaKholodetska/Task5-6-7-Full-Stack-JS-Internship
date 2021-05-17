@@ -34,7 +34,7 @@ var adUnits = [
 		],
 	},
 ];
-
+window.googletag = window.googletag || { cmd: [] };
 // ======== DO NOT EDIT BELOW THIS LINE =========== //
 var googletag = googletag || {};
 googletag.cmd = googletag.cmd || [];
