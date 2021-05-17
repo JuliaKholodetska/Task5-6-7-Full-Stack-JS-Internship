@@ -35,6 +35,7 @@
 		"pg": "^8.5.1",
 		"pg-hstore": "^2.3.3",
 		"pq": "^0.0.3",
+		"react-gtm-module": "^2.0.11",
 		"require": "^0.4.4",
 		"sequelize": "^6.6.2",
 		"socket.io": "^4.0.1",

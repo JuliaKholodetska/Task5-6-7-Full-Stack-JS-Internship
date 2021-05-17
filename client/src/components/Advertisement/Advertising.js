@@ -1,31 +1,10 @@
 /* global pbjs, googletag */
+
 googletag.cmd = googletag.cmd || [];
 googletag.cmd.push(function () {
 	googletag.pubads().disableInitialLoad();
 });
-const div_2_sizes = [
-	[728, 90],
-	[970, 250],
-];
-const adUnits = [
-	{
-		path: "/19968336/header-bid-tag-1",
-		code: "div-2",
-		mediaTypes: {
-			banner: {
-				sizes: div_2_sizes,
-			},
-		},
-		bids: [
-			{
-				bidder: "appnexus",
-				params: {
-					placementId: 13144370,
-				},
-			},
-		],
-	},
-];
+
 var pbjs = pbjs || {};
 pbjs.que = pbjs.que || [];
 
@@ -72,9 +51,10 @@ export default class {
 		setTimeout(() => sendAdserverRequest(), FAILSAFE_TIMEOUT);
 
 		googletag.cmd.push(() => {
-			googletag
-				.defineSlot("/19968336/header-bid-tag-1", div_2_sizes, "div-2")
-				.addService(googletag.pubads());
+			for (const { path, sizes, code } of this.adUnits) {
+				googletag.defineSlot(path, sizes, code).addService(googletag.pubads());
+			}
+
 			googletag.pubads().enableSingleRequest();
 			googletag.enableServices();
 		});

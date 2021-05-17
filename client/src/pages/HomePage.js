@@ -13,8 +13,8 @@ import {
 	DEFAULT_TOTAL_PAGE_VALUE,
 } from "../constants/defaultValueConstants.js";
 import Pagination from "../components/Pagination";
-import AdProvider from "../components/Advertisement/AdProvider";
-import AdPlacement from "../components/Advertisement/AdPlacement";
+// import AdProvider from "../components/Advertisement/AdProvider";
+// import AdPlacement from "../components/Advertisement/AdPlacement";
 export default function HomePage() {
 	const div_2_sizes = [
 		[728, 90],
@@ -93,9 +93,10 @@ export default function HomePage() {
 	return (
 		<div className="col-1">
 			{" "}
-			<AdProvider adUnits={adUnits}>
+			{/* <AdProvider adUnits={adUnits}>
 				<AdPlacement id="div-2" />
-			</AdProvider>
+			</AdProvider>*/}
+			<div id="div-2" className="ad-slot-home-page"></div>
 			<Pagination
 				getFilterUrl={getFilterUrl}
 				page={page}
