@@ -1,7 +1,7 @@
-/* global pbjs, googletag */
-
-window.googletag.cmd = googletag.cmd || [];
-window.googletag.cmd.push(function () {
+window.googletag = window.googletag || { cmd: [] };
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+googletag.cmd.push(function () {
 	googletag.pubads().disableInitialLoad();
 });
 
@@ -16,17 +16,17 @@ function sendAdserverRequest() {
 		return;
 	}
 	pbjs.adserverRequestSent = true;
-	googletag.cmd.push(() =>
+	window.googletag.cmd.push(() =>
 		pbjs.que.push(() => {
 			pbjs.setTargetingForGPTAsync();
-			googletag.pubads().refresh();
+			window.googletag.pubads().refresh();
 		})
 	);
 }
 
 function reset() {
-	googletag.cmd.push(() => {
-		googletag.destroySlots();
+	window.googletag.cmd.push(() => {
+		window.googletag.destroySlots();
 		pbjs.adserverRequestSent = false;
 	});
 }
@@ -38,7 +38,9 @@ export default class {
 
 	init() {
 		reset();
-		googletag.cmd.push(() => googletag.pubads().disableInitialLoad());
+		window.googletag.cmd.push(() =>
+			window.googletag.pubads().disableInitialLoad()
+		);
 
 		pbjs.que.push(() => {
 			pbjs.addAdUnits(this.adUnits);
@@ -50,17 +52,19 @@ export default class {
 
 		setTimeout(() => sendAdserverRequest(), FAILSAFE_TIMEOUT);
 
-		googletag.cmd.push(() => {
+		window.googletag.cmd.push(() => {
 			for (const { path, sizes, code } of this.adUnits) {
-				googletag.defineSlot(path, sizes, code).addService(googletag.pubads());
+				window.googletag
+					.defineSlot(path, sizes, code)
+					.addService(window.googletag.pubads());
 			}
 
-			googletag.pubads().enableSingleRequest();
-			googletag.enableServices();
+			window.googletag.pubads().enableSingleRequest();
+			window.googletag.enableServices();
 		});
 	}
 
 	refresh(id) {
-		googletag.cmd.push(() => googletag.display(id));
+		window.googletag.cmd.push(() => window.googletag.display(id));
 	}
 }
