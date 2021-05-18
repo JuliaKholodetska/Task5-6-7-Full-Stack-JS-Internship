@@ -1,21 +1,12 @@
-var intViewportWidth = window.innerWidth;
-var div_2_sizes;
-if (intViewportWidth > 800) {
-	div_2_sizes = [
-		[728, 90],
-		[970, 250],
-	];
-} else {
-	div_2_sizes = [
-		[300, 50],
-		[336, 280],
-	];
-}
+const div_2_sizes = [
+	[728, 90],
+	[970, 250],
+];
 
-var PREBID_TIMEOUT = 1000;
-var FAILSAFE_TIMEOUT = 3000;
+const PREBID_TIMEOUT = 1000;
+const FAILSAFE_TIMEOUT = 3000;
 
-var adUnits = [
+const adUnits = [
 	{
 		path: "/19968336/header-bid-tag-1",
 		code: "div-2",
@@ -34,8 +25,8 @@ var adUnits = [
 		],
 	},
 ];
+
 window.googletag = window.googletag || { cmd: [] };
-// ======== DO NOT EDIT BELOW THIS LINE =========== //
 var googletag = googletag || {};
 googletag.cmd = googletag.cmd || [];
 googletag.cmd.push(function () {
@@ -63,8 +54,6 @@ function initAdserver() {
 		});
 	});
 }
-
-// in case PBJS doesn't load
 setTimeout(function () {
 	initAdserver();
 }, FAILSAFE_TIMEOUT);

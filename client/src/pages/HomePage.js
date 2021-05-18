@@ -13,7 +13,8 @@ import {
 	DEFAULT_TOTAL_PAGE_VALUE,
 } from "../constants/defaultValueConstants.js";
 import Pagination from "../components/Pagination";
-import AdPlacement from "../components/AddTech/AdPlacement";
+import AdSlot from "../components/AdSlot";
+
 export default function HomePage() {
 	const {
 		name = DEFAULT_NAME_VALUE,
@@ -32,7 +33,6 @@ export default function HomePage() {
 
 		return `?${params.join("&")}`;
 	};
-
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
 	const { loading, error, products, page, productsTotalCount } = productList;
@@ -43,7 +43,6 @@ export default function HomePage() {
 		return new URLSearchParams(useLocation().search);
 	}
 	let query = useQuery();
-
 	const searchPageNumber = query.get("pageNumber") || DEFAULT_PAGE_NUMBER_VALUE;
 	const searchLimitProducts =
 		query.get("limitProducts") || DEFAULT_lIMIT_PRODUCTS;
@@ -68,17 +67,7 @@ export default function HomePage() {
 	};
 	return (
 		<div className="col-1">
-			<AdPlacement id="div-2" />{" "}
-			{/* <AdProvider adUnits={adUnits}>
-				<AdPlacement id="div-2" />
-			</AdProvider> */}
-			{/* <div id="div-2" className="ad-slot-home-page">
-				<script>
-					{window.googletag.cmd.push(function () {
-						window.googletag.display("div-2");
-					})}
-				</script>
-			</div> */}
+			<AdSlot id={"div-2"} className="ad-slot-home-page"></AdSlot>
 			<Pagination
 				getFilterUrl={getFilterUrl}
 				page={page}
