@@ -13,7 +13,7 @@ import {
 	DEFAULT_TOTAL_PAGE_VALUE,
 } from "../constants/defaultValueConstants.js";
 import Pagination from "../components/Pagination";
-
+export default function HomePage() {
 	const {
 		name = DEFAULT_NAME_VALUE,
 		category = DEFAULT_CATEGORY_VALUE,
