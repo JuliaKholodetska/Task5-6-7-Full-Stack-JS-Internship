@@ -13,32 +13,7 @@ import {
 	DEFAULT_TOTAL_PAGE_VALUE,
 } from "../constants/defaultValueConstants.js";
 import Pagination from "../components/Pagination";
-// import AdProvider from "../components/Advertisement/AdProvider";
-// import AdPlacement from "../components/Advertisement/AdPlacement";
-export default function HomePage() {
-	const div_2_sizes = [
-		[728, 90],
-		[970, 250],
-	];
-	const adUnits = [
-		{
-			path: "/19968336/header-bid-tag-1",
-			code: "div-2",
-			mediaTypes: {
-				banner: {
-					sizes: div_2_sizes,
-				},
-			},
-			bids: [
-				{
-					bidder: "appnexus",
-					params: {
-						placementId: 13144370,
-					},
-				},
-			],
-		},
-	];
+
 	const {
 		name = DEFAULT_NAME_VALUE,
 		category = DEFAULT_CATEGORY_VALUE,
@@ -93,9 +68,6 @@ export default function HomePage() {
 	return (
 		<div className="col-1">
 			{" "}
-			{/* <AdProvider adUnits={adUnits}>
-				<AdPlacement id="div-2" />
-			</AdProvider> */}
 			<div id="div-2" className="ad-slot-home-page">
 				<script>
 					{window.googletag.cmd.push(function () {
