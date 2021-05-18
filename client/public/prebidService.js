@@ -2,10 +2,8 @@ const div_2_sizes = [
 	[728, 90],
 	[970, 250],
 ];
-
 const PREBID_TIMEOUT = 1000;
 const FAILSAFE_TIMEOUT = 3000;
-
 const adUnits = [
 	{
 		path: "/19968336/header-bid-tag-1",
@@ -25,8 +23,10 @@ const adUnits = [
 		],
 	},
 ];
+let slot;
 
 window.googletag = window.googletag || { cmd: [] };
+
 var googletag = googletag || {};
 googletag.cmd = googletag.cmd || [];
 googletag.cmd.push(function () {
@@ -59,9 +59,15 @@ setTimeout(function () {
 }, FAILSAFE_TIMEOUT);
 
 googletag.cmd.push(function () {
-	googletag
-		.defineSlot("/19968336/header-bid-tag-1", div_2_sizes, "div-2")
-		.addService(googletag.pubads());
-	googletag.pubads().enableSingleRequest();
-	googletag.enableServices();
+	slot = googletag.defineSlot(
+		"/19968336/header-bid-tag-1",
+		div_2_sizes,
+		"div-2"
+	);
+	if (slot) {
+		slot.addService(googletag.pubads());
+		googletag.pubads().enableSingleRequest();
+		googletag.enableServices();
+		googletag.display(slot);
+	}
 });
