@@ -714,8 +714,6 @@ select:focus {
 .first-ad-slot-home-page {
 	height: 400px;
 	width: 400px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
+	display: static;
+	margin-left: 30px;
 }
