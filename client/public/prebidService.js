@@ -1,13 +1,33 @@
-const div_2_sizes = [
+var div_1_sizes = [
+	[300, 250],
+	[300, 600],
+];
+var div_2_sizes = [
 	[728, 90],
 	[970, 250],
 ];
-const PREBID_TIMEOUT = 1000;
-const FAILSAFE_TIMEOUT = 3000;
-const adUnits = [
+var PREBID_TIMEOUT = 1000;
+var FAILSAFE_TIMEOUT = 3000;
+
+var adUnits = [
 	{
-		path: "/19968336/header-bid-tag-1",
-		code: "div-2",
+		code: "/19968336/header-bid-tag-0",
+		mediaTypes: {
+			banner: {
+				sizes: div_1_sizes,
+			},
+		},
+		bids: [
+			{
+				bidder: "appnexus",
+				params: {
+					placementId: 13144370,
+				},
+			},
+		],
+	},
+	{
+		code: "/19968336/header-bid-tag-1",
 		mediaTypes: {
 			banner: {
 				sizes: div_2_sizes,
@@ -23,7 +43,8 @@ const adUnits = [
 		],
 	},
 ];
-let slot;
+let firstSlot;
+let secondSlot;
 
 window.googletag = window.googletag || { cmd: [] };
 
@@ -59,7 +80,42 @@ setTimeout(function () {
 }, FAILSAFE_TIMEOUT);
 
 googletag.cmd.push(function () {
-	var mapping = googletag
+	var firstdMapping = googletag
+		.sizeMapping()
+		.addSize(
+			[992, 0],
+			[
+				[300, 250],
+				[1, 1],
+			]
+		)
+		.addSize(
+			[768, 0],
+			[
+				[300, 250],
+				[320, 100],
+				[320, 50],
+				[1, 1],
+			]
+		)
+		.addSize([0, 0], [1, 1], [])
+		.build();
+	firstSlot = googletag.defineSlot(
+		"/19968336/header-bid-tag-0",
+		div_1_sizes,
+		"div-1"
+	);
+
+	if (firstSlot) {
+		firstSlot.defineSizeMapping(firstdMapping).addService(googletag.pubads());
+		googletag.pubads().enableSingleRequest();
+		googletag.pubads().collapseEmptyDivs();
+		googletag.enableServices();
+	}
+});
+
+googletag.cmd.push(function () {
+	var secondMapping = googletag
 		.sizeMapping()
 		.addSize(
 			[992, 0],
@@ -74,13 +130,13 @@ googletag.cmd.push(function () {
 		.addSize([640, 480], [300, 250])
 		.addSize([0, 0], [1, 1], [])
 		.build();
-	slot = googletag.defineSlot(
+	secondSlot = googletag.defineSlot(
 		"/19968336/header-bid-tag-1",
 		div_2_sizes,
 		"div-2"
 	);
-	if (slot) {
-		slot.defineSizeMapping(mapping).addService(googletag.pubads());
+	if (secondSlot) {
+		secondSlot.defineSizeMapping(secondMapping).addService(googletag.pubads());
 		googletag.pubads().enableSingleRequest();
 		googletag.pubads().collapseEmptyDivs();
 		googletag.enableServices();

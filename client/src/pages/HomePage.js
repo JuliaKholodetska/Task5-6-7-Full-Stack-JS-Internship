@@ -67,25 +67,36 @@ export default function HomePage() {
 	};
 
 	return (
-		<div className="col-1">
-			<AdSlot id={"div-2"} className="ad-slot-home-page"></AdSlot>
-			<Pagination
-				getFilterUrl={getFilterUrl}
-				page={page}
-				totalPages={totalPages}
-			/>{" "}
-			{loading ? (
-				<LoadingBox></LoadingBox>
-			) : error ? (
-				<MessageBox variant="danger">{error}</MessageBox>
-			) : (
-				<div className="row center">
+		<div className="row">
+			<div className="col-2-home-page top">
+				<div className="first-ad-slot-home-page">
 					{" "}
-					{products.map((product) => (
-						<Product key={product.id} product={product}></Product>
-					))}
+					<AdSlot id={"div-1"}></AdSlot>
 				</div>
-			)}
+			</div>
+			<div className="col-1">
+				<div className="second-ad-slot-home-page">
+					{" "}
+					<AdSlot id={"div-2"}></AdSlot>
+				</div>
+				<Pagination
+					getFilterUrl={getFilterUrl}
+					page={page}
+					totalPages={totalPages}
+				/>{" "}
+				{loading ? (
+					<LoadingBox></LoadingBox>
+				) : error ? (
+					<MessageBox variant="danger">{error}</MessageBox>
+				) : (
+					<div className="row center">
+						{" "}
+						{products.map((product) => (
+							<Product key={product.id} product={product}></Product>
+						))}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

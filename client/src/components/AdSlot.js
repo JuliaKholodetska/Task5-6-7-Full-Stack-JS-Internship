@@ -13,7 +13,7 @@ export default function AdSlot({ id }) {
 	useEffect(adRefresh, []);
 
 	return (
-		<div id={id} className="ad-slot-home-page">
+		<div id={id}>
 			<script>
 				{window.googletag.cmd.push(function () {
 					window.googletag.display(id);
