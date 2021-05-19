@@ -65,6 +65,7 @@ export default function HomePage() {
 			limitProducts: filterLimit,
 		})}`;
 	};
+
 	return (
 		<div className="col-1">
 			<AdSlot id={"div-2"} className="ad-slot-home-page"></AdSlot>
