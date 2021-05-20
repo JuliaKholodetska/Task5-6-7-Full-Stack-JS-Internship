@@ -5,7 +5,6 @@ export default function AdSlot({ id }) {
 	const adRefresh = () => {
 		window.googletag.cmd.push(function () {
 			window.googletag.pubads().refresh();
-			console.log("ia refresh");
 		});
 	};
 	setTimeout(function () {
@@ -18,7 +17,6 @@ export default function AdSlot({ id }) {
 			<script>
 				{window.googletag.cmd.push(function () {
 					window.googletag.display(id);
-					console.log("ia display");
 				})}
 			</script>
 		</div>

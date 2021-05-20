@@ -1,7 +1,6 @@
 var div_1_sizes = [
 	[300, 250],
 	[300, 600],
-	[100, 100],
 ];
 var div_2_sizes = [
 	[728, 90],
@@ -93,7 +92,13 @@ googletag.cmd.push(function () {
 				[300, 250],
 			]
 		)
-		.addSize([400, 0], [100, 100])
+		.addSize(
+			[400, 300],
+			[
+				[300, 600],
+				[300, 250],
+			]
+		)
 		.addSize([0, 0], [])
 		.build();
 	firstSlot = googletag.defineSlot(
