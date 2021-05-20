@@ -68,12 +68,6 @@ export default function HomePage() {
 
 	return (
 		<div className="row">
-			<div className="col-2-home-page top">
-				<div className="first-ad-slot-home-page">
-					{" "}
-					<AdSlot id={"div-1"}></AdSlot>
-				</div>
-			</div>
 			<div className="col-1">
 				<div className="second-ad-slot-home-page">
 					{" "}
@@ -96,6 +90,12 @@ export default function HomePage() {
 						))}
 					</div>
 				)}
+			</div>{" "}
+			<div className="col-2-home-page top">
+				<div className="second-ad-slot-home-page">
+					{" "}
+					<AdSlot id={"div-1"}></AdSlot>
+				</div>
 			</div>
 		</div>
 	);

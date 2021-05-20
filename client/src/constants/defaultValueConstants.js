@@ -8,7 +8,7 @@ export const DEFAULT_MAX_VALUE = 0;
 export const DEFAULT_RATING_VALUE = 0;
 export const DEFAULT_PAGE_NUMBER_VALUE = 1;
 export const DEFAULT_TOTAL_PAGE_VALUE = 1;
-export const DEFAULT_lIMIT_PRODUCTS = 10;
+export const DEFAULT_lIMIT_PRODUCTS = 9;
 
 export const PRICES = [
 	{

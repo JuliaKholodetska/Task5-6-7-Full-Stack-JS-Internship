@@ -1,10 +1,14 @@
 var div_1_sizes = [
 	[300, 250],
 	[300, 600],
+	[100, 100],
 ];
 var div_2_sizes = [
 	[728, 90],
 	[970, 250],
+	[468, 60],
+	[300, 250],
+	[336, 280],
 ];
 var PREBID_TIMEOUT = 1000;
 var FAILSAFE_TIMEOUT = 3000;
@@ -83,22 +87,14 @@ googletag.cmd.push(function () {
 	var firstdMapping = googletag
 		.sizeMapping()
 		.addSize(
-			[992, 0],
+			[1024, 768],
 			[
+				[300, 600],
 				[300, 250],
-				[1, 1],
 			]
 		)
-		.addSize(
-			[768, 0],
-			[
-				[300, 250],
-				[320, 100],
-				[320, 50],
-				[1, 1],
-			]
-		)
-		.addSize([0, 0], [1, 1], [])
+		.addSize([400, 0], [100, 100])
+		.addSize([0, 0], [])
 		.build();
 	firstSlot = googletag.defineSlot(
 		"/19968336/header-bid-tag-0",
@@ -109,7 +105,6 @@ googletag.cmd.push(function () {
 	if (firstSlot) {
 		firstSlot.defineSizeMapping(firstdMapping).addService(googletag.pubads());
 		googletag.pubads().enableSingleRequest();
-		googletag.pubads().collapseEmptyDivs();
 		googletag.enableServices();
 	}
 });
@@ -118,17 +113,28 @@ googletag.cmd.push(function () {
 	var secondMapping = googletag
 		.sizeMapping()
 		.addSize(
-			[992, 0],
+			[1024, 768],
 			[
-				[970, 90],
 				[970, 250],
-				[970, 66],
-				[980, 120],
 				[728, 90],
 			]
 		)
-		.addSize([640, 480], [300, 250])
-		.addSize([0, 0], [1, 1], [])
+		.addSize(
+			[640, 0],
+			[
+				[468, 60],
+				[300, 250],
+				[336, 280],
+			]
+		)
+		.addSize(
+			[400, 0],
+			[
+				[300, 250],
+				[336, 280],
+			]
+		)
+		.addSize([0, 0], [])
 		.build();
 	secondSlot = googletag.defineSlot(
 		"/19968336/header-bid-tag-1",
@@ -138,7 +144,6 @@ googletag.cmd.push(function () {
 	if (secondSlot) {
 		secondSlot.defineSizeMapping(secondMapping).addService(googletag.pubads());
 		googletag.pubads().enableSingleRequest();
-		googletag.pubads().collapseEmptyDivs();
 		googletag.enableServices();
 	}
 });
