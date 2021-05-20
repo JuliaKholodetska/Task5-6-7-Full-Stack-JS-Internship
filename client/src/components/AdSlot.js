@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 
 export default function AdSlot({ id }) {
-	const TIMEOUT = 20000;
+	const TIMEOUT = 30000;
 	const adRefresh = () => {
 		window.googletag.cmd.push(function () {
+			window.googletag.display(id);
 			window.googletag.pubads().refresh();
 		});
 	};
@@ -12,13 +13,5 @@ export default function AdSlot({ id }) {
 	}, TIMEOUT);
 	useEffect(adRefresh, []);
 
-	return (
-		<div id={id}>
-			<script>
-				{window.googletag.cmd.push(function () {
-					window.googletag.display(id);
-				})}
-			</script>
-		</div>
-	);
+	return <div id={id}></div>;
 }

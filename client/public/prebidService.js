@@ -74,7 +74,6 @@ function initAdserver() {
 	googletag.cmd.push(function () {
 		pbjs.que.push(function () {
 			pbjs.setTargetingForGPTAsync();
-			googletag.pubads().refresh();
 		});
 	});
 }
@@ -110,6 +109,7 @@ googletag.cmd.push(function () {
 	if (firstSlot) {
 		firstSlot.defineSizeMapping(firstdMapping).addService(googletag.pubads());
 		googletag.pubads().enableSingleRequest();
+		googletag.pubads().disableInitialLoad();
 		googletag.enableServices();
 	}
 });
@@ -149,6 +149,7 @@ googletag.cmd.push(function () {
 	if (secondSlot) {
 		secondSlot.defineSizeMapping(secondMapping).addService(googletag.pubads());
 		googletag.pubads().enableSingleRequest();
+		googletag.pubads().disableInitialLoad();
 		googletag.enableServices();
 	}
 });
