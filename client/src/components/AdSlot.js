@@ -7,10 +7,11 @@ export default function AdSlot({ id }) {
 			window.googletag.display(id);
 			window.googletag.pubads().refresh();
 		});
+		setInterval(() => {
+			window.googletag.pubads().refresh();
+		}, TIMEOUT);
 	};
-	setTimeout(function () {
-		adRefresh();
-	}, TIMEOUT);
+
 	useEffect(adRefresh, []);
 
 	return <div id={id}></div>;
