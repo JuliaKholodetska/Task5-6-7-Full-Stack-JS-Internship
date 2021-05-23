@@ -14,7 +14,8 @@ import {
 } from "../constants/defaultValueConstants.js";
 import Pagination from "../components/Pagination";
 import AdSlot from "../components/AdSlot";
-
+import { div_1_sizes, div_2_sizes } from "../constants/adUnitSizeConstants.js";
+import { firstdMapping, secondMapping } from "../constants/adMappingConstants";
 export default function HomePage() {
 	const {
 		name = DEFAULT_NAME_VALUE,
@@ -71,7 +72,12 @@ export default function HomePage() {
 			<div className="col-1">
 				<div className="second-ad-slot-home-page">
 					{" "}
-					<AdSlot id={"div-2"}></AdSlot>
+					<AdSlot
+						divId={"div-2"}
+						code={"/19968336/header-bid-tag-1"}
+						sizes={div_2_sizes}
+						slotMapping={secondMapping}
+					></AdSlot>
 				</div>
 				<Pagination
 					getFilterUrl={getFilterUrl}
@@ -94,7 +100,12 @@ export default function HomePage() {
 			<div className="col-2-home-page top">
 				<div className="second-ad-slot-home-page">
 					{" "}
-					<AdSlot id={"div-1"}></AdSlot>
+					<AdSlot
+						divId={"div-1"}
+						code={"/19968336/header-bid-tag-0"}
+						sizes={div_1_sizes}
+						slotMapping={firstdMapping}
+					></AdSlot>
 				</div>
 			</div>
 		</div>
