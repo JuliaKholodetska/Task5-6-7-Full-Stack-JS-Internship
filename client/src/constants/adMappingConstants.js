@@ -69,4 +69,5 @@ const bannerMapping = {
 			.build();
 	},
 };
+
 export default bannerMapping;

@@ -139,6 +139,7 @@ function initAdserver() {
 		});
 	});
 }
+
 setTimeout(function () {
 	initAdserver();
 }, FAILSAFE_TIMEOUT);
