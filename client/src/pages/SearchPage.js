@@ -23,7 +23,9 @@ import {
 	DEFAULT_TOTAL_PAGE_VALUE,
 } from "../constants/defaultValueConstants.js";
 import Pagination from "../components/Pagination";
-
+import AdSlot from "../components/AdSlot";
+import bannerMapping from "../constants/adMappingConstants.js";
+import { thirdSlotSizes } from "../constants/adUnitSizeConstants.js";
 const getUrlParams = (data) => {
 	const params = [
 		"pageNumber",
@@ -200,9 +202,18 @@ export default function SearchPage(props) {
 									<Rating caption={" & up"} rating={r.rating}></Rating>
 								</Link>
 							</li>
-						))}
+						))}{" "}
 					</ul>
 				</div>{" "}
+				<div className="third-ad-slot-home-page">
+					{" "}
+					<AdSlot
+						divId={"div-3"}
+						code={"/19968336/header-bid-tag-2"}
+						sizes={thirdSlotSizes}
+						slotMapping={bannerMapping.thirdSlot}
+					></AdSlot>
+				</div>
 			</div>
 			<div className="col-3">
 				{" "}

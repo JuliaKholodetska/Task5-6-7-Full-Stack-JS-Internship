@@ -1,44 +1,27 @@
-var div_1_sizes = [
+var firstSlotSizes = [
 	[300, 250],
 	[300, 600],
 ];
-var div_2_sizes = [
+var secondSlotSizes = [
 	[728, 90],
 	[970, 250],
 	[300, 250],
 	[336, 280],
 ];
+var thirdSlotSizes = [
+	[336, 280],
+	[300, 250],
+];
 var PREBID_TIMEOUT = 1000;
 var FAILSAFE_TIMEOUT = 3000;
 
-// var AdUnits = [{
-//   code: "ad-slot-1",
-//   mediaTypes: {
-//       banner: {
-//           sizes: [[768,90], [468,60], [320,50]]
-//       }
-//   },
-//   bids: [
-//       {
-//           bidder: "bidderA",
-//           params: {
-//               placement: "1000"
-//           }
-//      },{
-//           bidder: "mobileBidder",
-//           labelAny: ["phone"],  // this bid only applies to small screensizes
-//           params: {
-//               placement: "2000"
-//           }
-//      }
-//  ]
-// }]
 var adUnits = [
 	{
 		code: "/19968336/header-bid-tag-0",
 		mediaTypes: {
 			banner: {
-				sizes: div_1_sizes,
+				labelAny: ["tablet", "desktop", "desktop-hd"],
+				sizes: firstSlotSizes,
 			},
 		},
 		bids: [
@@ -54,7 +37,25 @@ var adUnits = [
 		code: "/19968336/header-bid-tag-1",
 		mediaTypes: {
 			banner: {
-				sizes: div_2_sizes,
+				labelAny: ["phone", "tablet", "desktop", "desktop-hd"],
+				sizes: secondSlotSizes,
+			},
+		},
+		bids: [
+			{
+				bidder: "appnexus",
+				params: {
+					placementId: 13144370,
+				},
+			},
+		],
+	},
+	{
+		code: "/19968336/header-bid-tag-2",
+		mediaTypes: {
+			banner: {
+				labelAny: ["phone", "tablet", "desktop", "desktop-hd"],
+				sizes: thirdSlotSizes,
 			},
 		},
 		bids: [
@@ -79,47 +80,47 @@ googletag.cmd.push(function () {
 var pbjs = pbjs || {};
 pbjs.que = pbjs.que || [];
 
-// pbjs.setConfig({
-// 	sizeConfig: [
-// 		{
-// 			mediaQuery: "(min-width: 1600px)",
-// 			sizesSupported: [
-// 				[1000, 300],
-// 				[970, 90],
-// 				[728, 90],
-// 				[300, 250],
-// 				[300, 600],
-// 			],
-// 			labels: ["desktop-hd"],
-// 		},
-// 		{
-// 			mediaQuery: "(min-width: 1200px)",
-// 			sizesSupported: [
-// 				[970, 90],
-// 				[728, 90],
-// 				[300, 250],
-// 				[300, 600],
-// 			],
-// 			labels: ["desktop"],
-// 		},
-// 		{
-// 			mediaQuery: "(min-width: 768px) and (max-width: 1199px)",
-// 			sizesSupported: [
-// 				[728, 90],
-// 				[300, 250],
-// 			],
-// 			labels: ["tablet"],
-// 		},
-// 		{
-// 			mediaQuery: "(min-width: 0px)",
-// 			sizesSupported: [
-// 				[300, 250],
-// 				[300, 100],
-// 			],
-// 			labels: ["phone"],
-// 		},
-// 	],
-// });
+pbjs.setConfig({
+	sizeConfig: [
+		{
+			mediaQuery: "(min-width: 1600px)",
+			sizesSupported: [
+				[1000, 300],
+				[970, 90],
+				[728, 90],
+				[300, 250],
+				[300, 600],
+			],
+			labels: ["desktop-hd"],
+		},
+		{
+			mediaQuery: "(min-width: 1200px)",
+			sizesSupported: [
+				[970, 90],
+				[728, 90],
+				[300, 250],
+				[300, 600],
+			],
+			labels: ["desktop"],
+		},
+		{
+			mediaQuery: "(min-width: 768px) and (max-width: 1199px)",
+			sizesSupported: [
+				[728, 90],
+				[300, 250],
+			],
+			labels: ["tablet"],
+		},
+		{
+			mediaQuery: "(min-width: 0px)",
+			sizesSupported: [
+				[300, 250],
+				[300, 100],
+			],
+			labels: ["phone"],
+		},
+	],
+});
 
 pbjs.que.push(function () {
 	pbjs.addAdUnits(adUnits);
