@@ -731,3 +731,37 @@ select:focus {
 	display: flex;
 	align-items: center;
 }
+
+.search-container-mobile {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.search input {
+		width: 100px;
+	}
+
+	.search-container-mobile {
+		display: block;
+	}
+
+	.search-container-desktop {
+		display: none;
+	}
+
+	a.brand {
+		font-size: 2rem;
+	}
+
+	.mobile {
+		display: flex;
+	}
+
+	.row.center-search {
+		margin: 0;
+	}
+
+	.row.center {
+		margin: 0;
+	}
+}

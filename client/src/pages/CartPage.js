@@ -34,7 +34,7 @@ export default function CartPage(props) {
 										<img
 											src={item.image}
 											alt={item.name}
-											className="small"
+											className="mobile"
 										></img>
 									</div>
 									<div className="name-product-cart">

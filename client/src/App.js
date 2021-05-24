@@ -50,14 +50,14 @@ function App() {
 								className="open-sidebar"
 								onClick={() => setSidebarIsOpen(true)}
 							>
-								<i className="fa fa-bars"></i>
+								<i className="fa fa-bars"> </i>
 							</button>
 							<Link className="brand" to="/">
 								Beauty Beach
 							</Link>
 						</div>
 						<div className="row">
-							<div className="search-container">
+							<div className="search-container search-container-desktop">
 								<Route
 									render={({ history }) => (
 										<SearchBox history={history}></SearchBox>
@@ -92,7 +92,9 @@ function App() {
 									</ul>
 								</div>
 							) : (
-								<Link to="/signin">Sign In</Link>
+								<Link to="/signin" className="dropdown-close">
+									Sign In
+								</Link>
 							)}
 						</div>
 					</header>
@@ -107,6 +109,16 @@ function App() {
 								>
 									<i className="fa fa-close"></i>
 								</button>
+							</li>
+							<li>
+								{" "}
+								<div className="search-container search-container-mobile">
+									<Route
+										render={({ history }) => (
+											<SearchBox history={history}></SearchBox>
+										)}
+									></Route>
+								</div>
 							</li>
 							{loadingCategories ? (
 								<LoadingBox></LoadingBox>

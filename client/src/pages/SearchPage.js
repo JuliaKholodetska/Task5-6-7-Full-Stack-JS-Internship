@@ -121,7 +121,7 @@ export default function SearchPage(props) {
 	return (
 		<div className="row top">
 			<div className="col-1">
-				<div className="row">
+				<div className="row mobile">
 					{loading ? (
 						<LoadingBox></LoadingBox>
 					) : error ? (
@@ -129,7 +129,7 @@ export default function SearchPage(props) {
 					) : (
 						<div>{products.length} Results</div>
 					)}
-					<div>
+					<div className="sort-by-mobile">
 						Sort by{" "}
 						<select
 							value={order}

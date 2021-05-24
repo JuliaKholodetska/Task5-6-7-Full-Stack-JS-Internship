@@ -37,7 +37,7 @@ export default function OrderHistoryPage(props) {
 								<td>
 									<button
 										type="button"
-										className="small"
+										className="mobile"
 										onClick={() => {
 											props.history.push(`/order/${order.id}`);
 										}}
