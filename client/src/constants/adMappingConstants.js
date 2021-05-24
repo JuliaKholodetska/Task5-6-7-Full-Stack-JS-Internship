@@ -1,6 +1,7 @@
+const { googletag } = window;
 const bannerMapping = {
 	firstSlot: () => {
-		return window.googletag
+		return googletag
 			.sizeMapping()
 			.addSize(
 				[1024, 768],
@@ -20,7 +21,7 @@ const bannerMapping = {
 			.build();
 	},
 	secondSlot: () => {
-		return window.googletag
+		return googletag
 			.sizeMapping()
 			.addSize(
 				[1024, 768],
@@ -48,7 +49,7 @@ const bannerMapping = {
 			.build();
 	},
 	thirdSlot: () => {
-		return window.googletag
+		return googletag
 			.sizeMapping()
 			.addSize(
 				[1024, 768],
