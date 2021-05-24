@@ -4,14 +4,14 @@ const bannerMapping = {
 		return googletag
 			.sizeMapping()
 			.addSize(
-				[1024, 768],
+				[1024, 0],
 				[
 					[300, 600],
 					[300, 250],
 				]
 			)
 			.addSize(
-				[400, 300],
+				[200, 0],
 				[
 					[300, 600],
 					[300, 250],
@@ -24,7 +24,7 @@ const bannerMapping = {
 		return googletag
 			.sizeMapping()
 			.addSize(
-				[1024, 768],
+				[1024, 0],
 				[
 					[970, 250],
 					[728, 90],
@@ -39,7 +39,7 @@ const bannerMapping = {
 				]
 			)
 			.addSize(
-				[400, 0],
+				[200, 0],
 				[
 					[300, 250],
 					[336, 280],
@@ -52,14 +52,14 @@ const bannerMapping = {
 		return googletag
 			.sizeMapping()
 			.addSize(
-				[1024, 768],
+				[1024, 0],
 				[
 					[336, 280],
 					[300, 250],
 				]
 			)
 			.addSize(
-				[400, 300],
+				[200, 0],
 				[
 					[336, 280],
 					[300, 250],
