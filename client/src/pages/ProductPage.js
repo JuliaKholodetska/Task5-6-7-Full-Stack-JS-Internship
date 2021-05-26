@@ -31,18 +31,17 @@ export default function ProductPage(props) {
 				<MessageBox variant="danger">{error}</MessageBox>
 			) : (
 				<div>
-					<Link to="/" className="link-main-page">
+					<Link to="/" className="link-main-page link-main-page-mobile-size">
 						Back to All
 					</Link>
 					<div className="row">
 						<div className="col-2">
 							<img
-								className="large"
+								className="img-size"
 								src={product.image}
 								alt={product.name}
 							></img>
 						</div>
-
 						<div className="col-1">
 							<ul>
 								<li>
