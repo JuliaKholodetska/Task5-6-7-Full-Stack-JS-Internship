@@ -14,7 +14,7 @@ export const PRICES = [
 	{
 		name: "Any",
 		min: 0,
-		max: 0,
+		max: 10000,
 	},
 	{
 		name: `less then $10`,
