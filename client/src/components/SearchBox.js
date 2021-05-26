@@ -15,7 +15,11 @@ export default function SearchBox(props) {
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 				></input>
-				<button className="primary" type="submit">
+				<button
+					onClick={() => props.setSidebarIsOpen(false)}
+					className="primary"
+					type="submit"
+				>
 					<i className="fa fa-search"></i>
 				</button>
 			</div>

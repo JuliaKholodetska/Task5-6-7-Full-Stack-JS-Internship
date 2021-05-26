@@ -5,21 +5,32 @@ import {
 	CART_REMOVE_ITEM,
 	CART_SAVE_PAYMENT_METHOD,
 	CART_SAVE_SHIPPING_ADDRESS,
+	CART_ADD_ITEM_FAIL,
 } from "../constants/cartConstants";
 
 export const addToCart = (productId, quantity) => async (dispatch) => {
-	const { data } = await Axios.get(`/api/products/${productId}`);
-	dispatch({
-		type: CART_ADD_ITEM,
-		payload: {
-			name: data.name,
-			image: data.image,
-			price: data.price,
-			countInStock: data.countInStock,
-			product: data.id,
-			quantity,
-		},
-	});
+	try {
+		const { data } = await Axios.get(`/api/products/${productId}`);
+		dispatch({
+			type: CART_ADD_ITEM,
+			payload: {
+				name: data.name,
+				image: data.image,
+				price: data.price,
+				countInStock: data.countInStock,
+				product: data.id,
+				quantity,
+			},
+		});
+	} catch (error) {
+		dispatch({
+			type: CART_ADD_ITEM_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
 };
 
 export const removeFromCart = (productId) => (dispatch, getState) => {

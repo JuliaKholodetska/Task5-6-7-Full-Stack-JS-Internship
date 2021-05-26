@@ -18,10 +18,12 @@ import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import PrivateRoute from "./components/PrivateRoute";
 import ChatPage from "./pages/ChatPage";
+import { SET_CART_FROM_LS } from "./constants/cartConstants";
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage"));
 function App() {
 	const cart = useSelector((state) => state.cart);
+
 	const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 	const { cartItems } = cart;
 	const userSignin = useSelector((state) => state.userSignin);
@@ -37,8 +39,27 @@ function App() {
 		categories,
 	} = productCategoryList;
 	useEffect(() => {
+		try {
+			const stateStr = JSON.parse(localStorage.getItem("productInCart"));
+			if (stateStr.hasOwnProperty("cartItems")) {
+				dispatch({
+					type: SET_CART_FROM_LS,
+					payload: stateStr.cartItems,
+				});
+			}
+			return stateStr ? JSON.parse(stateStr) : undefined;
+		} catch (e) {
+			console.error(e);
+			return undefined;
+		}
+	}, []);
+	useEffect(() => {
 		dispatch(listProductCategories());
 	}, [dispatch]);
+	let checkCartEmptyState;
+	cartItems.length > 0
+		? (checkCartEmptyState = "fa fa-cart-arrow-down ")
+		: (checkCartEmptyState = "fas fa-shopping-cart");
 	return (
 		<React.Suspense fallback={<span>...</span>}>
 			<BrowserRouter>
@@ -64,11 +85,8 @@ function App() {
 									)}
 								></Route>
 							</div>
-							<Link className="fas fa-shopping-cart" to="/cart">
-								{cartItems.length > 0 && (
-									<span className="badge">{cartItems.length}</span>
-								)}
-							</Link>
+
+							<Link className={checkCartEmptyState} to="/cart"></Link>
 							{userInfo ? (
 								<div className="dropdown">
 									<Link to="#">
@@ -115,7 +133,10 @@ function App() {
 								<div className="search-container search-container-mobile">
 									<Route
 										render={({ history }) => (
-											<SearchBox history={history}></SearchBox>
+											<SearchBox
+												setSidebarIsOpen={setSidebarIsOpen}
+												history={history}
+											></SearchBox>
 										)}
 									></Route>
 								</div>

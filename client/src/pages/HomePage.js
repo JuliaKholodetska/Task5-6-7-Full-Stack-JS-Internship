@@ -81,12 +81,7 @@ export default function HomePage() {
 						sizes={secondSlotSizes}
 						slotMapping={bannerMapping.secondSlot}
 					></AdSlot>
-				</div>
-				<Pagination
-					getFilterUrl={getFilterUrl}
-					page={page}
-					totalPages={totalPages}
-				/>{" "}
+				</div>{" "}
 				{loading ? (
 					<LoadingBox></LoadingBox>
 				) : error ? (
@@ -98,6 +93,15 @@ export default function HomePage() {
 							<Product key={product.id} product={product}></Product>
 						))}
 					</div>
+				)}
+				{totalPages === 1 ? (
+					""
+				) : (
+					<Pagination
+						getFilterUrl={getFilterUrl}
+						page={page}
+						totalPages={totalPages}
+					/>
 				)}
 			</div>{" "}
 			<div className="col-2-home-page top">

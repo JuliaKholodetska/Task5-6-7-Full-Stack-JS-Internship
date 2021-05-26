@@ -115,7 +115,7 @@ button.primary.join {
 }
 
 button.block {
-	margin-top: 10px;
+	margin-top: 60px;
 	width: 100%;
 }
 
@@ -274,6 +274,11 @@ img {
 	color: #20a020;
 	background-color: #eeffe0;
 }
+.ad-to-cart-message {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
 
 .link-main-page {
 	font: 3.5rem "Poiret One", cursive;
@@ -282,6 +287,7 @@ img {
 		0 0 90px #fff;
 	position: absolute;
 	right: 0;
+	margin-right: 60px;
 }
 
 #navbar-button {
@@ -376,6 +382,7 @@ aside {
 	transform: translateX(-30rem);
 	transition: all 0.5s;
 }
+
 aside.open {
 	transform: translateX(0);
 }
@@ -713,6 +720,7 @@ select:focus {
 	justify-content: center;
 	display: flex;
 	align-items: center;
+	margin-top: 10px;
 }
 
 .first-ad-slot-home-page {
@@ -775,8 +783,9 @@ select:focus {
 
 	.link-main-page-mobile-size {
 		position: absolute;
-		right: 0;
+		right: 8;
 		font-size: 2.1rem;
+		margin-right: 15px;
 	}
 
 	.alert-info {
@@ -796,4 +805,71 @@ select:focus {
 	.checkout-steps > div {
 		font-size: 1rem;
 	}
+
+	aside {
+		background-color: #e0dfdf;
+	}
+}
+
+.select-product-page {
+	height: auto;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	outline: 0;
+	box-shadow: none;
+	border: 0 !important;
+	background: #ffdcdc;
+	background-image: none;
+	border-radius: 0.25em;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+.select {
+	border-radius: 0.25em;
+	position: relative;
+	display: flex;
+	width: 5em;
+	height: 3em;
+	line-height: 3;
+	background: #ffdcdc;
+	overflow: hidden;
+	border-radius: 0.25em;
+}
+
+select {
+	flex: 1;
+	padding: 0 0.5em;
+	color: rgb(81, 78, 78);
+	cursor: pointer;
+}
+
+.select::after {
+	content: "\25BC";
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0 1em;
+	background: #ffdcdc;
+	cursor: pointer;
+	pointer-events: none;
+	-webkit-transition: 0.25s all ease;
+	-o-transition: 0.25s all ease;
+	transition: 0.25s all ease;
+	border-radius: 0.25em;
+}
+
+.select:hover::after {
+	color: #ffd7d7;
+}
+
+.fa-cart-arrow-down {
+	color: #dddddd;
 }

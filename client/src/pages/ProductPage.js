@@ -11,6 +11,7 @@ export default function ProductPage(props) {
 	const dispatch = useDispatch();
 	const productId = props.match.params.id;
 	const [quantity, setquantity] = useState(1);
+	const [cartIsEmpty, setcartIsEmpty] = useState(true);
 	const { productDetails } = useSelector((state) => ({
 		productDetails: state.productDetails,
 	}));
@@ -21,6 +22,7 @@ export default function ProductPage(props) {
 	}, [dispatch, productId]);
 	const addToCartHandler = () => {
 		dispatch(addToCart(productId, quantity));
+		setcartIsEmpty(false);
 	};
 
 	return (
@@ -34,6 +36,7 @@ export default function ProductPage(props) {
 					<Link to="/" className="link-main-page link-main-page-mobile-size">
 						Back to All
 					</Link>
+
 					<div className="row">
 						<div className="col-2">
 							<img
@@ -43,6 +46,17 @@ export default function ProductPage(props) {
 							></img>
 						</div>
 						<div className="col-1">
+							{!cartIsEmpty ? (
+								<MessageBox variant="success ad-to-cart-message">
+									Successfully added to the cart!
+								</MessageBox>
+							) : error ? (
+								<MessageBox variant="danger ad-to-cart-message">
+									{error}
+								</MessageBox>
+							) : (
+								""
+							)}
 							<ul>
 								<li>
 									<h1>{product.name}</h1>
@@ -86,8 +100,12 @@ export default function ProductPage(props) {
 											<li>
 												<div className="row">
 													<div>quantity</div>
-													<div>
+
+													<div class="select">
 														<select
+															name="slct"
+															id="slct"
+															className="select-product-page"
 															value={quantity}
 															onChange={(e) => setquantity(e.target.value)}
 														>

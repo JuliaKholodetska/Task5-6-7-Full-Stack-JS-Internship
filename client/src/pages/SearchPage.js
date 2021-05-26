@@ -216,12 +216,6 @@ export default function SearchPage(props) {
 				</div>
 			</div>
 			<div className="col-3">
-				{" "}
-				<Pagination
-					getFilterUrl={getFilterUrl}
-					page={page}
-					totalPages={totalPages}
-				/>{" "}
 				{loading ? (
 					<LoadingBox></LoadingBox>
 				) : error ? (
@@ -235,7 +229,16 @@ export default function SearchPage(props) {
 							))}
 						</div>
 					</>
-				)}
+				)}{" "}
+				{totalPages === 1 ? (
+					""
+				) : (
+					<Pagination
+						getFilterUrl={getFilterUrl}
+						page={page}
+						totalPages={totalPages}
+					/>
+				)}{" "}
 			</div>{" "}
 		</div>
 	);
