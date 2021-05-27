@@ -49,7 +49,6 @@ function App() {
 			}
 			return stateStr ? JSON.parse(stateStr) : undefined;
 		} catch (e) {
-			console.error(e);
 			return undefined;
 		}
 	}, []);

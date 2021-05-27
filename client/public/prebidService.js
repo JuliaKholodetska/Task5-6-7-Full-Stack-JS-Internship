@@ -12,7 +12,7 @@ var thirdSlotSizes = [
 	[336, 280],
 	[300, 250],
 ];
-var PREBID_TIMEOUT = 1000;
+var PREBID_TIMEOUT = 10000;
 var FAILSAFE_TIMEOUT = 3000;
 
 var adUnits = [
@@ -124,6 +124,7 @@ pbjs.que.push(function () {
 		],
 	});
 	pbjs.requestBids({
+		// labelAll: ["phone", "tablet", "desktop", "desktop-hd"],
 		bidsBackHandler: initAdserver,
 		timeout: PREBID_TIMEOUT,
 	});
