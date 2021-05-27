@@ -124,7 +124,6 @@ pbjs.que.push(function () {
 		],
 	});
 	pbjs.requestBids({
-		// labelAll: ["phone", "tablet", "desktop", "desktop-hd"],
 		bidsBackHandler: initAdserver,
 		timeout: PREBID_TIMEOUT,
 	});
