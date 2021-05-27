@@ -80,50 +80,49 @@ googletag.cmd.push(function () {
 var pbjs = pbjs || {};
 pbjs.que = pbjs.que || [];
 
-pbjs.setConfig({
-	sizeConfig: [
-		{
-			mediaQuery: "(min-width: 1600px)",
-			sizesSupported: [
-				[1000, 300],
-				[970, 90],
-				[728, 90],
-				[300, 250],
-				[300, 600],
-			],
-			labels: ["desktop-hd"],
-		},
-		{
-			mediaQuery: "(min-width: 1200px)",
-			sizesSupported: [
-				[970, 90],
-				[728, 90],
-				[300, 250],
-				[300, 600],
-			],
-			labels: ["desktop"],
-		},
-		{
-			mediaQuery: "(min-width: 768px) and (max-width: 1199px)",
-			sizesSupported: [
-				[728, 90],
-				[300, 250],
-			],
-			labels: ["tablet"],
-		},
-		{
-			mediaQuery: "(min-width: 0px)",
-			sizesSupported: [
-				[300, 250],
-				[300, 100],
-			],
-			labels: ["phone"],
-		},
-	],
-});
-
 pbjs.que.push(function () {
 	pbjs.addAdUnits(adUnits);
+	pbjs.setConfig({
+		sizeConfig: [
+			{
+				mediaQuery: "(min-width: 1600px)",
+				sizesSupported: [
+					[1000, 300],
+					[970, 90],
+					[728, 90],
+					[300, 250],
+					[300, 600],
+				],
+				labels: ["desktop-hd"],
+			},
+			{
+				mediaQuery: "(min-width: 1200px)",
+				sizesSupported: [
+					[970, 90],
+					[728, 90],
+					[300, 250],
+					[300, 600],
+				],
+				labels: ["desktop"],
+			},
+			{
+				mediaQuery: "(min-width: 768px) and (max-width: 1199px)",
+				sizesSupported: [
+					[728, 90],
+					[300, 250],
+				],
+				labels: ["tablet"],
+			},
+			{
+				mediaQuery: "(min-width: 0px)",
+				sizesSupported: [
+					[300, 250],
+					[300, 100],
+				],
+				labels: ["phone"],
+			},
+		],
+	});
 	pbjs.requestBids({
 		bidsBackHandler: initAdserver,
 		timeout: PREBID_TIMEOUT,
@@ -134,9 +133,7 @@ function initAdserver() {
 	if (pbjs.initAdserverSet) return;
 	pbjs.initAdserverSet = true;
 	googletag.cmd.push(function () {
-		pbjs.que.push(function () {
-			pbjs.setTargetingForGPTAsync();
-		});
+		pbjs.setTargetingForGPTAsync && pbjs.setTargetingForGPTAsync();
 	});
 }
 
