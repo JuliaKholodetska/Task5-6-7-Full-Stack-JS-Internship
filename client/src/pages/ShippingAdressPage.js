@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
+import debounce from "lodash.debounce";
 
 export default function ShippingAddressScreen(props) {
 	const userSignin = useSelector((state) => state.userSignin);
@@ -24,10 +25,12 @@ export default function ShippingAddressScreen(props) {
 		);
 		props.history.push("/payment");
 	};
+	const debouncedChangeHandler = useCallback(debounce(submitHandler, 600), []);
+
 	return (
 		<div>
 			<CheckoutSteps stepSignIn stepShipping></CheckoutSteps>
-			<form className="form" onSubmit={submitHandler}>
+			<form className="form" onSubmit={debouncedChangeHandler}>
 				<div>
 					<h1>Shipping Address</h1>
 				</div>

@@ -1,11 +1,12 @@
 import Axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { detailsOrder, payOrder } from "../actions/orderAcrions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { ORDER_PAY } from "../constants/orderConstants";
+import debounce from "lodash.debounce";
 
 export default function OrderPage(props) {
 	const orderId = props.match.params.id;
@@ -53,6 +54,10 @@ export default function OrderPage(props) {
 	const successPaymentHandler = (paymentResult) => {
 		dispatch(payOrder(order, paymentResult));
 	};
+	const debouncedChangeHandler = useCallback(
+		debounce(successPaymentHandler, 600),
+		[]
+	);
 
 	return loading ? (
 		<LoadingBox></LoadingBox>
@@ -162,7 +167,7 @@ export default function OrderPage(props) {
 
 											<PayPalButton
 												amount={order.totalPrice}
-												onSuccess={successPaymentHandler}
+												onSuccess={debouncedChangeHandler}
 											></PayPalButton>
 										</>
 									)}

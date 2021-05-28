@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrder } from "../actions/orderAcrions";
@@ -6,6 +6,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { ORDER_CREATE } from "../constants/orderConstants";
+import debounce from "lodash.debounce";
 
 export default function PlaceOrderScreen(props) {
 	const cart = useSelector((state) => state.cart);
@@ -31,6 +32,11 @@ export default function PlaceOrderScreen(props) {
 			dispatch({ type: ORDER_CREATE.RESET });
 		}
 	}, [dispatch, order, props.history, success]);
+	const debouncedChangeHandler = useCallback(
+		debounce(placeOrderHandler, 600),
+		[]
+	);
+
 	return (
 		<div>
 			<CheckoutSteps
@@ -130,7 +136,7 @@ export default function PlaceOrderScreen(props) {
 							<li>
 								<button
 									type="button"
-									onClick={placeOrderHandler}
+									onClick={debouncedChangeHandler}
 									className="primary block"
 									disabled={cart.cartItems.length === 0}
 								>

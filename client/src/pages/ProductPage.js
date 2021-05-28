@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../actions/cartActions";
@@ -6,6 +6,7 @@ import { detailsProduct } from "../actions/productActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
+import debounce from "lodash.debounce";
 
 export default function ProductPage(props) {
 	const dispatch = useDispatch();
@@ -24,6 +25,10 @@ export default function ProductPage(props) {
 		dispatch(addToCart(productId, quantity));
 		setcartIsEmpty(false);
 	};
+	const debouncedChangeHandler = useCallback(
+		debounce(addToCartHandler, 600),
+		[]
+	);
 
 	return (
 		<div>
@@ -122,7 +127,7 @@ export default function ProductPage(props) {
 											</li>
 											<li>
 												<button
-													onClick={addToCartHandler}
+													onClick={debouncedChangeHandler}
 													className="primary block"
 												>
 													Add to Cart

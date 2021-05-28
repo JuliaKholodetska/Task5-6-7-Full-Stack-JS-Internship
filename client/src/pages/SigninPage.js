@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signin, signInGoggle } from "../actions/userActions";
@@ -8,9 +8,10 @@ import Googlelogin from "react-google-login";
 import { Button } from "@material-ui/core";
 import Icon from "../components/Icon.js";
 import dotenv from "dotenv";
+import debounce from "lodash.debounce";
 dotenv.config();
 
-export default function SigninPadge(props) {
+export default function SigninPage(props) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -36,10 +37,11 @@ export default function SigninPadge(props) {
 	};
 	const googleError = () =>
 		alert("Google Sign In was unsuccessful. Try again later");
+	const debouncedChangeHandler = useCallback(debounce(submitHandler, 600), []);
 
 	return (
 		<div>
-			<form className="form" onSubmit={submitHandler}>
+			<form className="form" onSubmit={debouncedChangeHandler}>
 				<div>
 					<h1>Sign In</h1>
 				</div>

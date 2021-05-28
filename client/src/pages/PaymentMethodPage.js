@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
+import debounce from "lodash.debounce";
 
 export default function PaymentMethodPage(props) {
 	const cart = useSelector((state) => state.cart);
@@ -16,10 +17,12 @@ export default function PaymentMethodPage(props) {
 		dispatch(savePaymentMethod(paymentMethod));
 		props.history.push("/placeorder");
 	};
+	const debouncedChangeHandler = useCallback(debounce(submitHandler, 600), []);
+
 	return (
 		<div>
 			<CheckoutSteps stepSignIn stepShipping stepPaymentMethod></CheckoutSteps>
-			<form className="form" onSubmit={submitHandler}>
+			<form className="form" onSubmit={debouncedChangeHandler}>
 				<div>
 					<h1>Payment Method</h1>
 				</div>

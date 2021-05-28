@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { detailsUser, updateUserProfile } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { USER_UPDATE_PROFILE } from "../constants/userConstants";
+import debounce from "lodash.debounce";
 
 export default function ProfilePage() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-
 	const userSignin = useSelector((state) => state.userSignin);
 	const { userInfo } = userSignin;
 	const userDetails = useSelector((state) => state.userDetails);
@@ -39,9 +39,11 @@ export default function ProfilePage() {
 			dispatch(updateUserProfile({ userId: user.id, name, email, password }));
 		}
 	};
+	const debouncedChangeHandler = useCallback(debounce(submitHandler, 600), []);
+
 	return (
 		<div>
-			<form className="form" onSubmit={submitHandler}>
+			<form className="form" onSubmit={debouncedChangeHandler}>
 				<div>
 					<h1>User Profile</h1>
 				</div>

@@ -11,6 +11,7 @@ export default function OrderHistoryPage(props) {
 	useEffect(() => {
 		dispatch(listOrderMine());
 	}, [dispatch]);
+
 	return (
 		<div>
 			<h1>Order History</h1>

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { register } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import debounce from "lodash.debounce";
 
 export default function RegisterPage(props) {
 	const [name, setName] = useState("");
@@ -32,9 +33,11 @@ export default function RegisterPage(props) {
 			props.history.push(redirect);
 		}
 	}, [props.history, redirect, userInfo]);
+	const debouncedChangeHandler = useCallback(debounce(submitHandler, 600), []);
+
 	return (
 		<div>
-			<form className="form" onSubmit={submitHandler}>
+			<form className="form" onSubmit={debouncedChangeHandler}>
 				<div>
 					<h1>Create Account</h1>
 				</div>

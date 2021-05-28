@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import MessageBox from "../components/MessageBox";
+import debounce from "lodash.debounce";
 
 export default function CartPage(props) {
 	const cart = useSelector((state) => state.cart);
@@ -14,6 +15,11 @@ export default function CartPage(props) {
 	const checkoutHandler = () => {
 		props.history.push("/signin?redirect=shipping");
 	};
+
+	const debouncedChangeHandler = useCallback(
+		debounce(checkoutHandler, 600),
+		[]
+	);
 	return (
 		<div className="row">
 			<div className="col-2">
@@ -86,7 +92,7 @@ export default function CartPage(props) {
 						<li>
 							<button
 								type="button"
-								onClick={checkoutHandler}
+								onClick={debouncedChangeHandler}
 								className="primary block"
 								disabled={cartItems.length === 0}
 							>

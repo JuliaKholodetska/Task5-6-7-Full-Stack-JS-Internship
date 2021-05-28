@@ -6,21 +6,24 @@ import { signout } from "./actions/userActions";
 import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 import SearchBox from "./components/SearchBox";
-import CartPage from "./pages/CartPage";
-import OrderPage from "./pages/OrderPage";
-import PaymentMethodPage from "./pages/PaymentMethodPage";
-import PlaceOrderPage from "./pages/PlaceOrderPage";
-import ProductPage from "./pages/ProductPage";
-import RegisterPage from "./pages/RegisterPage";
-import ShippingAdressPage from "./pages/ShippingAdressPage";
-import SigninPadge from "./pages/SigninPage";
-import OrderHistoryPage from "./pages/OrderHistoryPage";
-import ProfilePage from "./pages/ProfilePage";
 import PrivateRoute from "./components/PrivateRoute";
-import ChatPage from "./pages/ChatPage";
 import { SET_CART_FROM_LS } from "./constants/cartConstants";
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage"));
+const CartPage = React.lazy(() => import("./pages/CartPage"));
+const OrderPage = React.lazy(() => import("./pages/OrderPage"));
+const PaymentMethodPage = React.lazy(() => import("./pages/PaymentMethodPage"));
+const PlaceOrderPage = React.lazy(() => import("./pages/PlaceOrderPage"));
+const ProductPage = React.lazy(() => import("./pages/ProductPage"));
+const RegisterPage = React.lazy(() => import("./pages/RegisterPage"));
+const ShippingAdressPage = React.lazy(() =>
+	import("./pages/ShippingAdressPage")
+);
+const SigninPage = React.lazy(() => import("./pages/SigninPage"));
+const OrderHistoryPage = React.lazy(() => import("./pages/OrderHistoryPage"));
+const ProfilePage = React.lazy(() => import("./pages/ProfilePage"));
+const ChatPage = React.lazy(() => import("./pages/ChatPage"));
+
 function App() {
 	const cart = useSelector((state) => state.cart);
 
@@ -59,6 +62,7 @@ function App() {
 	cartItems.length > 0
 		? (checkCartEmptyState = "fa fa-cart-arrow-down ")
 		: (checkCartEmptyState = "fas fa-shopping-cart");
+
 	return (
 		<React.Suspense fallback={<span>...</span>}>
 			<BrowserRouter>
@@ -159,20 +163,29 @@ function App() {
 						</ul>
 					</aside>
 					<main>
-						<Route path="/cart" component={CartPage}></Route>
-						<Route path="/product/:id" component={ProductPage}></Route>
+						<Route path="/cart" component={CartPage} exact></Route>
+						<Route path="/product/:id" component={ProductPage} exact></Route>
 						<Route path="/" component={HomePage} exact></Route>
-						<Route path="/signin" component={SigninPadge}></Route>
-						<Route path="/register" component={RegisterPage}></Route>
-						<Route path="/shipping" component={ShippingAdressPage}></Route>
-						<Route path="/placeorder" component={PlaceOrderPage}></Route>
-						<Route path="/payment" component={PaymentMethodPage}></Route>
-						<Route path="/order/:id" component={OrderPage}></Route>
-						<Route path="/orderhistory" component={OrderHistoryPage}></Route>
-						<Route path="/chat" component={ChatPage}></Route>
+						<Route path="/signin" component={SigninPage} exact></Route>
+						<Route path="/register" component={RegisterPage} exact></Route>
+						<Route
+							path="/shipping"
+							component={ShippingAdressPage}
+							exact
+						></Route>
+						<Route path="/placeorder" component={PlaceOrderPage} exact></Route>
+						<Route path="/payment" component={PaymentMethodPage} exact></Route>
+						<Route path="/order/:id" component={OrderPage} exact></Route>
+						<Route
+							path="/orderhistory"
+							component={OrderHistoryPage}
+							exact
+						></Route>
+						<Route path="/chat" component={ChatPage} exact></Route>
 						<PrivateRoute
 							path="/profile"
 							component={ProfilePage}
+							exact
 						></PrivateRoute>
 						<Route path="/search" component={SearchPage} exact></Route>
 					</main>
