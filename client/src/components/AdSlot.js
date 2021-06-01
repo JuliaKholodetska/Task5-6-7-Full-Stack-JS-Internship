@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 export default function AdSlot({ divId, code, sizes, slotMapping }) {
 	const { googletag } = window;
-	const REFRESH_TIME_INTERVAL = 30000;
+	const REFRESH_TIME_INTERVAL = 20000;
 
 	let slot;
 
@@ -18,12 +18,10 @@ export default function AdSlot({ divId, code, sizes, slotMapping }) {
 				googletag.enableServices();
 			}
 		});
-
 		googletag.cmd.push(function () {
 			googletag.display(divId);
-			googletag.pubads().refresh();
+			googletag.pubads().refresh([slot]);
 		});
-
 		const refreshSlotFunction = setInterval(() => {
 			googletag.pubads().refresh([slot]);
 		}, REFRESH_TIME_INTERVAL);
