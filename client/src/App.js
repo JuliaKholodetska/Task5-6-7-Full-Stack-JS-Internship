@@ -84,7 +84,10 @@ function App() {
 							<div className="search-container search-container-desktop">
 								<Route
 									render={({ history }) => (
-										<SearchBox history={history}></SearchBox>
+										<SearchBox
+											history={history}
+											setSidebarIsOpen={setSidebarIsOpen}
+										></SearchBox>
 									)}
 								></Route>
 							</div>

@@ -6,7 +6,6 @@ import { detailsProduct } from "../actions/productActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
-import debounce from "lodash.debounce";
 
 export default function ProductPage(props) {
 	const dispatch = useDispatch();
@@ -17,18 +16,15 @@ export default function ProductPage(props) {
 		productDetails: state.productDetails,
 	}));
 	const { loading, error, product } = productDetails;
-
 	useEffect(() => {
 		dispatch(detailsProduct(productId));
 	}, [dispatch, productId]);
+
 	const addToCartHandler = () => {
 		dispatch(addToCart(productId, quantity));
 		setcartIsEmpty(false);
 	};
-	const debouncedChangeHandler = useCallback(
-		debounce(addToCartHandler, 600),
-		[]
-	);
+	const addItemLoading = useSelector((state) => state.cartItemLoading);
 
 	return (
 		<div>
@@ -127,7 +123,8 @@ export default function ProductPage(props) {
 											</li>
 											<li>
 												<button
-													onClick={debouncedChangeHandler}
+													disabled={addItemLoading.cartItemLoading}
+													onClick={addToCartHandler}
 													className="primary block"
 												>
 													Add to Cart

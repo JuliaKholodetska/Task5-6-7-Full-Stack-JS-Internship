@@ -92,7 +92,7 @@ export default function SigninPage(props) {
 						onFailure={googleError}
 					/>
 				</div>
-				<div>
+				<div className="lable-signin-page">
 					<label />
 					<div>
 						New customer?{" "}

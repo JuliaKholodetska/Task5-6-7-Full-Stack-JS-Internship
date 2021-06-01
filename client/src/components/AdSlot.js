@@ -5,6 +5,7 @@ export default function AdSlot({ divId, code, sizes, slotMapping }) {
 	const REFRESH_TIME_INTERVAL = 30000;
 
 	let slot;
+
 	let adMapping = slotMapping();
 	const adRefresh = () => {
 		googletag.cmd.push(function () {

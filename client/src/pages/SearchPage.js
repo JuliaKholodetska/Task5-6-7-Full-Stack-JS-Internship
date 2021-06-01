@@ -119,7 +119,7 @@ export default function SearchPage(props) {
 		})}`;
 	};
 	return (
-		<div className="row top">
+		<div className="row top row-top-mobile">
 			<div className="col-1">
 				<div className="row mobile">
 					{loading ? (
@@ -196,7 +196,7 @@ export default function SearchPage(props) {
 						{ratings.map((r) => (
 							<li key={r.name}>
 								<Link
-									to={getFilterUrl({ searchRating: r.ratingg })}
+									to={getFilterUrl({ searchRating: r.rating })}
 									className={`${r.rating}` === `${rating}` ? "active" : ""}
 								>
 									<Rating caption={" & up"} rating={r.rating}></Rating>

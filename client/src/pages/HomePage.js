@@ -105,7 +105,7 @@ export default function HomePage() {
 				)}
 			</div>{" "}
 			<div className="col-2-home-page top">
-				<div className="second-ad-slot-home-page">
+				<div className="first-ad-slot-home-page">
 					{" "}
 					<AdSlot
 						divId={"div-1"}

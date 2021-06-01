@@ -6,11 +6,14 @@ import {
 	CART_SAVE_PAYMENT_METHOD,
 	CART_SAVE_SHIPPING_ADDRESS,
 	CART_ADD_ITEM_FAIL,
+	SET_ITEM_LOADING,
 } from "../constants/cartConstants";
 
 export const addToCart = (productId, quantity) => async (dispatch) => {
 	try {
+		dispatch({ type: SET_ITEM_LOADING, payload: true });
 		const { data } = await Axios.get(`/api/products/${productId}`);
+		dispatch({ type: SET_ITEM_LOADING, payload: false });
 		dispatch({
 			type: CART_ADD_ITEM,
 			payload: {

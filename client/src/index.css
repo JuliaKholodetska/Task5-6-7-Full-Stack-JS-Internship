@@ -377,7 +377,7 @@ aside {
 	position: fixed;
 	width: 30rem;
 	height: 100%;
-	background-color: #ffffff;
+	background-color: #eeecec;
 	z-index: 1000;
 	transform: translateX(-30rem);
 	transition: all 0.5s;
@@ -409,6 +409,7 @@ aside li {
 	display: flex;
 	justify-content: space-between;
 	padding: 1rem;
+	font-size: 2rem;
 }
 
 button.close-sidebar {
@@ -723,13 +724,6 @@ select:focus {
 	margin-top: 10px;
 }
 
-.first-ad-slot-home-page {
-	height: 400px;
-	width: 400px;
-	display: static;
-	margin-left: 30px;
-}
-
 .third-ad-slot-home-page {
 	margin-top: 20px;
 	width: 100%;
@@ -744,71 +738,6 @@ select:focus {
 
 .button-delete {
 	margin-left: 1rem;
-}
-
-@media (max-width: 768px) {
-	.search input {
-		width: 100px;
-	}
-
-	.search-container-mobile {
-		display: block;
-	}
-
-	.search-container-desktop {
-		display: none;
-	}
-
-	a.brand {
-		font-size: 2rem;
-	}
-
-	.mobile {
-		display: flex;
-	}
-
-	.row.center-search {
-		margin: 0;
-	}
-
-	.row.center {
-		margin: 0;
-	}
-
-	.img-size {
-		width: 190px;
-		height: 180px;
-		display: block;
-	}
-
-	.link-main-page-mobile-size {
-		position: absolute;
-		right: 8;
-		font-size: 2.1rem;
-		margin-right: 15px;
-	}
-
-	.alert-info {
-		margin-bottom: 2rem;
-	}
-
-	.row-cart-product {
-		flex-direction: column;
-	}
-
-	.row-cart-item-position {
-		margin-top: 1rem;
-		margin-bottom: 1rem;
-		text-align: center;
-	}
-
-	.checkout-steps > div {
-		font-size: 1rem;
-	}
-
-	aside {
-		background-color: #e0dfdf;
-	}
 }
 
 .select-product-page {
@@ -872,4 +801,86 @@ select {
 
 .fa-cart-arrow-down {
 	color: #dddddd;
+}
+.lable-signin-page {
+	margin-top: 2rem;
+}
+
+.googleSignIn {
+	border: 3px !important;
+}
+
+@media (min-width: 678px) {
+	.row-top-mobile {
+		flex-wrap: nowrap !important;
+	}
+}
+
+@media (max-width: 900px) {
+	.search input {
+		width: 100px;
+	}
+
+	.search-container-mobile {
+		display: block;
+	}
+
+	.search-container-desktop {
+		display: none;
+	}
+
+	a.brand {
+		font-size: 2rem;
+	}
+
+	.mobile {
+		display: flex;
+	}
+
+	.row.center-search {
+		margin: 0;
+	}
+
+	.row.center {
+		margin: 0;
+	}
+
+	.img-size {
+		width: 190px;
+		height: 180px;
+		display: block;
+	}
+
+	.link-main-page-mobile-size {
+		position: absolute;
+		right: 8;
+		font-size: 2.1rem;
+		margin-right: 15px;
+	}
+
+	.alert-info {
+		margin-bottom: 2rem;
+	}
+
+	.row-cart-product {
+		flex-direction: column;
+	}
+
+	.row-cart-item-position {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		text-align: center;
+	}
+
+	.checkout-steps > div {
+		font-size: 1rem;
+	}
+
+	aside {
+		background-color: #e0dfdf;
+	}
+
+	.first-ad-slot-home-page {
+		width: 100%;
+	}
 }
