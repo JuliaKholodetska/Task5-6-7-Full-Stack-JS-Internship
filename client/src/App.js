@@ -8,6 +8,8 @@ import MessageBox from "./components/MessageBox";
 import SearchBox from "./components/SearchBox";
 import PrivateRoute from "./components/PrivateRoute";
 import { SET_CART_FROM_LS } from "./constants/cartConstants";
+import prebidSetup from "./actions/prebidService";
+
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const SearchPage = React.lazy(() => import("./pages/SearchPage"));
 const CartPage = React.lazy(() => import("./pages/CartPage"));
@@ -25,8 +27,8 @@ const ProfilePage = React.lazy(() => import("./pages/ProfilePage"));
 const ChatPage = React.lazy(() => import("./pages/ChatPage"));
 
 function App() {
+	prebidSetup();
 	const cart = useSelector((state) => state.cart);
-
 	const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 	const { cartItems } = cart;
 	const userSignin = useSelector((state) => state.userSignin);
